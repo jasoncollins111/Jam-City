@@ -1,0 +1,33 @@
+body {
+  background-color: black;
+}
+
+.logo{
+  position:relative;
+  left: 239;
+  width: 30%;
+  margin:auto;
+  text-align: center;
+}
+.logo-box{
+  width:700px;
+}
+.jumbotron{
+  width: 700px;
+  margin: auto;
+  margin-top: 30px;
+  border-radius: 10px;
+  background-color:#35DEFD;
+}
+#box{
+  background-color: #7E2F28;
+  height: 300px;
+}
+.title{
+  color:black;
+}
+.cityInput{
+  padding-top: 10px;
+  margin: auto;
+  width: 300px;
+}

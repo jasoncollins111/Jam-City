@@ -1,7 +1,7 @@
 {
-  "author": "Jason ",
+  "author": "Saint Embers",
   "name": "Jam-City",
-  "description": "Stream Live music happening in your area",
+  "description": "Play the bands nearest you",
   "version": "0.0.1",
   "main": "app.js",
   "dependencies": {

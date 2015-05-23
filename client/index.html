@@ -1,0 +1,31 @@
+<!-- <!DOCTYPE html> -->
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Jam-City</title>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="main.css">
+
+</head>
+<body  ng-app="jamApp">
+  <div class="jumbotron">
+  <div class="media-middle logo-box">
+    <img src="images/jamlogo.png" class="media-middle logo">
+  </div>
+    <!-- <h1 class="text-center title">Welcome to Jam-City</h1> -->
+    <h3 class="text-center title"></h3>
+    <!-- <input> -->
+    <form ng-controller="JamAppController" ng-submit="submit()">
+        <div class="input-group cityInput">
+          <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-globe"></i></span>
+          <input type="text" ng-model="text" class="form-control" placeholder="Enter your city" aria-describedby="basic-addon1" />
+          <!-- <input type="submit" id="submit" value="Submit" /> -->
+        </div>
+    </form>
+  </div>
+</body>
+</html>
