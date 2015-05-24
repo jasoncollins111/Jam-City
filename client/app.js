@@ -1,4 +1,24 @@
-var app = angular.module('jamApp', [])
+var app = angular.module('jamApp', [
+  'ngRoute',
+  'JamAppController'
+])
+
+// app.config(['$routeProvider',
+//   function($routeProvider) {
+//     $routeProvider.
+//       when('/artists',{
+//         templateUrl: 'artists.html',
+//         controller: 'ArtistsCtrl'
+//       }).
+//       when('/artists/:artist', {
+//         templateUrl: 'artist-details.html',
+//         controller: 'ArtistDetailsCtrl'
+//       }).
+//       otherwise({
+//         redirectTo: '/'
+//       })
+//   }
+// ])
 
 app.controller('JamAppController', ['$scope','$http', function($scope,$http) {
   var songkickKey='ngIhxhYsLMjkEU8y';
@@ -6,6 +26,7 @@ app.controller('JamAppController', ['$scope','$http', function($scope,$http) {
   var consumerKey = 'ce78d10e8183380fb57357cc8a07e29d'
   var echoSharedSecret = 'YhNZOH5TRUWGMogv/2XCZw'
   var city;
+  $scope.artistName = [];
   
   $scope.submit = function() {
     if($scope.text) {
@@ -21,7 +42,9 @@ app.controller('JamAppController', ['$scope','$http', function($scope,$http) {
       // data is JSON response object
         console.log('success',data);
         var artists = data.resultsPage.results.event
-        console.log('artists:', artists)
+        
+        $scope.artistName.push(artists[0].performance[0].displayName)
+        console.log('artists:', artistName)
       }) 
   };
   
@@ -46,7 +69,6 @@ app.controller('JamAppController', ['$scope','$http', function($scope,$http) {
   
   function createAnchors(artistObjArray){
     var artist = artistObjArray[0]
-    var artistName = artist.performance[0].displayName
   
   }
  

@@ -1,5 +1,6 @@
 body {
-  background-color: black;
+  /*background-image: url('app/images/stars3.jpg');*/
+  background-size: cover;
 }
 
 .logo{
@@ -17,11 +18,12 @@ body {
   margin: auto;
   margin-top: 30px;
   border-radius: 10px;
-  background-color:#35DEFD;
+  background-color:#48d1cc;
+  opacity: .85;
 }
 #box{
-  background-color: #7E2F28;
-  height: 300px;
+  background-color: #48d1cc;
+  height: 200px;
 }
 .title{
   color:black;
@@ -31,3 +33,62 @@ body {
   margin: auto;
   width: 300px;
 }
+.artistList{
+  color:white;
+}
+a{
+  font-size: 19px;
+}
+a:hover{
+  cursor: pointer;
+}
+.artistInfo{
+  width: 600px;
+  margin:auto;
+  margin-top: 38px;
+  text-align: center;
+}
+.getCity{
+  height:250px;
+  text-align: center;
+}
+
+button{
+  width: 300px;
+  height: 70;
+  margin-top: 175px;
+  background-color: #48d1cc;
+  opacity: .75;
+}
+.navbar-logo{
+  position:relative;
+  top:-5px;
+  background-size: 45px 45px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width:86px;
+  height:55px;
+}
+.navColor{
+  background-color: #ff1748;
+  height: 80px;
+}
+.cities{
+  text-decoration: underline;
+  margin-left: 20px;
+  text-align: center;
+  font-size: 25px;
+  border: solid lightgrey 1px;
+  border-radius: 10px;
+  height: 400px;
+}
+.navLinks{
+  top:15px;
+  padding-left: 10px;
+  vertical-align: center;
+  color:white;
+  font-size: 20px;
+}
+
+
+

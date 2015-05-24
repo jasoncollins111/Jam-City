@@ -1,0 +1,1 @@
+artist.controller.js

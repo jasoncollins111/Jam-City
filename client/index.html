@@ -5,27 +5,56 @@
     <title>Jam-City</title>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="main.css">
 
 </head>
-<body  ng-app="jamApp">
-  <div class="jumbotron">
-  <div class="media-middle logo-box">
-    <img src="images/jamlogo.png" class="media-middle logo">
+<body  ng-app="jamApp" ng-controller="JamAppController">
+  <!-- <div class="getCity">
+   <button type="button" class="btn butt">MUSICA</button>
+  </div> -->
+
+
+
+
+
+  <!-- <div ng-include="components/navbar.html"></div> -->
+  <nav class="navbar navbar-default">
+  <div class="container-fluid navColor">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" class="navbar-logo" src="app/images/jamlogo.png">
+      </a>
+    </div>
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="navLinks"><a class="navAnchor" href="#" style="color:white;">Cities</a></li>
+      </ul>
+     </div>
   </div>
-    <!-- <h1 class="text-center title">Welcome to Jam-City</h1> -->
-    <h3 class="text-center title"></h3>
-    <!-- <input> -->
-    <form ng-controller="JamAppController" ng-submit="submit()">
+</nav>
+  <div class="jumbotron">
+    <div class="media-middle logo-box">
+      <!-- <img src="app/images/jamlogo.png" class="media-middle logo"> -->
+    </div>
+      <h3 class="text-center title"></h3>
+      <form ng-submit="submit()">
         <div class="input-group cityInput">
           <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-globe"></i></span>
-          <input type="text" ng-model="text" class="form-control" placeholder="Enter your city" aria-describedby="basic-addon1" />
-          <!-- <input type="submit" id="submit" value="Submit" /> -->
+          <input type="text" ng-model="text" class="form-control" placeholder="Enter a city, or venue" aria-describedby="basic-addon1" />
         </div>
-    </form>
+      </form>
   </div>
+  <div class="list-group">
+      <!-- <li ng-repeat="artist in artistName"></li> -->
+  </div>  
+  <div class="row">
+  <div class="col-md-3 cities">Cities & Venues</div>
+  <!-- <div class="col-md-6">OtherShit</div> -->
+</div>
+
 </body>
 </html>
