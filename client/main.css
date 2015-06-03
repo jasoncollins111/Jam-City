@@ -1,5 +1,5 @@
 body {
-  /*background-image: url('app/images/stars3.jpg');*/
+  background-image: url('app/images/stars3.jpg');
   background-size: cover;
 }
 
@@ -14,19 +14,25 @@ body {
   width:700px;
 }
 .jumbotron{
-  width: 700px;
+  position:relative;
+  width: 470px;
+  right: 5em;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 150px;
   border-radius: 10px;
   background-color:#48d1cc;
-  opacity: .85;
+  opacity: .9;
 }
 #box{
   background-color: #48d1cc;
   height: 200px;
 }
 .title{
+  position: relative;
+  font-weight: lighter;
+  font-size: 40px;
   color:black;
+  top: -.5em;
 }
 .cityInput{
   padding-top: 10px;
@@ -69,18 +75,24 @@ button{
   width:86px;
   height:55px;
 }
+.navbar-default{
+  border: none;
+}
+.navbar{
+  margin-bottom: 0px;
+}
 .navColor{
-  background-color: #ff1748;
+  background-color: #AE0077;
   height: 80px;
 }
 .cities{
-  text-decoration: underline;
-  margin-left: 20px;
+  /*margin-top:-21px;*/
+  background-color: black;
+  color: #48d1cc;
   text-align: center;
   font-size: 25px;
-  border: solid lightgrey 1px;
-  border-radius: 10px;
-  height: 400px;
+  height: 100%;
+  opacity: .7;
 }
 .navLinks{
   top:15px;
@@ -88,6 +100,15 @@ button{
   vertical-align: center;
   color:white;
   font-size: 20px;
+}
+.nav{
+  border:none;
+}
+.header{
+  font-size: 32px;
+  font-weight: lighter;
+  text-decoration: underline;
+  margin-top: 20px;
 }
 
 

@@ -1,14 +1,13 @@
 var app = angular.module('jamApp', [
-  'ngRoute',
-  'JamAppController'
+  'ngRoute' 
 ])
 
 // app.config(['$routeProvider',
 //   function($routeProvider) {
 //     $routeProvider.
-//       when('/artists',{
-//         templateUrl: 'artists.html',
-//         controller: 'ArtistsCtrl'
+//       when('/',{
+//         templateUrl: 'index.html',
+//         controller: 'JamController'
 //       }).
 //       when('/artists/:artist', {
 //         templateUrl: 'artist-details.html',
@@ -17,16 +16,19 @@ var app = angular.module('jamApp', [
 //       otherwise({
 //         redirectTo: '/'
 //       })
+//     $locationProvider.html5Mode(true);
+
 //   }
 // ])
 
-app.controller('JamAppController', ['$scope','$http', function($scope,$http) {
-  var songkickKey='ngIhxhYsLMjkEU8y';
-  var echokey = 'APRGVYHQGMQ5FKTYM';
+
+app.controller('JamController', ['$scope','$http', function($scope,$http) {
+  var echokey = 'APRGVYHQGMQ5FKTYM'
+  var songkickKey = 'ngIhxhYsLMjkEU8y'
   var consumerKey = 'ce78d10e8183380fb57357cc8a07e29d'
   var echoSharedSecret = 'YhNZOH5TRUWGMogv/2XCZw'
   var city;
-  $scope.artistName = [];
+  $scope.eventName = [];
   
   $scope.submit = function() {
     if($scope.text) {
@@ -36,15 +38,15 @@ app.controller('JamAppController', ['$scope','$http', function($scope,$http) {
     }
   };
   
-  function getArtists(id){
-    $.getJSON("https://api.songkick.com/api/3.0/metro_areas/"+id+"/calendar.json?apikey="+songkickKey+"&jsoncallback=?",
+  function getEvents(cityId){
+    $.getJSON("https://api.songkick.com/api/3.0/metro_areas/"+cityId+"/calendar.json?apikey="+songkickKey+"&jsoncallback=?",
       function(data){
       // data is JSON response object
         console.log('success',data);
-        var artists = data.resultsPage.results.event
-        
-        $scope.artistName.push(artists[0].performance[0].displayName)
-        console.log('artists:', artistName)
+        var events = data.resultsPage.results.event
+        for(var i = 0; i < events.length; i++)
+        $scope.eventName.push(events[i])
+        console.log('events:', $scope.eventName)
       }) 
   };
   
@@ -52,24 +54,22 @@ app.controller('JamAppController', ['$scope','$http', function($scope,$http) {
     $.getJSON("http://api.songkick.com/api/3.0/search/locations.json?query="+city+"&apikey="+songkickKey+"&jsoncallback=?", 
       function(data){ 
         // data is JSON response object 
-        var id = data.resultsPage.results.location[0].metroArea.id
-        console.log(id)
-        getArtists(id)
+        var cityId = data.resultsPage.results.location[0].metroArea.id
+        console.log(cityId)
+        getEvents(cityId)
       }); 
   }
 
-  function getSpotifyIds(){
-    $.getJSON("http://developer.echonest.com/api/v4/artist/search?api_key="+echokey+"&name=radiohead&format=json&bucket=id:spotify", 
+  function getSpotifyIds(artist){
+    $.getJSON("http://developer.echonest.com/api/v4/artist/search?api_key="+echokey+"&name="+artist+"&format=json&bucket=id:spotify", 
     function(data){ 
       // data is JSON response object 
       console.log(data)
-
     }); 
   }  
   
   function createAnchors(artistObjArray){
     var artist = artistObjArray[0]
-  
   }
  
 }]);
