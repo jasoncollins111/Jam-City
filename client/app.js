@@ -8,14 +8,34 @@ angular.module('jamApp', [
 .controller('JamController', function ($scope, $location, CityInfo) {
 
   $scope.eventName = [];
-
+  $scope.cityId = {}
   $scope.submit = function() {
     if($scope.text) {
       city = this.text;
-      getCityInfo.getCityId(city)
+      CityInfo.getCityId(city)
+      .then(function(data){
+        console.log('data:',data)
+      })
       $scope.text = '';
     }
   };
+
+  // .controller('LinksController', function ($scope, Links) {
+  // // Your code here
+  // /* START SOLUTION */
+  // $scope.data = {};
+  // $scope.getLinks = function () {
+  //   Links.getAll()
+  //     .then(function (links) {
+  //       $scope.data.links = links;
+  //     })
+  //     .catch(function (error) {
+  //       console.error(error);
+  //     });
+  // };
+  // $scope.getLinks();
+  /* END SOLUTION */
+// });
 
 
   // function getSpotifyIds(artist){
