@@ -17,6 +17,7 @@
     "passport-oauth": "1.0.0",
     "passport-spotify": "^0.3.0",
     "pkginfo": "0.3.x",
+    "q": "^1.4.1",
     "querystring": "~0.2.0",
     "request": "~2.34.0",
     "swig": "^1.4.2",
