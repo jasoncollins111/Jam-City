@@ -53,11 +53,10 @@ app.controller('JamController', ['$scope','$http', function($scope,$http) {
         for(var i = 0; i < events.length; i++){
           // var artist = events[i].performance[0].artist.id
           eventArray.push(events[i])
-
         }
-          console.log('events:', $scope.eventName)
+        console.log('events:', $scope.eventName)
         for(var i = 0; i < eventArray.length; i++){
-          var artist = eventArray[i].performance[0].artist.id
+          var artist = eventArray[0].performance[0].artist.id
 
         }
           getSpotifyIds(artist)
@@ -73,11 +72,14 @@ app.controller('JamController', ['$scope','$http', function($scope,$http) {
         getEvents(cityId)
       });
   }
-
+  //"http://developer.echonest.com/api/v4/artist?api_key=APRGVYHQGMQ5FKTYM&artist=songkick:artist:6833469&format=jsonp&bucket=id:musicbrainz&callback=JSON_CALLBACK"
   // var url = "http://developer.echonest.com/api/v4/artist/search?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:6833469&format=jsonp&bucket=id:spotify&callback=JSON_CALLBACK"
   function getSpotifyIds(artist){
     $http
-      .jsonp("http://developer.echonest.com/api/v4/song/search?api_key=FILDTEOIK2HBORODV&artist=songkick:artist:96050&format=jsonp&callback=JSON_CALLBACK")
+      //.jsonp("http://developer.echonest.com/api/v4/artist/similar?api_key=APRGVYHQGMQ5FKTYM&artist=songkick:artist:6833469&format=jsonp&callback=JSON_CALLBACK")
+      //.jsonp("http://developer.echonest.com/api/v4/song/search?api_key=APRGVYHQGMQ5FKTYM&artist=songkick:artist:6833469&format=jsonp&callback=JSON_CALLBACK")
+      .jsonp("http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:6833469&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK")
+      //.jsonp("http://developer.echonest.com/api/v4/artist/news?api_key=APRGVYHQGMQ5FKTYM&id=spotify:artist:5l8VQNuIg0turYE1VtM9zV&format=jsonp&callback=JSON_CALLBACK")
       .success(function(data) {console.log(data)})
       .error(function(data) {console.log(data)});
   }
