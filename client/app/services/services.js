@@ -32,7 +32,7 @@ angular.module('jamApp.services', [])
     return $http.jsonp("https://api.songkick.com/api/3.0/metro_areas/"+cityId+"/calendar.json?apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
     .success(function(data){
       console.log('big',data)
-      // var events = data.resultsPage.results.event
+      var events = data.resultsPage.results.event
       // var eventArray = $scope.eventName
       // console.log(events)
       // for(var i = 0; i < events.length; i++){
