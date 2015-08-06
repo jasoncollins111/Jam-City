@@ -1,8 +1,16 @@
-body {
-  background-image: url('app/images/stars3.jpg');
-  background-size: cover;
+.artist{
+  color: black;
 }
-
+body {
+ /* background-image: url('app/images/stars3.jpg');
+  /*background-size: cover;*/
+}
+/*#list-group{
+  margin-top:-21px;
+  background-color: black;
+  width: 200px;
+  height: 100%;
+}*/
 .logo{
   position:relative;
   left: 239;
@@ -10,19 +18,11 @@ body {
   margin:auto;
   text-align: center;
 }
+
 .logo-box{
   width:700px;
 }
-.jumbotron{
-  position:relative;
-  width: 470px;
-  right: 5em;
-  margin: auto;
-  margin-top: 150px;
-  border-radius: 10px;
-  background-color:#4EAAAE;
-  opacity: .9;
-}
+
 #box{
   background-color: #48d1cc;
   height: 200px;
@@ -35,18 +35,32 @@ body {
   top: -.5em;
 }
 .cityInput{
-  padding-top: 10px;
+  padding-top: 40px;
   margin: auto;
+  right: 50px;
   width: 300px;
 }
 .artistList{
-  color:white;
+  /*color:black;*/
+  margin-left: 15px;
 }
+
 a{
-  font-size: 19px;
+  font-size: 35px;
+  color: black;
+  /*font-family: "HelveticaNeue-Light"*/
+  font-weight: lighter;
+  transition: font-size 0.3s ease-in;
 }
 a:hover{
   cursor: pointer;
+  color:black;
+  text-decoration: none;
+  font-size: 45px;
+  transition: font-size 0.3s ease-out;
+}
+a:focus{
+  text-decoration: none;
 }
 .artistInfo{
   width: 600px;
@@ -68,7 +82,7 @@ button{
 }
 .navbar-logo{
   position:relative;
-  top:-5px;
+  top:14px;
   background-size: 45px 45px;
   background-repeat: no-repeat;
   background-position: center center;
@@ -82,8 +96,8 @@ button{
   margin-bottom: 0px;
 }
 .navColor{
-  background-color: #AE0077;
-  height: 80px;
+  background-color: #4EAAAE;
+  height: 120px;
 }
 .cities{
   /*margin-top:-21px;*/
@@ -110,6 +124,7 @@ button{
   text-decoration: underline;
   margin-top: 20px;
 }
+
 
 
 

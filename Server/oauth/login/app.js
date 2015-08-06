@@ -11,7 +11,7 @@ var express = require('express'),
 var consolidate = require('consolidate');
 var DB;
 var mongo = require('mongodb').MongoClient;
-// var app = require('../../app')
+
 
 var appKey = '526cbc85ee13460bacb7133580aba4a3';
 var appSecret = 'c3cf83c6949941f29e6fc7f655b8c42a';

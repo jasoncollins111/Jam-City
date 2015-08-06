@@ -17,9 +17,15 @@
     <div class="container-fluid navColor">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">
-          <img alt="Brand" class="navbar-logo" src="app/images/jamlogo.png">
+          <!-- <img alt="Brand" class="navbar-logo" src="app/images/jamlogo.png"> -->
         </a>
       </div>
+      <form ng-submit="submit()">
+        <div class="input-group cityInput">
+          <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-globe"></i></span>
+          <input type="text" ng-model="text" class="form-control inputBox" placeholder="Enter a city, or venue" aria-describedby="basic-addon1" />
+        </div>
+      </form>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <!-- <li class="navLinks"><a class="navAnchor" href="#" style="color:white;">Cities</a></li> -->
@@ -27,29 +33,30 @@
        </div>
     </div>
   </nav>
-  <div class="row">
-    <div class="col-md-2 cities">
-      <p class="header">Your Cities</p>
-    </div>
-    <div class="col-md-10">
-      <div class="jumbotron">
-        <div class="media-middle logo-box">
-        </div>
-          <!-- <h2 class="text-center title">Welcome to Jam City</h2> -->
-          <form ng-submit="submit()">
-            <div class="input-group cityInput">
-              <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-globe"></i></span>
-              <input type="text" ng-model="text" class="form-control inputBox" placeholder="Enter a city, or venue" aria-describedby="basic-addon1" />
-            </div>
-          </form>
+
+
       </div>
+    </div>
+    <div>
+      <ul>
 
+      </ul>
     </div>
   </div>
 
-  <div class="list-group">
-      <li ng-repeat="artist in artistName"></li>
+<!--   <div class="list-group">
+      <li ng-repeat="artist in eventList"></li>
+  </div> -->
+<div id="list-group">
+  <div class="artistList"
+       ng-repeat="artist in eventsList">
+    <div class="info">
+      <div class="name">
+        <a class="artist" href="#">{{ artist.artistName }}</a>
+      </div>
+    </div>
   </div>
+</div>
   <div class="row">
   <!-- <div class="col-md-3 cities">Cities & Venues</difv> -->
   <!-- <div class="col-md-6">OtherShit</div> -->
