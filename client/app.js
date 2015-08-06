@@ -2,7 +2,16 @@ angular.module('jamApp', [
   'jamApp.services'
 ])
 
+.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise("/");
 
+    $stateProvider
+    .state('artistList', {
+      url: "/artistList",
+      templateUrl: "app/artists/artists.html"
+    })
+
+}
 
 
 .controller('JamController', function ($scope, $location, CityInfo) {

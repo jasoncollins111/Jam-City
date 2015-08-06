@@ -44,22 +44,9 @@
     </div>
   </div>
 
-<!--   <div class="list-group">
-      <li ng-repeat="artist in eventList"></li>
-  </div> -->
-<div id="list-group">
-  <div class="artistList"
-       ng-repeat="artist in eventsList">
-    <div class="info">
-      <div class="name">
-        <a class="artist" href="#">{{ artist.artistName }}</a>
-      </div>
-    </div>
-  </div>
-</div>
-  <div class="row">
-  <!-- <div class="col-md-3 cities">Cities & Venues</difv> -->
-  <!-- <div class="col-md-6">OtherShit</div> -->
+<div>
+
+  <ui-view>
 </div>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
