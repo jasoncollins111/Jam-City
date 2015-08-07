@@ -2,33 +2,14 @@
   color: black;
 }
 .artistInfo{
-  width: 300px;
+  width: 350px;
   position:relative;
 }
 a[ng-click]{
     cursor: pointer;
 }
-body {
- /* background-image: url('app/images/stars3.jpg');
-  /*background-size: cover;*/
-}
-/*#list-group{
-  margin-top:-21px;
-  background-color: black;
-  width: 200px;
-  height: 100%;
-}*/
-.logo{
-  position:relative;
-  left: 239;
-  width: 30%;
-  margin:auto;
-  text-align: center;
-}
 
-.logo-box{
-  width:700px;
-}
+
 
 #box{
   background-color: #48d1cc;
@@ -53,9 +34,8 @@ body {
 }
 
 .artist{
-  font-size: 35px;
+  font-size: 25px;
   color: black;
-  /*font-family: "HelveticaNeue-Light"*/
   font-weight: lighter;
   transition: font-size 0.3s ease-in;
 }
@@ -63,7 +43,7 @@ body {
   cursor: pointer;
   color:black;
   text-decoration: none;
-  font-size: 45px;
+  font-size: 35px;
   transition: font-size 0.3s ease-out;
 }
 .artist:focus{
@@ -114,6 +94,17 @@ button{
   font-size: 25px;
   height: 100%;
   opacity: .7;
+}
+.logo{
+  position:relative;
+  left: 239;
+  width: 30%;
+  margin:auto;
+  text-align: center;
+}
+
+.logo-box{
+  width:700px;
 }
 .navLinks{
   top:15px;
