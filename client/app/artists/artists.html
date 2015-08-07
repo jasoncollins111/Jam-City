@@ -1,10 +1,13 @@
-<div id="list-group">
+<div id="list-group" class="col-md-4">
   <div class="artistList"
        ng-repeat="artist in eventsList">
     <div class="info">
       <div class="name">
-        <a class="artist" href="#">{{ artist.artistName }}</a>
+        <a class="artist" href="#" ng-click="artistDeets(artist)">{{ artist.artistName }}</a>
       </div>
     </div>
   </div>
 </div>
+<span class=" artistInfo col-md-8" ui-view></span>
+
+

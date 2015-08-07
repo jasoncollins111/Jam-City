@@ -1,6 +1,13 @@
 .artist{
   color: black;
 }
+.artistInfo{
+  width: 300px;
+  position:relative;
+}
+a[ng-click]{
+    cursor: pointer;
+}
 body {
  /* background-image: url('app/images/stars3.jpg');
   /*background-size: cover;*/
@@ -45,21 +52,21 @@ body {
   margin-left: 15px;
 }
 
-a{
+.artist{
   font-size: 35px;
   color: black;
   /*font-family: "HelveticaNeue-Light"*/
   font-weight: lighter;
   transition: font-size 0.3s ease-in;
 }
-a:hover{
+.artist:hover{
   cursor: pointer;
   color:black;
   text-decoration: none;
   font-size: 45px;
   transition: font-size 0.3s ease-out;
 }
-a:focus{
+.artist:focus{
   text-decoration: none;
 }
 .artistInfo{
@@ -77,7 +84,7 @@ button{
   width: 300px;
   height: 70;
   margin-top: 175px;
-  background-color: #48d1cc;
+  /*background-color: #48d1cc;*/
   opacity: .75;
 }
 .navbar-logo{
@@ -124,7 +131,14 @@ button{
   text-decoration: underline;
   margin-top: 20px;
 }
-
+.spotify{
+  border:#ED3E32;
+  background-color: #ED3E32;
+}
+.spotify:hover{
+  border:#ED3E32;
+  background-color: #ED3E32;
+}
 
 
 

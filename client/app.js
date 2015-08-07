@@ -1,26 +1,33 @@
 angular.module('jamApp', [
-  'jamApp.services'
+  'jamApp.services',
+  'ui.router'
 ])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/");
 
     $stateProvider
-    .state('artistList', {
-      url: "/artistList",
+    .state('artists', {
+      url: "/artists",
       templateUrl: "app/artists/artists.html"
+
     })
+    .state('artists.artist', {
+      url: '/artist',
+      templateUrl: 'app/artist/artist.html',
+      // controller: function($stateParams){
+      //   console.log('in stateProvider')
+      // }
+    })
+})
 
-}
-
-
-.controller('JamController', function ($scope, $location, CityInfo) {
+.controller('JamController', function ($scope, $location, $state, CityInfo) {
 
   $scope.eventsList = [];
   $scope.cityId = {}
   $scope.submit = function() {
     if($scope.text) {
-      city = this.text;
+      city = $scope.text;
       CityInfo.getCityId(city)
       .then(function(res){
         //console.log(res.data.resultsPage)
@@ -31,6 +38,7 @@ angular.module('jamApp', [
 
       })
       $scope.text = '';
+      $state.go('artists')
     }
   };
   $scope.listCityEvents = function(cityId) {
@@ -53,6 +61,13 @@ angular.module('jamApp', [
         console.log($scope.eventsList)
       })
     }
+  }
+  $scope.artistDeets = function(artistClicked){
+    // console.log($events)
+    $scope.artistClicked = artistClicked
+    event.preventDefault()
+    console.log('in ArtistDeets', artistClicked)
+    $state.go('artists.artist')
   }
 });
 
