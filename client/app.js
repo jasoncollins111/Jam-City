@@ -69,5 +69,8 @@ angular.module('jamApp', [
     console.log('in ArtistDeets', artistClicked)
     $state.go('artists.artist')
   }
+  $scope.spotify = function(){
+    $
+  }
 });
 

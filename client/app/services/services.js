@@ -52,5 +52,11 @@ angular.module('jamApp.services', [])
       .success(function(data) {console.log(data)})
       .error(function(data) {console.log(data)});
   }
-
+.factory('AddToSpotify', function ())
+var addtracks = function () {
+  return $http({
+    method: 'POST',
+    url: '/addTrack'
+  });
+};
 })

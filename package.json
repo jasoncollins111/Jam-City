@@ -19,7 +19,8 @@
     "pkginfo": "0.3.x",
     "q": "^1.4.1",
     "querystring": "~0.2.0",
-    "request": "~2.34.0",
+    "request": "^2.34.0",
+    "spotify-web-api-node": "^2.1.0",
     "swig": "^1.4.2",
     "util": "~0.10.3"
   }
