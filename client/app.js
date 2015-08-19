@@ -1,7 +1,8 @@
 angular.module('jamApp', [
   'jamApp.services',
   'ui.router',
-  'ngAutocomplete'
+  'ngAutocomplete',
+  'daterangepicker'
 ])
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -23,6 +24,7 @@ angular.module('jamApp', [
 })
 
 .controller('JamController', function ($scope, $location, $state, CityInfo) {
+  $scope.date = {startDate: null, endDate: null};///HERE
   $scope.options = ['establishment', '(cities)'];
   $scope.eventsList = [];
   $scope.cityId = {}

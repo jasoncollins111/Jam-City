@@ -13,6 +13,7 @@ angular.module('jamApp.services', [])
     .success(function (resp) {
 
       var cityId = resp.resultsPage.results.location[0].metroArea.id
+      
 
       //getCityEvents(cityId)
     return resp.data;

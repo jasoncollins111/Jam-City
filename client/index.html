@@ -8,11 +8,16 @@
     <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="main.css">
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
 
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
     <script src="bower_components/ngAutocomplete/src/ngAutocomplete.js"></script>
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -35,7 +40,9 @@
         <div class="input-group cityInput">
           <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-globe"></i></span>
           <input type="text" ng-model="text" class="form-control inputBox" placeholder="Enter a city, or venue" aria-describedby="basic-addon1" ng-autocomplete ng-model="autocomplete" options="options" details="details" />
+          <input date-range-picker class="form-control date-picker" type="text" ng-model="date" placeholder="pick a date" />
         </div>
+
       </form>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
