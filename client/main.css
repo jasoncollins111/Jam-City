@@ -3,7 +3,8 @@
 }
 .artistInfo{
   width: 350px;
-  position:relative;
+  position: fixed;
+  left: 33%;
 }
 a[ng-click]{
     cursor: pointer;
@@ -56,6 +57,15 @@ a[ng-click]{
 .getCity{
   height:250px;
   text-align: center;
+}
+
+#artists {
+  overflow: scroll;
+  position: fixed;
+  height: 100%;
+  width: 33%;
+  border-right-width: 0px;
+  border-left-width: 0px;
 }
 
 button{
