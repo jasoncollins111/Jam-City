@@ -1,6 +1,7 @@
 angular.module('jamApp', [
   'jamApp.services',
-  'ui.router'
+  'ui.router',
+  'ngAutocomplete'
 ])
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -22,7 +23,7 @@ angular.module('jamApp', [
 })
 
 .controller('JamController', function ($scope, $location, $state, CityInfo) {
-
+  $scope.options = ['establishment', '(cities)'];
   $scope.eventsList = [];
   $scope.cityId = {}
   $scope.submit = function() {
