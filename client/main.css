@@ -3,7 +3,8 @@
 }
 .artistInfo{
   width: 350px;
-  position:relative;
+  position: fixed;
+  left: 33%;
 }
 a[ng-click]{
     cursor: pointer;
@@ -59,17 +60,12 @@ a[ng-click]{
 }
 
 #artists {
-  position: fixed;
   overflow: scroll;
-  height: 600;
-  border-top-color: black;
-  margin-bottom: 20px;
-  margin-top: 30px;
-  border-top-width: 2px;
+  position: fixed;
+  height: 100%;
+  width: 33%;
   border-right-width: 0px;
   border-left-width: 0px;
-  border-style: solid;
-  border-bottom-width: 2px;
 }
 
 button{

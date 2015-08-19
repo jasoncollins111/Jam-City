@@ -65,7 +65,6 @@ angular.module('jamApp', [
   $scope.artistDeets = function(artistClicked){
     // console.log($events)
     $scope.artistClicked = artistClicked
-    event.preventDefault()
     console.log('in ArtistDeets', artistClicked)
     $state.go('artists.artist')
   }
