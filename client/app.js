@@ -22,8 +22,8 @@ angular.module('jamApp', [
     })
 })
 
-.controller('JamController', function ($scope, $location, $state, CityInfo) {
-  $scope.options = ['establishment', '(cities)'];
+.controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo) {
+
   $scope.eventsList = [];
   $scope.cityId = {}
   $scope.submit = function() {
@@ -31,7 +31,6 @@ angular.module('jamApp', [
       city = $scope.text;
       CityInfo.getCityId(city)
       .then(function(res){
-        //console.log(res.data.resultsPage)
         var cityId = res.data.resultsPage.results.location[0].metroArea.id
         console.log(cityId)
         $scope.cityId.city = cityId
@@ -46,10 +45,12 @@ angular.module('jamApp', [
     if(cityId){
       CityInfo.getCityEvents(cityId)
       .then(function(res){
-        console.log(res)
+        console.log("res:", res)
         var events = res.data.resultsPage.results.event
         for(var i = 0; i < events.length; i++){
+          if(events[i].performance.length>0){
           var artist = events[i].performance[0].artist.displayName
+
           $scope.eventsList.push({
             artistName: artist,
             artistId: events[i].performance[0].artist.id,
@@ -58,8 +59,9 @@ angular.module('jamApp', [
             venue: events[i].venue.displayName,
             venueId: events[i].venue.id
           })
+          }
         }
-        console.log($scope.eventsList)
+        console.log("eventsList", $scope.eventsList)
       })
     }
   }
@@ -69,8 +71,18 @@ angular.module('jamApp', [
     console.log('in ArtistDeets', artistClicked)
     $state.go('artists.artist')
   }
-  $scope.spotify = function(){
-    $
+  $scope.spotify = function(artistId){
+    var newId;
+    console.log('app controller spotify', artistId)
+    ArtistInfo.getSpotifyIds(artistId)
+    .then(function(res){
+      console.log('idRes',res)
+      var id = res.data.response.artist.foreign_ids[0].foreign_id
+      // console.log('spotifyId', id.slice(15) )
+      newId = id.slice(15)
+      console.log('newId', newId)
+      AddToSpotify.hotTracks(newId)
+    })
   }
 });
 
