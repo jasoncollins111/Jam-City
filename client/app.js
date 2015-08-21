@@ -23,13 +23,16 @@ angular.module('jamApp', [
     })
 })
 
+<<<<<<< HEAD
+.controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo) {
+=======
 .run(function(){
   var geocoder = new google.maps.Geocoder();
-  
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
   }
-  
+
   function successFunction(position) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
@@ -47,11 +50,12 @@ angular.module('jamApp', [
 
 })
 .controller('JamController', function ($scope, $location, $state, CityInfo) {
-  
+
 
 
 
   $scope.options = ['establishment', '(cities)'];
+>>>>>>> 06bb2e0e5ed66a48e81961ba6e26fb222a9eb166
 
   $scope.eventsList = [];
   $scope.cityId = {}
@@ -63,7 +67,6 @@ angular.module('jamApp', [
 
       CityInfo.getCityId(city)
       .then(function(res){
-        //console.log(res.data.resultsPage)
         var cityId = res.data.resultsPage.results.location[0].metroArea.id
         console.log(cityId)
         $scope.cityId.city = cityId
@@ -71,7 +74,7 @@ angular.module('jamApp', [
 
       })
       $state.go('artists')
-    
+
 
     }
   };
@@ -79,10 +82,10 @@ angular.module('jamApp', [
     if(cityId){
       CityInfo.getCityEvents(cityId)
       .then(function(res){
-        console.log(res)
+        console.log("res:", res)
         var events = res.data.resultsPage.results.event
         console.log(events);
-        for(var i = 0; i < events.length; i++){
+
           if(events[i].performance.length > 0){
             var artist = events[i].performance[0].artist.displayName;
             $scope.eventsList.push({
@@ -107,11 +110,23 @@ angular.module('jamApp', [
     console.log('in ArtistDeets', artistClicked)
     $state.go('artists.artist')
   }
+  $scope.spotify = function(artistId){
+    var newId;
+    console.log('app controller spotify', artistId)
+    ArtistInfo.getSpotifyIds(artistId)
+    .then(function(res){
+      console.log('idRes',res)
+      var id = res.data.response.artist.foreign_ids[0].foreign_id
+      // console.log('spotifyId', id.slice(15) )
+      newId = id.slice(15)
+      console.log('newId', newId)
+      AddToSpotify.hotTracks(newId)
+    })
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
   }
-  
+
   function successFunction(position) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
@@ -121,14 +136,13 @@ angular.module('jamApp', [
     CityInfo.getCityEventsLatng(lat, lng)
       .then(function(data){
         console.log(data.data.resultsPage.results.location[0].metroArea.displayName);
-        // console.log(data.resultsPage.results.location[0].metroArea.displayName);
         $scope.text = data.data.resultsPage.results.location[0].metroArea.displayName;
         $scope.submit(function(){
           $scope.loading = false;
           console.log('loading complete');
         });
       });
-    
+
   }
 
   function errorFunction(){

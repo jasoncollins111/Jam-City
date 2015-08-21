@@ -26,17 +26,6 @@ angular.module('jamApp.services', [])
     .success(function(data){
       console.log('big',data)
       var events = data.resultsPage.results.event
-      // var eventArray = $scope.eventName
-      // console.log(events)
-      // for(var i = 0; i < events.length; i++){
-      //   // var artist = events[i].performance[0].artist.id
-      //   eventArray.push(events[i])
-      // }
-      // // console.log()
-      // for(var i = 0; i < eventArray.length; i++){
-      //   var artist = eventArray[0].performance[0].artist.id
-
-      // }
     })
   };
 
@@ -62,10 +51,32 @@ angular.module('jamApp.services', [])
 })
 
 .factory('ArtistInfo', function ($http){
-    function getSpotifyIds(artist){
-    $http
-      .jsonp("http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:6833469&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK")
-      .success(function(data) {console.log(data)})
-      .error(function(data) {console.log(data)});
+    function getSpotifyIds(songkickId){
+    return $http
+      .jsonp("http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+songkickId+"&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK")
+      .success(function(data) {
+        console.log(data)
+
+      })
+      .error(function(data) {console.log(data)})
+  }
+    return {
+      getSpotifyIds: getSpotifyIds
+    }
+})
+.factory('AddToSpotify', function ($http){
+   function hotTracks (artistId) {
+    console.log('artistId factory', artistId)
+     $http.get('/hotTracks', {params :{artistId: artistId}})
+     .then(function(response){
+       console.log(response)
+     }, function(err){
+       console.log(err)
+     })
+
+   }
+   return {
+    hotTracks: hotTracks
   }
 });
+

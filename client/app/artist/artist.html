@@ -3,7 +3,7 @@
     <h1>{{artistClicked.artistName}}</h1>
     <p>{{artistClicked.eventDateTime.date}}</p>
     <p>{{artistClicked.venue}}</p>
-    <p><a class="btn btn-primary btn-lg spotify" ng-submit="spotify()"href="#" role="button">Add to Spotify</a></p>
+    <p><a class="btn btn-primary btn-lg spotify" ng-click="spotify(artistClicked.artistId)" href="#" role="button">Add to Spotify</a></p>
   </div>
 </span>
 

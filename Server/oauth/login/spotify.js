@@ -131,14 +131,6 @@ app.get('/auth/spotify',
 // function will not be called.
   console.log(res)
 });
-// app.post('/postTracks')
-  //check if user has jamCity playlist
-
-  //if not then create jamCity playlist
-  //if is there add 5 of the artists hottest songs
-  //create toast that the tracks have been added
-
-
 
 
 // GET /auth/spotify/callback
@@ -157,8 +149,9 @@ app.get('/callback',
    .then(function(data) {
      bigD = data.body.items
      bigD.forEach(function(item){
+        console.log('playlistName', item.name)
        if(item.name === 'city jams'){
-        hasJamCity === true
+        hasJamCity = true;
         console.log(hasJamCity)
        }
      })
@@ -173,12 +166,21 @@ app.get('/callback',
     res.redirect('/');
   });
 
+app.get('/hotTracks', function(req, res){
+  var spotifyId = req.query.artistId
+  console.log('getHotTracks', spotifyId)
+  spotifyApi.getArtistTopTracks(spotifyId, 'US')
+  .then(function(data) {
+    console.log(data.body);
+    }, function(err) {
+    console.log('Something went wrong!', err);
+  });
+})
 
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
-
 
 
 
