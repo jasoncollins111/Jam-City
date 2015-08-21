@@ -36,13 +36,12 @@
           <!-- <img alt="Brand" class="navbar-logo" src="app/images/jamlogo.png"> -->
         </a>
       </div>
+      {{city}}
       <form ng-submit="submit()">
         <div class="input-group cityInput">
           <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-globe"></i></span>
           <input type="text" ng-model="text" class="form-control inputBox" placeholder="Enter a city, or venue" aria-describedby="basic-addon1" ng-autocomplete ng-model="autocomplete" options="options" details="details" />
-          <input date-range-picker class="form-control date-picker" type="text" ng-model="date" placeholder="pick a date" />
         </div>
-
       </form>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
