@@ -1,7 +1,8 @@
 angular.module('jamApp', [
   'jamApp.services',
   'ui.router',
-  'ngAutocomplete'
+  'ngAutocomplete',
+  'daterangepicker'
 ])
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -22,46 +23,84 @@ angular.module('jamApp', [
     })
 })
 
+<<<<<<< HEAD
 .controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo) {
+=======
+.run(function(){
+  var geocoder = new google.maps.Geocoder();
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+  }
+
+  function successFunction(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    codeLatLng(lat, lng)
+  }
+
+  function errorFunction(){
+      alert("Geocoder failed");
+  }
+
+  function codeLatLng(lat, lng) {
+
+
+  }
+
+})
+.controller('JamController', function ($scope, $location, $state, CityInfo) {
+
+
+
+
+  $scope.options = ['establishment', '(cities)'];
+>>>>>>> 06bb2e0e5ed66a48e81961ba6e26fb222a9eb166
 
   $scope.eventsList = [];
   $scope.cityId = {}
-  $scope.submit = function() {
+  $scope.submit = function(cb) {
     if($scope.text) {
-      city = $scope.text;
+      var city = $scope.text;
+      var date = $scope.date;
+      var venue = $scope.text;
+
       CityInfo.getCityId(city)
       .then(function(res){
         var cityId = res.data.resultsPage.results.location[0].metroArea.id
         console.log(cityId)
         $scope.cityId.city = cityId
-        return $scope.listCityEvents(cityId)
+        return $scope.listCityEvents(cityId, cb)
 
       })
-      $scope.text = '';
       $state.go('artists')
+
+
     }
   };
-  $scope.listCityEvents = function(cityId) {
+  $scope.listCityEvents = function(cityId, cb) {
     if(cityId){
       CityInfo.getCityEvents(cityId)
       .then(function(res){
         console.log("res:", res)
         var events = res.data.resultsPage.results.event
-        for(var i = 0; i < events.length; i++){
-          if(events[i].performance.length>0){
-          var artist = events[i].performance[0].artist.displayName
+        console.log(events);
 
-          $scope.eventsList.push({
-            artistName: artist,
-            artistId: events[i].performance[0].artist.id,
-            eventDateTime: {date: events[i].start.date,
-            time: events[i].start.time},
-            venue: events[i].venue.displayName,
-            venueId: events[i].venue.id
-          })
+          if(events[i].performance.length > 0){
+            var artist = events[i].performance[0].artist.displayName;
+            $scope.eventsList.push({
+              artistName: artist,
+              artistId: events[i].performance[0].artist.id,
+              eventDateTime: {date: events[i].start.date,
+              time: events[i].start.time},
+              venue: events[i].venue.displayName,
+              venueId: events[i].venue.id
+            })
+
           }
         }
-        console.log("eventsList", $scope.eventsList)
+        cb();
+        console.log($scope.eventsList)
       })
     }
   }
@@ -83,6 +122,33 @@ angular.module('jamApp', [
       console.log('newId', newId)
       AddToSpotify.hotTracks(newId)
     })
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
   }
+
+  function successFunction(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    CityInfo.getCityEventsLatng(lat, lng);
+    $scope.loading = true;
+    console.log('loading started');
+    CityInfo.getCityEventsLatng(lat, lng)
+      .then(function(data){
+        console.log(data.data.resultsPage.results.location[0].metroArea.displayName);
+        $scope.text = data.data.resultsPage.results.location[0].metroArea.displayName;
+        $scope.submit(function(){
+          $scope.loading = false;
+          console.log('loading complete');
+        });
+      });
+
+  }
+
+  function errorFunction(){
+      console.log("Geocoder failed");
+  }
+
+
 });
 
