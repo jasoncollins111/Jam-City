@@ -8,11 +8,16 @@
     <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="main.css">
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
 
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
     <script src="bower_components/ngAutocomplete/src/ngAutocomplete.js"></script>
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -31,6 +36,7 @@
           <!-- <img alt="Brand" class="navbar-logo" src="app/images/jamlogo.png"> -->
         </a>
       </div>
+      {{city}}
       <form ng-submit="submit()">
         <div class="input-group cityInput">
           <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-globe"></i></span>

@@ -13,6 +13,7 @@ angular.module('jamApp.services', [])
     .success(function (resp) {
 
       var cityId = resp.resultsPage.results.location[0].metroArea.id
+      
 
       //getCityEvents(cityId)
     return resp.data;
@@ -39,9 +40,24 @@ angular.module('jamApp.services', [])
     })
   };
 
+  var getCityEventsLatng = function(lat, lng){
+    console.log('lat ',lat);
+    console.log('lng ',lng);
+
+    return $http.jsonp("http://api.songkick.com/api/3.0/search/locations.json?location=geo:"+lat+","+lng+"&apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
+      .success(function(data){
+        return data.resultsPage.results.location[0].metroArea.displayName;
+      })
+      .error(function(error, b){
+        console.log('error ',error);
+        console.log('error code ',b);
+      });
+  };
+
   return {
     getCityEvents: getCityEvents,
-    getCityId: getCityId
+    getCityId: getCityId,
+    getCityEventsLatng : getCityEventsLatng
   };
 })
 
