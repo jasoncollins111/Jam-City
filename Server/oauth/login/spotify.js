@@ -22,6 +22,8 @@ var appKey = '526cbc85ee13460bacb7133580aba4a3';
 var appSecret = 'c3cf83c6949941f29e6fc7f655b8c42a';
 
 var currentUser;
+var playlistId;
+var trackArray = []
 
 var mongoUri = 'mongodb://saintembers:bassandhon3y@ds031862.mongolab.com:31862/jam-city'
 
@@ -148,9 +150,13 @@ app.get('/callback',
    spotifyApi.getUserPlaylists(currentUser)
    .then(function(data) {
      bigD = data.body.items
+     console.log('playlistInfo', bigD)
+
      bigD.forEach(function(item){
         console.log('playlistName', item.name)
        if(item.name === 'city jams'){
+        playlistId = item.id
+        console.log(playlistId)
         hasJamCity = true;
         console.log(hasJamCity)
        }
@@ -171,11 +177,27 @@ app.get('/hotTracks', function(req, res){
   console.log('getHotTracks', spotifyId)
   spotifyApi.getArtistTopTracks(spotifyId, 'US')
   .then(function(data) {
-    console.log(data.body);
+    for(var i = 0; i < 3; i++){
+    var spotifyTrack = 'spotify:track:'
+    var track = spotifyTrack + data.body.tracks[i].id
+    console.log(track)
+    trackArray.push(track)
+    }
+    spotifyApi.addTracksToPlaylist(currentUser, playlistId, trackArray)
+      .then(function(data) {
+        console.log('Added tracks to playlist!');
+        trackArray = []
+      }, function(err) {
+        console.log('Something went wrong!', err);
+      });
     }, function(err) {
     console.log('Something went wrong!', err);
-  });
+  })
+
+
+
 })
+
 
 app.get('/logout', function(req, res){
   req.logout();

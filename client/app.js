@@ -1,31 +1,28 @@
 angular.module('jamApp', [
   'jamApp.services',
   'ui.router',
-  'ngAutocomplete',
-  'daterangepicker'
-])
+  'ngAutocomplete'
+  ])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/");
 
-    $stateProvider
-    .state('artists', {
-      url: "/artists",
-      templateUrl: "app/artists/artists.html"
+  $stateProvider
+  .state('artists', {
+    url: "/artists",
+    templateUrl: "app/artists/artists.html"
 
-    })
-    .state('artists.artist', {
-      url: '/artist',
-      templateUrl: 'app/artist/artist.html',
+  })
+  .state('artists.artist', {
+    url: '/artist',
+    templateUrl: 'app/artist/artist.html',
       // controller: function($stateParams){
       //   console.log('in stateProvider')
       // }
     })
 })
 
-<<<<<<< HEAD
-.controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo) {
-=======
+
 .run(function(){
   var geocoder = new google.maps.Geocoder();
 
@@ -40,7 +37,7 @@ angular.module('jamApp', [
   }
 
   function errorFunction(){
-      alert("Geocoder failed");
+    alert("Geocoder failed");
   }
 
   function codeLatLng(lat, lng) {
@@ -49,13 +46,12 @@ angular.module('jamApp', [
   }
 
 })
-.controller('JamController', function ($scope, $location, $state, CityInfo) {
+.controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo) {
 
 
 
 
   $scope.options = ['establishment', '(cities)'];
->>>>>>> 06bb2e0e5ed66a48e81961ba6e26fb222a9eb166
 
   $scope.eventsList = [];
   $scope.cityId = {}
@@ -85,25 +81,27 @@ angular.module('jamApp', [
         console.log("res:", res)
         var events = res.data.resultsPage.results.event
         console.log(events);
-
+        for(var i = 0; i < events.length; i++){
           if(events[i].performance.length > 0){
             var artist = events[i].performance[0].artist.displayName;
             $scope.eventsList.push({
               artistName: artist,
               artistId: events[i].performance[0].artist.id,
               eventDateTime: {date: events[i].start.date,
-              time: events[i].start.time},
-              venue: events[i].venue.displayName,
-              venueId: events[i].venue.id
-            })
+                time: events[i].start.time},
+                venue: events[i].venue.displayName,
+                venueId: events[i].venue.id
+              })
 
           }
         }
         cb();
         console.log($scope.eventsList)
+
       })
     }
   }
+
   $scope.artistDeets = function(artistClicked){
     // console.log($events)
     $scope.artistClicked = artistClicked
@@ -122,18 +120,19 @@ angular.module('jamApp', [
       console.log('newId', newId)
       AddToSpotify.hotTracks(newId)
     })
-
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
   }
 
-  function successFunction(position) {
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    CityInfo.getCityEventsLatng(lat, lng);
-    $scope.loading = true;
-    console.log('loading started');
-    CityInfo.getCityEventsLatng(lat, lng)
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+    }
+
+    function successFunction(position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+      CityInfo.getCityEventsLatng(lat, lng);
+      $scope.loading = true;
+      console.log('loading started');
+      CityInfo.getCityEventsLatng(lat, lng)
       .then(function(data){
         console.log(data.data.resultsPage.results.location[0].metroArea.displayName);
         $scope.text = data.data.resultsPage.results.location[0].metroArea.displayName;
@@ -143,12 +142,12 @@ angular.module('jamApp', [
         });
       });
 
-  }
+    }
 
-  function errorFunction(){
+    function errorFunction(){
       console.log("Geocoder failed");
-  }
+    }
 
 
-});
+  });
 
