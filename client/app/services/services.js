@@ -1,19 +1,19 @@
 
+var echokey = 'APRGVYHQGMQ5FKTYM';
+var consumerKey = 'ce78d10e8183380fb57357cc8a07e29d';
+var echoSharedSecret = 'YhNZOH5TRUWGMogv/2XCZw';
+var songkickKey = 'ngIhxhYsLMjkEU8y';
 angular.module('jamApp.services', [])
 
 
 .factory('CityInfo', function ($http) {
-  var echokey = 'APRGVYHQGMQ5FKTYM'
-  var consumerKey = 'ce78d10e8183380fb57357cc8a07e29d'
-  var echoSharedSecret = 'YhNZOH5TRUWGMogv/2XCZw'
-  var songkickKey = 'ngIhxhYsLMjkEU8y'
 
   var getCityId = function (city) {
     return $http.jsonp("http://api.songkick.com/api/3.0/search/locations.json?query="+city+"&apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
     .success(function (resp) {
 
       var cityId = resp.resultsPage.results.location[0].metroArea.id
-      
+
 
       //getCityEvents(cityId)
     return resp.data;
@@ -28,6 +28,8 @@ angular.module('jamApp.services', [])
       var events = data.resultsPage.results.event
     })
   };
+
+
 
   var getCityEventsLatng = function(lat, lng){
     console.log('lat ',lat);
@@ -78,5 +80,25 @@ angular.module('jamApp.services', [])
    return {
     hotTracks: hotTracks
   }
-});
+})
+.factory('VenueSearch', function($http){
+  function venueId(venueName){
+    console.log('getting venue events')
+    return $http.jsonp("http://api.songkick.com/api/3.0/search/venues.json?query="+venueName+"&apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
+    .success(function(data){
+      console.log(data)
+    })
+  }
+  function venueEvents(venueId){
+
+     return $http.jsonp("http://api.songkick.com/api/3.0/venues/"+venueId+"/calendar.json?apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
+    .success(function(data){
+      console.log('venueEvents:',data)
+    })
+  }
+  return{
+    venueId: venueId,
+    venueEvents: venueEvents
+  }
+})
 

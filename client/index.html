@@ -34,10 +34,10 @@
         </a>
       </div>
       {{city}}
-      <form ng-submit="submit()">
+      <form ng-submit="getVenue()">
         <div class="input-group cityInput">
           <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-globe"></i></span>
-          <input type="text" ng-model="text" class="form-control inputBox" placeholder="Enter a city, or venue" aria-describedby="basic-addon1" ng-autocomplete ng-model="autocomplete" options="options" details="details" />
+          <input type="text" ng-model="text" class="form-control inputBox" placeholder="Enter a venue" aria-describedby="basic-addon1" ng-autocomplete ng-model="autocomplete" options="options" details="details" />
         </div>
       </form>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

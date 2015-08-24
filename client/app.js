@@ -46,7 +46,7 @@ angular.module('jamApp', [
   }
 
 })
-.controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo) {
+.controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch) {
 
 
 
@@ -74,6 +74,27 @@ angular.module('jamApp', [
 
     }
   };
+  $scope.getVenue = function(venueName){
+    var venueName = $scope.text
+    var venueId;
+    VenueSearch.venueId(venueName)
+    .then(function(res){
+      console.log('venue res', res)
+      venueId = res.data.resultsPage.results.venue[0].id
+      console.log(venueId)
+      return VenueSearch.venueEvents(venueId)
+      // console.log($scope.eventsList)
+    }).then(function(res){
+       console.log('venueEvents call returned',res)
+      var events = res.data.resultsPage.results.event
+      $scope.eventsList = []
+      searchEvents(events)
+    })
+
+
+
+
+  }
   $scope.listCityEvents = function(cityId, cb) {
     if(cityId){
       CityInfo.getCityEvents(cityId)
@@ -81,7 +102,15 @@ angular.module('jamApp', [
         console.log("res:", res)
         var events = res.data.resultsPage.results.event
         console.log(events);
-        for(var i = 0; i < events.length; i++){
+        searchEvents(events)
+        cb();
+        console.log($scope.eventsList)
+
+      })
+    }
+  }
+  function searchEvents(events){
+    for(var i = 0; i < events.length; i++){
           if(events[i].performance.length > 0){
             var artist = events[i].performance[0].artist.displayName;
             $scope.eventsList.push({
@@ -95,11 +124,6 @@ angular.module('jamApp', [
 
           }
         }
-        cb();
-        console.log($scope.eventsList)
-
-      })
-    }
   }
 
   $scope.artistDeets = function(artistClicked){
