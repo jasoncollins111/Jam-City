@@ -59,6 +59,11 @@ a[ng-click]{
   height:250px;
   text-align: center;
 }
+#loading {
+    margin-top: 200px;
+    position: fixed;
+    margin-left: 50%;
+}
 
 #artists {
   overflow: scroll;
@@ -67,7 +72,7 @@ a[ng-click]{
   width: 33%;
   border-right-width: 0px;
   border-left-width: 0px;
-  margin-top: 33px;
+  margin-top: 60px;
 }
 
 /*button{

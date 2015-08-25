@@ -52,17 +52,18 @@ angular.module('jamApp', [
 .controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch) {
 
 
+      $scope.obj = {loading : true};
 
 
   $scope.options = ['establishment', '(cities)'];
 
   $scope.eventsList = [];
   $scope.cityId = {}
-  $scope.submit = function(cb) {
-    if($scope.text) {
-      var city = $scope.text;
-      var date = $scope.date;
-      var venue = $scope.text;
+  $scope.getCity = function(city, cb) {
+
+
+    
+    console.log($scope.obj);
 
       CityInfo.getCityId(city)
       .then(function(res){
@@ -73,11 +74,13 @@ angular.module('jamApp', [
 
       })
       $state.go('artists')
-
-
-    }
+      $scope.obj = {loading : true};
   };
+
   $scope.getVenue = function(venueName){
+    $scope.obj = {loading : true};
+    console.log($scope.obj);
+
     var venueName = $scope.text
     var venueId;
     VenueSearch.venueId(venueName)
@@ -113,6 +116,7 @@ angular.module('jamApp', [
     }
   }
   function searchEvents(events){
+    $scope.eventsList = [];
     for(var i = 0; i < events.length; i++){
           if(events[i].performance.length > 0){
             var artist = events[i].performance[0].artist.displayName;
@@ -127,6 +131,9 @@ angular.module('jamApp', [
 
           }
         }
+    $scope.obj = {loading : false};
+    console.log($scope.obj);
+
   }
 
   $scope.artistDeets = function(artistClicked){
@@ -165,11 +172,10 @@ angular.module('jamApp', [
       .then(function(data){
         console.log(data.data.resultsPage.results.location[0].metroArea.displayName);
 
-        // console.log(data.resultsPage.results.location[0].metroArea.displayName);
-        $scope.location = data.data.resultsPage.results.location[0].metroArea.displayName;
 
-        $scope.text = data.data.resultsPage.results.location[0].metroArea.displayName;
-        $scope.submit(function(){
+        var city = data.data.resultsPage.results.location[0].metroArea.displayName;
+        // $scope.text = data.data.resultsPage.results.location[0].metroArea.displayName;
+        $scope.getCity(city, function(){
           $scope.loading = false;
           console.log('loading complete');
         });
