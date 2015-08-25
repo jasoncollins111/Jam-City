@@ -2,7 +2,10 @@ angular.module('jamApp', [
   'jamApp.services',
   'ui.router',
   'ngAutocomplete'
-  ])
+
+
+])
+
 
 .config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/");
@@ -161,6 +164,10 @@ angular.module('jamApp', [
       CityInfo.getCityEventsLatng(lat, lng)
       .then(function(data){
         console.log(data.data.resultsPage.results.location[0].metroArea.displayName);
+
+        // console.log(data.resultsPage.results.location[0].metroArea.displayName);
+        $scope.location = data.data.resultsPage.results.location[0].metroArea.displayName;
+
         $scope.text = data.data.resultsPage.results.location[0].metroArea.displayName;
         $scope.submit(function(){
           $scope.loading = false;

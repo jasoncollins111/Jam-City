@@ -14,6 +14,7 @@ a[ng-click]{
   background-color: #48d1cc;
   height: 200px;
 }
+
 .title{
   position: relative;
   font-weight: lighter;
@@ -66,6 +67,7 @@ a[ng-click]{
   width: 33%;
   border-right-width: 0px;
   border-left-width: 0px;
+  margin-top: 33px;
 }
 
 /*button{
