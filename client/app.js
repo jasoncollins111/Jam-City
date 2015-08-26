@@ -1,8 +1,8 @@
 angular.module('jamApp', [
   'jamApp.services',
   'ui.router',
-  'ngAutocomplete'
-
+  'ngAutocomplete',
+  'ui.materialize'
 
 ])
 
@@ -23,36 +23,26 @@ angular.module('jamApp', [
       //   console.log('in stateProvider')
       // }
     })
+  .state('login', {
+  url: '/login',
+  templateUrl: 'login.html',
+    // controller: function($stateParams){
+    //   console.log('in stateProvider')
+    // }
+  })
+
 })
 
 
 .run(function(){
-  var geocoder = new google.maps.Geocoder();
+//check if logged into spotify
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
-  }
-
-  function successFunction(position) {
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    codeLatLng(lat, lng)
-  }
-
-  function errorFunction(){
-    alert("Geocoder failed");
-  }
-
-  function codeLatLng(lat, lng) {
-
-
-  }
 
 })
 .controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch) {
 
 
-      $scope.obj = {loading : true};
+  $scope.obj = {loading : true};
 
 
   $scope.options = ['establishment', '(cities)'];
@@ -78,6 +68,8 @@ angular.module('jamApp', [
   };
 
   $scope.getVenue = function(venueName){
+    $scope.artistClicked = {};
+    $state.go('artists')
     $scope.obj = {loading : true};
     console.log($scope.obj);
 
@@ -185,6 +177,10 @@ angular.module('jamApp', [
 
     function errorFunction(){
       console.log("Geocoder failed");
+    }
+
+    $scope.toast = function(){
+      Materialize.toast('I am a toast!', 4000)
     }
 
 

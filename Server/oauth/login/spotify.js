@@ -108,10 +108,13 @@ app.use(passport.session());
 
 app.engine('html', consolidate.swig);
 
-// app.get('/', function(req, res){
-//   console.log(req.user)
-//   res.render('index.html', { user: req.user });
-// });
+
+app.get('/', ensureAuthenticated, function(req, res){
+  console.log(req.user);
+  console.log('hello');
+  res.render('index.html', { user: req.user });
+});
+
 
 // app.get('/account', ensureAuthenticated, function(req, res){
 //   res.render('account.html', { user: req.user });

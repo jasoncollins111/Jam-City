@@ -5,8 +5,10 @@
     <title>Jam-City</title>
 
     <link rel="stylesheet" href="main.css">
+
     <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css">
     <link rel="stylesheet" href="bower_components/materialize/bin/materialize.js">
+
 
 
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
@@ -18,107 +20,16 @@
 
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-materialize/src/angular-materialize.js"> </script>
+
     <script type="text/javascript" src="app.js"></script>
     <script src="app/services/services.js"></script>
 
 </head>
-<body  ng-app="jamApp" ng-controller="JamController" ng-init='location = false'>
+<body  ng-app="jamApp" ng-controller="JamController">
 
-
-  <!-- <div ng-include="components/navbar.html"></div> -->
-  <nav class="navbar navbar-default">
-    <div class="container-fluid navColor">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-          <!-- <img alt="Brand" class="navbar-logo" src="app/images/jamlogo.png"> -->
-        </a>
-      </div>
-
-      <form ng-submit="getVenue()" align='middle'>
-        <div class="input-group cityInput" align='middle'>
-          <!-- <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-globe"></i></span> -->
-          <input type="text" align='middle' ng-model="text" class="form-control inputBox" placeholder="Enter a venue" aria-describedby="basic-addon1" ng-autocomplete ng-model="autocomplete" options="options" details="details" />
-
-        </div>
-      </form>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <!-- <li class="navLinks"><a class="navAnchor" href="#" style="color:white;">Cities</a></li> -->
-        </ul>
-       </div>
-    </div>
-  </nav>
-  
-  <!-- <div align='middle' ng-if='location' >Artists in {{location}}</div> -->
-
-<!-- <div ui-view></div> -->
-
-<div ng-if='obj.loading' align='middle' id='loading'>
-  <div class="preloader-wrapper big active">
-      <div class="spinner-layer spinner-blue">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-
-      <div class="spinner-layer spinner-red">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-
-      <div class="spinner-layer spinner-yellow">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-
-      <div class="spinner-layer spinner-green">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-    </div>
-</div>
-
-<div class="col-md-4" id="artists">
-  
-
-
-
-<div ng-if='!obj.loading'>
-
-
-  <div class="artistList"  
-       ng-repeat="artist in eventsList">
-    <div class="info">
-      <div class="name">
-        <a class="artist" href="#" ng-click="artistDeets(artist)">{{ artist.artistName }}</a>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-</div>
-
-<span class="artistInfo col-md-8" ui-view></span>
+ 
+<div ui-view></div>
 
 </body>
 </html>
