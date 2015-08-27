@@ -138,7 +138,7 @@ angular.module('jamApp', [
 
       AddToSpotify.hotTracks(newId, function(){
         console.log('hot fire added');
-      })
+      });
 
     })
   }

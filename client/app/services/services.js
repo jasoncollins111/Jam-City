@@ -55,7 +55,7 @@ angular.module('jamApp.services', [])
   function getSpotifyIds(songkickId){
     return $http
       .jsonp("http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+songkickId+"&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK")
-      .then(function(data) {
+      .success(function(data) {
         console.log(data)
       })
       // .error(function(data) {console.log(data)})
