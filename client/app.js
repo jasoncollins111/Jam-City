@@ -131,14 +131,20 @@ angular.module('jamApp', [
     ArtistInfo.getSpotifyIds(artistId)
     .then(function(res){
       console.log('idRes',res)
-      var id = res.data.response.artist.foreign_ids[0].foreign_id
-      // console.log('spotifyId', id.slice(15) )
-      newId = id.slice(15)
-      console.log('newId', newId)
+      if(res.data.response.status.code === 0){
+        var id = res.data.response.artist.foreign_ids[0].foreign_id
+        // console.log('spotifyId', id.slice(15) )
+        newId = id.slice(15)
+        console.log('newId', newId)
 
-      AddToSpotify.hotTracks(newId, function(){
-        console.log('hot fire added');
-      });
+        AddToSpotify.hotTracks(newId, function(){
+          console.log('hot fire added');
+        });
+      } else {
+        console.log('artist doesnt exist in spotify');
+        //toast
+        return;
+      }
 
     })
   }
