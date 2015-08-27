@@ -15,11 +15,11 @@ var
     consolidate = require('consolidate'),
     DB,
     mongo = require('mongodb').MongoClient,
+    keys = require('../../keys.js'),
     hasJamCity = false;
-//
 
-    var appKey = '526cbc85ee13460bacb7133580aba4a3';
-    var appSecret = 'c3cf83c6949941f29e6fc7f655b8c42a';
+    var appKey = keys.appKey ;
+    var appSecret = keys.appSecret;
 
     var currentUser;
     var playlistId;
