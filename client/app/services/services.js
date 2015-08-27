@@ -73,11 +73,12 @@ angular.module('jamApp.services', [])
     }
 })
 .factory('AddToSpotify', function ($http){
-   function hotTracks (artistId) {
+   function hotTracks (artistId, cb) {
     console.log('artistId factory', artistId)
      $http.get('/hotTracks', {params :{artistId: artistId}})
      .then(function(response){
        console.log(response)
+       cb();
      }, function(err){
        console.log(err)
      })

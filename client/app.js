@@ -4,67 +4,74 @@ angular.module('jamApp', [
   'ngAutocomplete',
   'ui.materialize'
 
-])
+  ])
 
 
 .config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise("/");
+
 
   $stateProvider
   .state('artists', {
     url: "/artists",
-    templateUrl: "app/artists/artists.html"
-
+    templateUrl: "app/artists/artists.html",
+    controller: 'JamController'
   })
   .state('artists.artist', {
     url: '/artist',
-    templateUrl: 'app/artist/artist.html',
-      // controller: function($stateParams){
-      //   console.log('in stateProvider')
-      // }
-    })
+    templateUrl: 'app/artist/artist.html'
+  })
   .state('login', {
-  url: '/login',
-  templateUrl: 'login.html',
-    // controller: function($stateParams){
-    //   console.log('in stateProvider')
-    // }
+    url: '/login',
+    templateUrl: 'login.html',
+    controller: "loginController"
+  })
+  .state('preloader',{
+    url: '/preloader',
+    templateUrl: 'preloader.html',
+    controller: "preloaderController"
   })
 
 })
 
 
-.run(function(){
-//check if logged into spotify
+.run(function($state, $http){
 
+    $state.go('preloader');
+    
+    $http.get('/isAuthenticated')
+    .then(function(response){
+      if(response.data.authenticated){
+        $state.go('artists');
+        console.log('auth')
+      } else {
+        $state.go('login');
+      }
+   }, function(err){
+     console.log(err)
+   })
 
-})
+  })
 .controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch) {
 
 
   $scope.obj = {loading : true};
-
-
   $scope.options = ['establishment', '(cities)'];
-
   $scope.eventsList = [];
   $scope.cityId = {}
+
   $scope.getCity = function(city, cb) {
-
-
-    
     console.log($scope.obj);
 
-      CityInfo.getCityId(city)
-      .then(function(res){
-        var cityId = res.data.resultsPage.results.location[0].metroArea.id
-        console.log(cityId)
-        $scope.cityId.city = cityId
-        return $scope.listCityEvents(cityId, cb)
+    CityInfo.getCityId(city)
+    .then(function(res){
+      var cityId = res.data.resultsPage.results.location[0].metroArea.id
+      console.log(cityId)
+      $scope.cityId.city = cityId
+      return $scope.listCityEvents(cityId, cb)
 
-      })
-      $state.go('artists')
-      $scope.obj = {loading : true};
+    })
+    $state.go('artists')
+    $scope.obj = {loading : true};
   };
 
   $scope.getVenue = function(venueName){
@@ -83,16 +90,13 @@ angular.module('jamApp', [
       return VenueSearch.venueEvents(venueId)
       // console.log($scope.eventsList)
     }).then(function(res){
-       console.log('venueEvents call returned',res)
-      var events = res.data.resultsPage.results.event
-      $scope.eventsList = []
-      searchEvents(events)
-    })
-
-
-
-
+     console.log('venueEvents call returned',res)
+     var events = res.data.resultsPage.results.event
+     $scope.eventsList = []
+     searchEvents(events)
+   })
   }
+
   $scope.listCityEvents = function(cityId, cb) {
     if(cityId){
       CityInfo.getCityEvents(cityId)
@@ -110,19 +114,19 @@ angular.module('jamApp', [
   function searchEvents(events){
     $scope.eventsList = [];
     for(var i = 0; i < events.length; i++){
-          if(events[i].performance.length > 0){
-            var artist = events[i].performance[0].artist.displayName;
-            $scope.eventsList.push({
-              artistName: artist,
-              artistId: events[i].performance[0].artist.id,
-              eventDateTime: {date: events[i].start.date,
-                time: events[i].start.time},
-                venue: events[i].venue.displayName,
-                venueId: events[i].venue.id
-              })
+      if(events[i].performance.length > 0){
+        var artist = events[i].performance[0].artist.displayName;
+        $scope.eventsList.push({
+          artistName: artist,
+          artistId: events[i].performance[0].artist.id,
+          eventDateTime: {date: events[i].start.date,
+            time: events[i].start.time},
+            venue: events[i].venue.displayName,
+            venueId: events[i].venue.id
+          })
 
-          }
-        }
+      }
+    }
     $scope.obj = {loading : false};
     console.log($scope.obj);
 
@@ -133,7 +137,10 @@ angular.module('jamApp', [
     $scope.artistClicked = artistClicked
     console.log('in ArtistDeets', artistClicked)
     $state.go('artists.artist')
+
+
   }
+
   $scope.spotify = function(artistId){
     var newId;
     console.log('app controller spotify', artistId)
@@ -144,28 +151,30 @@ angular.module('jamApp', [
       // console.log('spotifyId', id.slice(15) )
       newId = id.slice(15)
       console.log('newId', newId)
-      AddToSpotify.hotTracks(newId)
-    }).then(function(res){
-      console.log('AddedToSpotify')
+
+      AddToSpotify.hotTracks(newId, function(){
+        console.log('hot fire added');
+      })
+
     })
   }
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
-    }
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+  }
 
-    function successFunction(position) {
-      var lat = position.coords.latitude;
-      var lng = position.coords.longitude;
-      CityInfo.getCityEventsLatng(lat, lng);
-      $scope.loading = true;
-      console.log('loading started');
-      CityInfo.getCityEventsLatng(lat, lng)
-      .then(function(data){
-        console.log(data.data.resultsPage.results.location[0].metroArea.displayName);
+  function successFunction(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    CityInfo.getCityEventsLatng(lat, lng);
+    $scope.loading = true;
+    console.log('loading started');
+    CityInfo.getCityEventsLatng(lat, lng)
+    .then(function(data){
+      console.log(data.data.resultsPage.results.location[0].metroArea.displayName);
 
 
-        var city = data.data.resultsPage.results.location[0].metroArea.displayName;
+      var city = data.data.resultsPage.results.location[0].metroArea.displayName;
         // $scope.text = data.data.resultsPage.results.location[0].metroArea.displayName;
         $scope.getCity(city, function(){
           $scope.loading = false;
@@ -173,16 +182,24 @@ angular.module('jamApp', [
         });
       });
 
-    }
+  }
 
-    function errorFunction(){
-      console.log("Geocoder failed");
-    }
+  function errorFunction(){
+    console.log("Geocoder failed");
+  }
 
-    $scope.toast = function(){
-      Materialize.toast('I am a toast!', 4000)
-    }
+  $scope.toast = function(){
+    Materialize.toast('I am a toast!', 4000)
+  }
 
 
-  });
+})
+.controller('loginController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch) {
+  console.log('in loginctrl');
+
+})
+.controller('preloaderController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch) {
+  console.log('in loginctrl');
+
+});
 

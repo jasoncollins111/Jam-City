@@ -73,6 +73,16 @@ a[ng-click]{
   border-right-width: 0px;
   border-left-width: 0px;
 }
+#loginCard {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#login {
+    background-image: url("assets/loginPic.jpeg");
+    background-color: #cccccc;
+}
 
 /*button{
   width: 300px;

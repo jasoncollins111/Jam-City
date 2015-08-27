@@ -15,17 +15,18 @@ var
     consolidate = require('consolidate'),
     DB,
     mongo = require('mongodb').MongoClient,
+    spotifyController = require('../../controllers/spotifyController.js'),
     hasJamCity = false;
 
 
-var appKey = '526cbc85ee13460bacb7133580aba4a3';
-var appSecret = 'c3cf83c6949941f29e6fc7f655b8c42a';
+    var appKey = '526cbc85ee13460bacb7133580aba4a3';
+    var appSecret = 'c3cf83c6949941f29e6fc7f655b8c42a';
 
-var currentUser;
-var playlistId;
-var trackArray = []
+    var currentUser;
+    var playlistId;
+    var trackArray = []
 
-var mongoUri = 'mongodb://saintembers:bassandhon3y@ds031862.mongolab.com:31862/jam-city'
+    var mongoUri = 'mongodb://saintembers:bassandhon3y@ds031862.mongolab.com:31862/jam-city'
 
 // mongo.connect(mongoUri, function(err, db) {
 //   DB = db
@@ -66,8 +67,8 @@ passport.use(new SpotifyStrategy({
   clientID: appKey,
   clientSecret: appSecret,
   callbackURL: 'http://localhost:8008/callback'
-  },
-  function(accessToken, refreshToken, profile, done) {
+},
+function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {
       // To keep the example simple, the user's spotify profile is returned to
@@ -109,32 +110,33 @@ app.use(passport.session());
 app.engine('html', consolidate.swig);
 
 
-app.get('/', ensureAuthenticated, function(req, res){
-  console.log(req.user);
-  console.log('hello');
-  res.render('index.html', { user: req.user });
-});
 
+// app.get('/', ensureAuthenticated, function(req, res){
+//   console.log(req.user);
+//   console.log('hello');
+//   res.render('index.html', { user: req.user });
+// });
 
 // app.get('/account', ensureAuthenticated, function(req, res){
 //   res.render('account.html', { user: req.user });
 // });
 
-app.get('/login', function(req, res){
-  res.render('login.html', { user: req.user });
-});
+// app.get('/login', function(req, res){
+//   res.render('login.html', { user: req.user });
+// });
 
 // GET /auth/spotify
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request. The first step in spotify authentication will involve redirecting
 //   the user to spotify.com. After authorization, spotify will redirect the user
 //   back to this application at /auth/spotify/callback
+
 app.get('/auth/spotify',
   passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private','playlist-modify-public'], showDialog: true}),
   function(req, res){
 // The request will be redirected to spotify for authentication, so this
 // function will not be called.
-  console.log(res)
+console.log(res)
 });
 
 
@@ -150,20 +152,33 @@ app.get('/callback',
     // getPlaylists(currentUser)
     //find if JamCity exists
     //create if not there
-   spotifyApi.getUserPlaylists(currentUser)
-   .then(function(data) {
+    spotifyApi.getUserPlaylists(currentUser)
+    .then(function(data) {
      bigD = data.body.items
-     console.log('playlistInfo', bigD)
+     // console.log('playlistInfo', bigD)
 
      bigD.forEach(function(item){
-        console.log('playlistName', item.name)
-       if(item.name === 'city jams'){
+      // console.log('playlistName', item.name)
+      if(item.name === 'city jams'){
+        console.log('city jams exists');
         playlistId = item.id
-        console.log(playlistId)
+        // console.log(playlistId)
         hasJamCity = true;
-        console.log(hasJamCity)
-       }
-     })
+        // console.log(hasJamCity)
+      }
+    })
+
+     if(!playlistId){
+      spotifyApi.createPlaylist(currentUser, 'city jams', { 'public' : true })
+        .then(function(data) {
+          console.log('Created playlist!');
+          //add songs
+          console.log('playlist data ', data);
+          playlistId = data.body.id;
+        }, function(err) {
+          console.log('Something went wrongjjjj!', err);
+        });
+     }
      // console.log('Retrieved playlists', data.body.items[0].name);
 
    },function(err) {
@@ -171,29 +186,30 @@ app.get('/callback',
    }).then(function(){
 
    })
-    console.log('userID: ', currentUser)
-    res.redirect('/');
-  });
+   console.log('userID: ', currentUser)
+   res.redirect('/');
+ });
 
-app.get('/hotTracks', function(req, res){
+app.get('/hotTracks', ensureAuthenticated ,function(req, res){
   var spotifyId = req.query.artistId
   console.log('getHotTracks', spotifyId)
   spotifyApi.getArtistTopTracks(spotifyId, 'US')
   .then(function(data) {
     for(var i = 0; i < 3; i++){
-    var spotifyTrack = 'spotify:track:'
-    var track = spotifyTrack + data.body.tracks[i].id
-    console.log(track)
-    trackArray.push(track)
+      var spotifyTrack = 'spotify:track:'
+      var track = spotifyTrack + data.body.tracks[i].id
+      console.log(track)
+      trackArray.push(track)
     }
     spotifyApi.addTracksToPlaylist(currentUser, playlistId, trackArray)
-      .then(function(data) {
-        console.log('Added tracks to playlist!');
-        trackArray = []
-      }, function(err) {
-        console.log('Something went wrong!', err);
-      });
+    .then(function(data) {
+      console.log('Added tracks to playlist!');
+      trackArray = []
+      res.status(200).json({status: 'tracks added!'});
     }, function(err) {
+      console.log('Something went wrong!', err);
+    });
+  }, function(err) {
     console.log('Something went wrong!', err);
   })
 
@@ -207,6 +223,24 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
+app.get('/isAuthenticated', function(req, res, next) {
+
+  var isAuth;
+
+  if (req.isAuthenticated()) {
+    isAuth = true;
+
+  } else {
+    isAuth = false;
+  }
+
+  var isAuthenticated = {
+    authenticated : isAuth
+  };
+
+  res.status(200).json(isAuthenticated);
+
+});
 
 
 // Simple route middleware to ensure user is authenticated.
