@@ -143,6 +143,8 @@ angular.module('jamApp', [
       newId = id.slice(15)
       console.log('newId', newId)
       AddToSpotify.hotTracks(newId)
+    }).then(function(res){
+      console.log('AddedToSpotify')
     })
   }
 

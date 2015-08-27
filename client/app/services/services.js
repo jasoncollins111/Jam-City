@@ -14,7 +14,6 @@ angular.module('jamApp.services', [])
 
       var cityId = resp.resultsPage.results.location[0].metroArea.id
 
-
       //getCityEvents(cityId)
     return resp.data;
     });
@@ -53,17 +52,24 @@ angular.module('jamApp.services', [])
 })
 
 .factory('ArtistInfo', function ($http){
-    function getSpotifyIds(songkickId){
+  function getSpotifyIds(songkickId){
     return $http
       .jsonp("http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+songkickId+"&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK")
-      .success(function(data) {
+      .then(function(data) {
         console.log(data)
-
       })
-      .error(function(data) {console.log(data)})
+      // .error(function(data) {console.log(data)})
+  }
+  function getPics(id){
+    return $http
+    .jsonp("http://developer.echonest.com/api/v4/artist/images?api_key=FILDTEOIK2HBORODV&id=ARH6W4X1187B99274F&format=jsonp&results=1&start=0&license=unknown&callback=JSON_CALLBACK")
+    .then(function(data){
+      console.log(data)
+    })
   }
     return {
-      getSpotifyIds: getSpotifyIds
+      getSpotifyIds: getSpotifyIds,
+      getPics: getPics
     }
 })
 .factory('AddToSpotify', function ($http){
