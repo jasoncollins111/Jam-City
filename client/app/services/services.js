@@ -55,7 +55,7 @@ angular.module('jamApp.services', [])
   function getSpotifyIds(songkickId){
     return $http
       .jsonp("http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+songkickId+"&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK")
-      .then(function(data) {
+      .success(function(data) {
         console.log(data)
       })
       // .error(function(data) {console.log(data)})
@@ -73,11 +73,12 @@ angular.module('jamApp.services', [])
     }
 })
 .factory('AddToSpotify', function ($http){
-   function hotTracks (artistId) {
+   function hotTracks (artistId, cb) {
     console.log('artistId factory', artistId)
      $http.get('/hotTracks', {params :{artistId: artistId}})
      .then(function(response){
        console.log(response)
+       cb();
      }, function(err){
        console.log(err)
      })
@@ -105,6 +106,31 @@ angular.module('jamApp.services', [])
   return{
     venueId: venueId,
     venueEvents: venueEvents
+  }
+})
+.factory('Authentication', function($http, $state){
+  var isAuthenticated;
+
+  function isAuth(intendedState){
+    
+    $http.get('/isAuthenticated')
+    .then(function(response){
+      if(response.data.authenticated){
+        $state.go(intendedState);
+        console.log('user is authenticated');
+        isAuthenticated = true;
+      } else {
+        $state.go('login');
+        isAuthenticated = false;
+      }
+   }, function(err){
+     console.log(err)
+   })
+
+  }
+  return{
+    isAuth: isAuth,
+    isAuthenticated: isAuthenticated
   }
 })
 
