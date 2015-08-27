@@ -9,6 +9,7 @@ angular.module('jamApp', [
 
 .config(function($stateProvider, $urlRouterProvider) {
 
+  $urlRouterProvider.otherwise("/preloader");
 
   $stateProvider
   .state('artists', {
@@ -34,22 +35,8 @@ angular.module('jamApp', [
 })
 
 
-.run(function($state, $http){
-
-    $state.go('preloader');
-    
-    $http.get('/isAuthenticated')
-    .then(function(response){
-      if(response.data.authenticated){
-        $state.go('artists');
-        console.log('auth')
-      } else {
-        $state.go('login');
-      }
-   }, function(err){
-     console.log(err)
-   })
-
+.run(function($state, $http, Authentication){
+    Authentication.isAuth('artists');
   })
 .controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch) {
 

@@ -15,7 +15,6 @@ var
     consolidate = require('consolidate'),
     DB,
     mongo = require('mongodb').MongoClient,
-    spotifyController = require('../../controllers/spotifyController.js'),
     hasJamCity = false;
 
 
@@ -237,7 +236,7 @@ app.get('/isAuthenticated', function(req, res, next) {
   var isAuthenticated = {
     authenticated : isAuth
   };
-
+//
   res.status(200).json(isAuthenticated);
 
 });

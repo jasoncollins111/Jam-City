@@ -79,9 +79,16 @@ a[ng-click]{
   transform: translateY(-50%);
 }
 
-#login {
-    background-image: url("assets/loginPic.jpeg");
-    background-color: #cccccc;
+#loginButton {
+  position: absolute;
+  top: 3%;
+  width: 100%;
+  padding-top: 7%;
+  height: 27%;
+}
+#headerLogin{
+  position: relative;
+  top: -32%;
 }
 
 /*button{

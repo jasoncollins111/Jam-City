@@ -108,4 +108,23 @@ angular.module('jamApp.services', [])
     venueEvents: venueEvents
   }
 })
+.factory('Authentication', function($http, $state){
+  function isAuth(intendedState){
+    $http.get('/isAuthenticated')
+    .then(function(response){
+      if(response.data.authenticated){
+        $state.go(intendedState);
+        console.log('user is authenticated');
+      } else {
+        $state.go('login');
+      }
+   }, function(err){
+     console.log(err)
+   })
+
+  }
+  return{
+    isAuth: isAuth
+  }
+})
 
