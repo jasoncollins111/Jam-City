@@ -9,7 +9,7 @@ angular.module('jamApp', [
 
 .config(function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise("/preloader");
+  $urlRouterProvider.otherwise("/artists");
 
   $stateProvider
   .state('artists', {
@@ -26,20 +26,17 @@ angular.module('jamApp', [
     templateUrl: 'login.html',
     controller: "loginController"
   })
-  .state('preloader',{
-    url: '/preloader',
-    templateUrl: 'preloader.html',
-    controller: "preloaderController"
-  })
+
 
 })
 
 
 .run(function($state, $http, Authentication){
-    Authentication.isAuth('artists');
-  })
-.controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch) {
+  Authentication.isAuth('artists');
 
+  })
+.controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch, Authentication) {
+  
 
   $scope.obj = {loading : true};
   $scope.options = ['establishment', '(cities)'];
@@ -182,10 +179,6 @@ angular.module('jamApp', [
 
 })
 .controller('loginController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch) {
-  console.log('in loginctrl');
-
-})
-.controller('preloaderController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch) {
   console.log('in loginctrl');
 
 });

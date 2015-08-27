@@ -16,7 +16,7 @@ var
     DB,
     mongo = require('mongodb').MongoClient,
     hasJamCity = false;
-
+//
 
     var appKey = '526cbc85ee13460bacb7133580aba4a3';
     var appSecret = 'c3cf83c6949941f29e6fc7f655b8c42a';
