@@ -78,7 +78,7 @@ angular.module('jamApp.services', [])
      $http.get('/hotTracks', {params :{artistId: artistId}})
      .then(function(response){
        console.log(response)
-       cb();
+       cb(response);
      }, function(err){
        console.log(err)
      })
