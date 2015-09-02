@@ -1,8 +1,7 @@
 angular.module('jamApp', [
   'jamApp.services',
   'ui.router',
-  'ngAutocomplete',
-  'ui.materialize'
+  'ngAutocomplete'
 
   ])
 
@@ -36,12 +35,13 @@ angular.module('jamApp', [
 
   })
 .controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch, Authentication) {
-  
+
 
   $scope.obj = {loading : true};
   $scope.options = ['establishment', '(cities)'];
   $scope.eventsList = [];
   $scope.cityId = {}
+  $scope.artistAdded = false
 
   $scope.getCity = function(city, cb) {
     console.log($scope.obj);
@@ -138,6 +138,7 @@ angular.module('jamApp', [
 
       AddToSpotify.hotTracks(newId, function(){
         console.log('hot fire added');
+        Materialize.toast('I am a toast!', 4000)
       });
 
     })

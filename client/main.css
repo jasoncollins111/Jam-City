@@ -73,11 +73,11 @@ a[ng-click]{
   border-right-width: 0px;
   border-left-width: 0px;
 }
-#loginCard {
+/*#loginCard {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-}
+}*/
 
 #loginButton {
   position: absolute;
@@ -161,6 +161,19 @@ a[ng-click]{
   border:#ED3E32;
   background-color: #ED3E32;
 }
+.cityImage{
+  background: url('../assets/loginPic.jpeg');
+  background-size: cover;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  min-width: 100%;
+  min-height: 100%;
+}
+
+
 
 
 
