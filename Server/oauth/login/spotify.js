@@ -15,11 +15,11 @@ var
     consolidate = require('consolidate'),
     DB,
     mongo = require('mongodb').MongoClient,
+    keys = require('../../keys.js'),
     hasJamCity = false;
-//
 
-    var appKey = '526cbc85ee13460bacb7133580aba4a3';
-    var appSecret = 'c3cf83c6949941f29e6fc7f655b8c42a';
+    var appKey = keys.appKey ;
+    var appSecret = keys.appSecret;
 
     var currentUser;
     var playlistId;
@@ -194,17 +194,30 @@ app.get('/hotTracks', ensureAuthenticated ,function(req, res){
   console.log('getHotTracks', spotifyId)
   spotifyApi.getArtistTopTracks(spotifyId, 'US')
   .then(function(data) {
+    var responseArr = [];
+
+    
     for(var i = 0; i < 3; i++){
+      responseArr.push({
+        artists: data.body.tracks[i].artists[0].name,
+        song: data.body.tracks[i].name,
+        album: data.body.tracks[i].album.name,
+        images: data.body.tracks[i].album.images
+      });
+
       var spotifyTrack = 'spotify:track:'
       var track = spotifyTrack + data.body.tracks[i].id
       console.log(track)
       trackArray.push(track)
     }
+
+    console.log(responseArr);
+
     spotifyApi.addTracksToPlaylist(currentUser, playlistId, trackArray)
     .then(function(data) {
       console.log('Added tracks to playlist!');
       trackArray = []
-      res.status(200).json({status: 'tracks added!'});
+      res.status(200).json({status: 'tracks added!', arrSongsAdded: responseArr});
     }, function(err) {
       console.log('Something went wrong!', err);
     });

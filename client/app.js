@@ -34,7 +34,8 @@ angular.module('jamApp', [
   Authentication.isAuth('artists');
 
   })
-.controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch, Authentication) {
+
+.controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout) {
 
 
   $scope.obj = {loading : true};
@@ -131,16 +132,25 @@ angular.module('jamApp', [
     ArtistInfo.getSpotifyIds(artistId)
     .then(function(res){
       console.log('idRes',res)
-      var id = res.data.response.artist.foreign_ids[0].foreign_id
-      // console.log('spotifyId', id.slice(15) )
-      newId = id.slice(15)
-      console.log('newId', newId)
+      if(res.data.response.artist.foreign_ids){
+        var id = res.data.response.artist.foreign_ids[0].foreign_id
+        // console.log('spotifyId', id.slice(15) )
+        newId = id.slice(15)
+        console.log('newId', newId)
 
-      AddToSpotify.hotTracks(newId, function(){
-        console.log('hot fire added');
-        Materialize.toast('I am a toast!', 4000)
-      });
+        AddToSpotify.hotTracks(newId, function(response){
+          console.log('hot fire added');
+          var songs = response.data.arrSongsAdded;
+          Materialize.toast('We added ' + songs[0].artists + ' to your spotify city jams playlist', 5750);
 
+        });
+      } else {
+        console.log('artist doesnt exist in spotify');
+        //toast
+        Materialize.toast('We could not add this music to spotify', 5750);
+
+        return;
+      }
     })
   }
 
