@@ -172,6 +172,9 @@ a[ng-click]{
   min-width: 100%;
   min-height: 100%;
 }
+.invisible{
+  visibility: hidden;
+}
 
 
 

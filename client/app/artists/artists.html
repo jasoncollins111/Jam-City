@@ -1,13 +1,13 @@
- <nav>
+<nav>
     <div class="nav-wrapper">
       <form ng-submit="getVenue()" align='middle'>
         <div class="input-field">
-          <input type="text" align='middle' ng-model="text" class="form-control inputBox"  aria-describedby="basic-addon1" ng-autocomplete ng-model="autocomplete" options="options" details="details" />
+          <input type="text" align='middle' ng-model="text" class="form-control inputBox" aria-describedby="basic-addon1" options="options" details="details" placeholder="Enter a Venue" />
         </div>
       </form>
     </div>
-  </nav>
-  
+</nav>
+
 
 
 <div ng-if='obj.loading' align='middle' id='loading'>
@@ -55,12 +55,12 @@
 </div>
 
 <div class="col-md-4" id="artists">
-  
+
 
 <div ng-if='!obj.loading'>
 
 
-  <div class="artistList"  
+  <div class="artistList"
        ng-repeat="artist in eventsList">
     <div class="info">
       <div class="name">
