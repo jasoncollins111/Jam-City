@@ -46,7 +46,7 @@ module.exports = function (app, express) {
 var spotifyApi = new SpotifyWebApi({
   clientId : appKey,
   clientSecret : appSecret,
-  redirectUri : 'http://localhost:8008/callback'
+  redirectUri : 'http://jamcity.elasticbeanstalk.com/callback'
 });
 
 passport.serializeUser(function(user, done) {
@@ -65,7 +65,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new SpotifyStrategy({
   clientID: appKey,
   clientSecret: appSecret,
-  callbackURL: 'http://localhost:8008/callback'
+  callbackURL: 'http://jamcity.elasticbeanstalk.com/callback'
 },
 function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
@@ -196,7 +196,7 @@ app.get('/hotTracks', ensureAuthenticated ,function(req, res){
   .then(function(data) {
     var responseArr = [];
 
-    
+
     for(var i = 0; i < 3; i++){
       responseArr.push({
         artists: data.body.tracks[i].artists[0].name,
