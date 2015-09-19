@@ -8,7 +8,8 @@ var express = require('express');
 
 
 var app = express();
-require('./oauth/login/spotify.js')(app, express);
+// require('./express.js')(app)
+require('./spotifyAuth/login/spotify.js')(app, express);
 
 var server = require('http').createServer(app);
 console.log('Jam City on port 8008')
