@@ -23,22 +23,7 @@ var
     keys = require('../../keys.js'),
     hasJamCity = false;
 
-
-    var appKey = keys.appKey ;
-    var appSecret = keys.appSecret;
-    var User;
-    var currentUser;
-    var playlistId;
-    var trackArray = []
-
-    var mongoUri = 'mongodb://saintembers:bassandtrebl3@ds031862.mongolab.com:31862/jam-city'
-    var mongooseUri = uriUtil.formatMongoose(mongoUri);
     // require('./config/express.js')
-mongo.connect(mongooseUri, function(err, db) {
-  DB = db
-  User = DB.collection('Users')
-  console.log('database', User)
-});
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session. Typically,
@@ -49,6 +34,24 @@ mongo.connect(mongooseUri, function(err, db) {
 
 module.exports = function (app, express) {
 
+    var appKey = keys.appKey ;
+    var appSecret = keys.appSecret;
+    var User;
+    var currentUser;
+    var trackArray = [];
+
+    var mongoUri = keys.mongodbUri;
+    var mongooseUri = uriUtil.formatMongoose(mongoUri);
+    var playlistId;
+  mongoose.connect(mongooseUri)
+  // var User = mongoose.model('Users', {spotifyId: String})
+    var sessionOpts = {
+      saveUninitialized: true, // saved new sessions
+      resave: false, // do not automatically write to the session store
+      store: new MongoStore({mongooseConnection: mongoose.connection}),
+      secret: 'keyboard cat',
+      cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
+    }
 // credentials are optional
 var spotifyApi = new SpotifyWebApi({
   clientId : appKey,
@@ -58,12 +61,12 @@ var spotifyApi = new SpotifyWebApi({
 
 passport.serializeUser(function(user, done) {
   console.log('user', user)
-  // User.insert(user)
-  done(null, user);
+  var sessionUser = user
+  done(null, sessionUser);
 });
 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
+passport.deserializeUser(function(sessionUser, done) {
+  done(null, sessionUser);
 });
 
 
@@ -78,21 +81,17 @@ passport.use(new SpotifyStrategy({
 },
 function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
-    // process.nextTick(function () {
+    process.nextTick(function () {
       // To keep the example simple, the user's spotify profile is returned to
       // represent the logged-in user. In a typical application, you would want
       // to associate the spotify account with a user record in your database,
       // and return that user instead.
       // console.log(User)
-      User.findOrCreate({ spotifyId: profile.id }, function (err, user) {
-
-        console.log("profile in SpotifyStrategy", profile)
-        console.log("refreshToken:", refreshToken)
-        console.log("accessToken:", accessToken)
 
         spotifyApi.setAccessToken(accessToken);
-        return done(null, User.spotifyId);
-      });
+        return done(null, profile);
+      // });
+     });
     }));
 
 
@@ -100,20 +99,21 @@ function(accessToken, refreshToken, profile, done) {
 
 // configure Express
 app.use(express.static(__dirname + '/../../../client'));
-app.set('views', __dirname + '/../../../client');
+// app.set('views', __dirname + '/../../../client');
 // app.set('view engine', 'ejs');
 
 app.use(cookieParser());
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride());
-app.use(session({
+app.use(session(sessionOpts))
 
-  secret: 'keyboard cat',
-  cookie : {
-      maxAge: 3600000 // see below
-    },
-    store : new MongoStore({ mongooseConnection: mongoose.connection })
-}));
+// app.use(session({
+//   secret: 'keyboard cat',
+//   cookie : {
+//       maxAge: 3600000 // see below
+//     },
+//     store : new MongoStore({mongooseConnection: mongoose.connection})
+// }));
  // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
 app.use(passport.initialize());
@@ -147,23 +147,21 @@ console.log(res)
 //   login page. Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
 app.get('/callback',
-  passport.authenticate('spotify', { failureRedirect: '/login' }),
-  function(req, res) {
+  passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {
     currentUser = res.req.user.id
-    // getPlaylists(currentUser)
-    //find if JamCity exists
+
+    //find if JamCity playlist exists
     //create if not there
     spotifyApi.getUserPlaylists(currentUser)
     .then(function(data) {
      bigD = data.body.items
-     // console.log('playlistInfo', bigD)
 
      bigD.forEach(function(item){
       // console.log('playlistName', item.name)
       if(item.name === 'city jams'){
         console.log('city jams exists');
         playlistId = item.id
-        // console.log(playlistId)
+        console.log(playlistId)
         hasJamCity = true;
         // console.log(hasJamCity)
       }
@@ -177,7 +175,7 @@ app.get('/callback',
           console.log('playlist data ', data);
           playlistId = data.body.id;
         }, function(err) {
-          console.log('Something went wrongjjjj!', err);
+          console.log('Something went wrong!', err);
         });
      }
      // console.log('Retrieved playlists', data.body.items[0].name);
@@ -192,8 +190,9 @@ app.get('/callback',
  });
 
 app.get('/hotTracks', ensureAuthenticated ,function(req, res){
+  // currentUser = req._passport.session
   var spotifyId = req.query.artistId
-  console.log('getHotTracks', spotifyId)
+  console.log('getHotTracks', spotifyId, 'playlistId', playlistId, 'currentUser',currentUser)
   spotifyApi.getArtistTopTracks(spotifyId, 'US')
   .then(function(data) {
     var responseArr = [];
@@ -209,7 +208,7 @@ app.get('/hotTracks', ensureAuthenticated ,function(req, res){
 
       var spotifyTrack = 'spotify:track:'
       var track = spotifyTrack + data.body.tracks[i].id
-      console.log(track)
+      // console.log(track)
       trackArray.push(track)
     }
 
@@ -234,11 +233,11 @@ app.get('/hotTracks', ensureAuthenticated ,function(req, res){
 
 app.get('/logout', function(req, res){
   req.logout();
-  res.redirect('/');
+  res.redirect('/login');
 });
 
 app.get('/isAuthenticated', function(req, res, next) {
-
+  console.log(req.session)
   var isAuth;
 
   if (req.isAuthenticated()) {

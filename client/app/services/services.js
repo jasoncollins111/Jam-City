@@ -60,11 +60,12 @@ angular.module('jamApp.services', [])
       })
       // .error(function(data) {console.log(data)})
   }
+
   function getPics(id){
     return $http
-    .jsonp("http://developer.echonest.com/api/v4/artist/images?api_key=FILDTEOIK2HBORODV&id=ARH6W4X1187B99274F&format=jsonp&results=1&start=0&license=unknown&callback=JSON_CALLBACK")
-    .then(function(data){
-      console.log(data)
+    .jsonp("http://developer.echonest.com/api/v4/artist/images?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+id+"&format=jsonp&results=1&start=0&license=unknown&callback=JSON_CALLBACK")
+    .success(function(data){
+      console.log("services Pic Data", data)
     })
   }
     return {
@@ -112,7 +113,7 @@ angular.module('jamApp.services', [])
   var isAuthenticated;
 
   function isAuth(intendedState){
-    
+
     $http.get('/isAuthenticated')
     .then(function(response){
       if(response.data.authenticated){
@@ -128,9 +129,16 @@ angular.module('jamApp.services', [])
    })
 
   }
+  function logOut(){
+    $http.get('/logout')
+    .then(function(response){
+      console.log(response)
+    })
+  }
   return{
     isAuth: isAuth,
-    isAuthenticated: isAuthenticated
+    isAuthenticated: isAuthenticated,
+    logOut: logOut
   }
 })
 

@@ -32,8 +32,7 @@ angular.module('jamApp', [
 
 .run(function($state, $http, Authentication){
   Authentication.isAuth('artists');
-
-  })
+})
 
 .controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout) {
 
@@ -119,13 +118,29 @@ angular.module('jamApp', [
 
   $scope.artistDeets = function(artistClicked){
     // console.log($events)
+    var newId;
+    var artistId  = artistClicked.artistId
+    // console.log("id", id)
+
+        ArtistInfo.getPics(artistId)
+        .then(function(res){
+          console.log('controller pic data', res.data.response.images[0].url)
+          $scope.artistPic = res.data.response.images[0].url
+        })
+
+
     $scope.artistClicked = artistClicked
     console.log('in ArtistDeets', artistClicked)
     $state.go('artists.artist')
 
 
   }
-
+  $scope.logout = function(){
+    Authentication.logOut()
+    .then(function(res){
+      console.log('logged out')
+    })
+  }
   $scope.spotify = function(artistId){
     var newId;
     console.log('app controller spotify', artistId)
@@ -134,15 +149,11 @@ angular.module('jamApp', [
       console.log('idRes',res)
       if(res.data.response.artist.foreign_ids){
         var id = res.data.response.artist.foreign_ids[0].foreign_id
-        // console.log('spotifyId', id.slice(15) )
         newId = id.slice(15)
-        console.log('newId', newId)
-
         AddToSpotify.hotTracks(newId, function(response){
           console.log('hot fire added');
           var songs = response.data.arrSongsAdded;
           Materialize.toast('We added ' + songs[0].artists + ' to your spotify city jams playlist', 5750);
-
         });
       } else {
         console.log('artist doesnt exist in spotify');
@@ -183,9 +194,7 @@ angular.module('jamApp', [
     console.log("Geocoder failed");
   }
 
-  $scope.toast = function(){
-    Materialize.toast('I am a toast!', 4000)
-  }
+
 
 
 })
