@@ -42,15 +42,16 @@ module.exports = function (app, express) {
 
     var mongoUri = keys.mongodbUri;
     var mongooseUri = uriUtil.formatMongoose(mongoUri);
-    var playlistId;
+    // var playlistId;
   mongoose.connect(mongooseUri)
-  // var User = mongoose.model('Users', {spotifyId: String})
+
     var sessionOpts = {
       saveUninitialized: true, // saved new sessions
       resave: false, // do not automatically write to the session store
       store: new MongoStore({mongooseConnection: mongoose.connection}),
       secret: 'keyboard cat',
-      cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
+      cookie : { httpOnly: true, maxAge: 2419200000 }
+       // configure when sessions expires
     }
 // credentials are optional
 var spotifyApi = new SpotifyWebApi({
@@ -107,13 +108,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride());
 app.use(session(sessionOpts))
 
-// app.use(session({
-//   secret: 'keyboard cat',
-//   cookie : {
-//       maxAge: 3600000 // see below
-//     },
-//     store : new MongoStore({mongooseConnection: mongoose.connection})
-// }));
  // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
 app.use(passport.initialize());
@@ -121,9 +115,6 @@ app.use(passport.session());
 
 
 app.engine('html', consolidate.swig);
-
-
-
 
 
 // GET /auth/spotify
@@ -149,7 +140,8 @@ console.log(res)
 app.get('/callback',
   passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {
     currentUser = res.req.user.id
-
+    var playlistId;
+    // console.log('req session obj ', req.session);
     //find if JamCity playlist exists
     //create if not there
     spotifyApi.getUserPlaylists(currentUser)
@@ -160,8 +152,11 @@ app.get('/callback',
       // console.log('playlistName', item.name)
       if(item.name === 'city jams'){
         console.log('city jams exists');
-        playlistId = item.id
-        console.log(playlistId)
+        playlistId = item.id;
+        console.log(playlistId);
+        req.session.playlistId = playlistId;
+        console.log("this is the playlist Id", req.session.playlistId)
+
         hasJamCity = true;
         // console.log(hasJamCity)
       }
@@ -174,6 +169,8 @@ app.get('/callback',
           //add songs
           console.log('playlist data ', data);
           playlistId = data.body.id;
+          req.session.playlistId = playlistId;
+
         }, function(err) {
           console.log('Something went wrong!', err);
         });
@@ -185,18 +182,18 @@ app.get('/callback',
    }).then(function(){
 
    })
-   console.log('userID: ', currentUser)
    res.redirect('/');
  });
 
 app.get('/hotTracks', ensureAuthenticated ,function(req, res){
   // currentUser = req._passport.session
+  var playlistId = req.session.playlistId
+  console.log("playlist ID",req.session)
   var spotifyId = req.query.artistId
-  console.log('getHotTracks', spotifyId, 'playlistId', playlistId, 'currentUser',currentUser)
+  console.log('getHotTracks', spotifyId, 'playlistId', playlistId)
   spotifyApi.getArtistTopTracks(spotifyId, 'US')
   .then(function(data) {
     var responseArr = [];
-
 
     for(var i = 0; i < 3; i++){
       responseArr.push({
@@ -208,11 +205,8 @@ app.get('/hotTracks', ensureAuthenticated ,function(req, res){
 
       var spotifyTrack = 'spotify:track:'
       var track = spotifyTrack + data.body.tracks[i].id
-      // console.log(track)
       trackArray.push(track)
     }
-
-    console.log(responseArr);
 
     spotifyApi.addTracksToPlaylist(currentUser, playlistId, trackArray)
     .then(function(data) {
@@ -225,9 +219,6 @@ app.get('/hotTracks', ensureAuthenticated ,function(req, res){
   }, function(err) {
     console.log('Something went wrong!', err);
   })
-
-
-
 })
 
 
