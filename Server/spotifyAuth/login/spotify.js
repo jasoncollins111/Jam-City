@@ -38,6 +38,7 @@ module.exports = function (app, express) {
     var appSecret = keys.appSecret;
     var User;
     var currentUser;
+    var playlistId;
     var trackArray = [];
 
     var mongoUri = keys.mongodbUri;
@@ -140,7 +141,7 @@ console.log(res)
 app.get('/callback',
   passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {
     currentUser = res.req.user.id
-    var playlistId;
+
     // console.log('req session obj ', req.session);
     //find if JamCity playlist exists
     //create if not there
@@ -187,8 +188,8 @@ app.get('/callback',
 
 app.get('/hotTracks', ensureAuthenticated ,function(req, res){
   // currentUser = req._passport.session
-  var playlistId = req.session.playlistId
-  console.log("playlist ID",req.session)
+  // var playlistId = req.session.playlistId
+  // console.log("playlist ID",req.session)
   var spotifyId = req.query.artistId
   console.log('getHotTracks', spotifyId, 'playlistId', playlistId)
   spotifyApi.getArtistTopTracks(spotifyId, 'US')
