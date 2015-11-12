@@ -4,6 +4,9 @@
   "description": "Play the bands nearest you",
   "version": "0.0.1",
   "main": "app.js",
+  "scripts": {
+    "start": "nodemon Server/app.js"
+  },
   "dependencies": {
     "body-parser": "^1.12.4",
     "connect-mongo": "^0.8.2",
