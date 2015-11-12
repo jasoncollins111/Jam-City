@@ -11,9 +11,6 @@ module.exports = function (app, express, passport, spotifyApi) {
   var playlistId;
   var trackArray = [];
 
-
-
-
 // GET /auth/spotify
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request. The first step in spotify authentication will involve redirecting
@@ -44,30 +41,18 @@ app.get('/callback',
     spotifyApi.getUserPlaylists(currentUser)
     .then(function(data) {
      bigD = data.body.items
-
      bigD.forEach(function(item){
       // console.log('playlistName', item.name)
       if(item.name === 'city jams'){
-        console.log('city jams exists');
         playlistId = item.id;
-        console.log(playlistId);
-        req.session.playlistId = playlistId;
-        console.log("this is the playlist Id", req.session.playlistId)
-
-        hasJamCity = true;
-        // console.log(hasJamCity)
+        req.session.passport.user.playlistId = playlistId;
       }
     })
 
      if(!playlistId){
       spotifyApi.createPlaylist(currentUser, 'city jams', { 'public' : true })
       .then(function(data) {
-        console.log('Created playlist!');
-          //add songs
-          console.log('playlist data ', data);
           playlistId = data.body.id;
-          req.session.playlistId = playlistId;
-
         }, function(err) {
           console.log('Something went wrong!', err);
         });
@@ -87,12 +72,15 @@ app.get('/hotTracks', ensureAuthenticated ,function(req, res){
   // var playlistId = req.session.playlistId
   // console.log("playlist ID",req.session)
   var spotifyId = req.query.artistId
-  console.log('getHotTracks', spotifyId, 'playlistId', playlistId)
+  console.log('in hot fire', spotifyId);
   spotifyApi.getArtistTopTracks(spotifyId, 'US')
   .then(function(data) {
     var responseArr = [];
+    console.log("data in hotFire", data)
+    for(var i = 0; i < data.body.tracks.length; i++){
 
-    for(var i = 0; i < 3; i++){
+      console.log('i', i)
+
       responseArr.push({
         artists: data.body.tracks[i].artists[0].name,
         song: data.body.tracks[i].name,
@@ -103,17 +91,25 @@ app.get('/hotTracks', ensureAuthenticated ,function(req, res){
       var spotifyTrack = 'spotify:track:'
       var track = spotifyTrack + data.body.tracks[i].id
       trackArray.push(track)
+      if(i === 2){
+        break;
+      }
     }
+
+    console.log('responseArr after push', responseArr);
 
     spotifyApi.addTracksToPlaylist(currentUser, playlistId, trackArray)
     .then(function(data) {
-      console.log('Added tracks to playlist!');
       trackArray = []
       res.status(200).json({status: 'tracks added!', arrSongsAdded: responseArr});
     }, function(err) {
+      res.status(400).json({status: ':( didnt add tracks'});
+
       console.log('Something went wrong!', err);
     });
+
   }, function(err) {
+      res.status(400).json({status: ':( didnt add tracks'});
     console.log('Something went wrong!', err);
   })
 })
@@ -125,7 +121,6 @@ app.get('/hotTracks', ensureAuthenticated ,function(req, res){
   });
 
   app.get('/isAuthenticated', function(req, res, next) {
-    console.log('req sessopm ',req.session);
     var isAuth;
 
     if (req.isAuthenticated()) {

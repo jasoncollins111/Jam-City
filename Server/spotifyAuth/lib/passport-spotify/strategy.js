@@ -137,10 +137,11 @@ Strategy.prototype.userProfile = function(accessToken, done) {
     try {
 
       var json = JSON.parse(body);
-
+      console.log('user profile strategy',json)
       var profile = {
         provider: 'spotify',
         id: json.id,
+        playlistId: null,
         username: json.id,
         displayName: json.display_name,
         profileUrl: json.external_urls ? json.external_urls.spotify : null,

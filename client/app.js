@@ -150,10 +150,14 @@ angular.module('jamApp', [
       if(res.data.response.artist.foreign_ids){
         var id = res.data.response.artist.foreign_ids[0].foreign_id
         newId = id.slice(15)
-        AddToSpotify.hotTracks(newId, function(response){
+        AddToSpotify.hotTracks(newId, function(err, response){
           console.log('hot fire added');
-          var songs = response.data.arrSongsAdded;
-          Materialize.toast('We added ' + songs[0].artists + ' to your spotify city jams playlist', 5750);
+          if(!err){
+            var songs = response.data.arrSongsAdded;
+            Materialize.toast('We added ' + songs[0].artists + ' to your spotify city jams playlist', 5750);
+          } else {
+            Materialize.toast('We could not add to your playlist :(...', 5750);
+          }
         });
       } else {
         console.log('artist doesnt exist in spotify');

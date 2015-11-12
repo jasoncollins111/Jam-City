@@ -79,9 +79,10 @@ angular.module('jamApp.services', [])
      $http.get('/hotTracks', {params :{artistId: artistId}})
      .then(function(response){
        console.log(response)
-       cb(response);
+       cb(null, response);
      }, function(err){
        console.log(err)
+       cb(err, null)
      })
 
    }
@@ -129,6 +130,7 @@ angular.module('jamApp.services', [])
    })
 
   }
+  
   function logOut(){
     $http.get('/logout')
     .then(function(response){
