@@ -15,13 +15,6 @@ a[ng-click]{
   height: 200px;
 }
 
-.title{
-  position: relative;
-  font-weight: lighter;
-  font-size: 40px;
-  color:black;
-  top: -.5em;
-}
 .cityInput{
   padding-top: 40px;
   margin: auto;
@@ -144,9 +137,8 @@ a[ng-click]{
   color:white;
   font-size: 20px;
 }
-.nav{
-  border:none;
-}
+
+
 .header{
   font-size: 32px;
   font-weight: lighter;
@@ -190,8 +182,32 @@ a[ng-click]{
 .logout{
   color: black;
 }
+.title{
+  position: relative;
+  font-weight: lighter;
+  font-size: 40px;
+  color:black;
+  top: -.5em;
+}
+.titleBox{
+  position: relative;
+  top: -27px;
+  height: 300px;
+  background-color:#462E3E ;
+}
+h2{
+  padding-top: 15px;
+  color: white;
+}
 
-
+.nav{
+  background-color:#514E64;
+  border-style: solid;
+  border-color:#514E64 #514E64 #41A7C7 #514E64;
+}
+.tagLine{
+  color: white;
+}
 
 
 
