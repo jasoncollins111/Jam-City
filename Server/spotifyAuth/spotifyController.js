@@ -1,21 +1,88 @@
 
 
 var keys = require('../keys.js'),
-    hasJamCity = false;
+hasJamCity = false;
+
+function getPlaylist(spotifyClient, currentUser, cb) {
+ var playlistId;
+ spotifyClient.getUserPlaylists(currentUser)
+ .then(function(data) {
+   bigD = data.body.items
+   bigD.forEach(function(item, key){
+    if(item.name === 'Jamm-City'){
+      playlistId = item.id;
+    }
+  });
+
+  cb(null, playlistId);
+},function(err) {
+  console.log('Something went wrong! 19', err);
+  cb(err, null);
+});
+
+}
+
+function createJammCityPlayList(spotifyClient, currentUser, cb){
+  spotifyClient.createPlaylist(currentUser, 'Jamm-City', { 'public' : true })
+  .then(function(data) {
+    playlistId = data.body.id;
+
+    cb(null, playlistId);
+  }, function(err) {
+    console.log('Something went wrong! 32', err);
+    cb(err, null);
+  });
+}
+
+function addToJammCityPlaylist(spotifyClient, currentUser, trackArray, id, cb){
+  spotifyClient.addTracksToPlaylist(currentUser, id, trackArray)
+  .then(function(data) {
+      cb(null, data);
+    }, function(err) {
+        console.log('Something went wrong! 42', err);
+      cb(err, null);
+    });
+}
+
+function getArtistTopTracks (spotifyClient, spotifyId, cb){
+  spotifyClient.getArtistTopTracks(spotifyId, 'US')
+  .then(function(data) {
+    var trackArray = [];
+
+    for(var i = 0; i < data.body.tracks.length; i++){
+      var trackUrl = 'spotify:track:' + data.body.tracks[i].id;
+      trackArray.push(trackUrl);
+      if(i === 2){
+        break;
+      }
+    }
+
+    cb(null, trackArray);
+  }, function(err){
+    console.log('Something went wrong! 62', err);
+
+    cb(err, null);
+  });
+}
+
+
+
+
 
 module.exports = function (app, express, passport, spotifyApi) {
   var clientID = keys.clientID ;
   var clientSecret = keys.clientSecret;
-  var User;
-  var currentUser;
-  var playlistId;
-  var trackArray = [];
 
 // GET /auth/spotify
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request. The first step in spotify authentication will involve redirecting
 //   the user to spotify.com. After authorization, spotify will redirect the user
 //   back to this application at /auth/spotify/callback
+
+app.use(function(req, res, next){
+  console.log('middleware playlist ', req.session.playlist);
+  next();
+})
 
 app.get('/auth/spotify',
   passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private','playlist-modify-public'], showDialog: true}),
@@ -33,108 +100,79 @@ console.log('res ', res);
 //   which, in this example, will redirect the user to the home page.
 app.get('/callback',
   passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {
-    currentUser = res.req.user.id
-
-    // console.log('req session obj ', req.session);
-    //find if JamCity playlist exists
-    //create if not there
-    spotifyApi.getUserPlaylists(currentUser)
-    .then(function(data) {
-     bigD = data.body.items
-     bigD.forEach(function(item){
-      // console.log('playlistName', item.name)
-      if(item.name === 'city jams'){
-        playlistId = item.id;
-        req.session.passport.user.playlistId = playlistId;
-      }
-    })
-
-     if(!playlistId){
-      spotifyApi.createPlaylist(currentUser, 'city jams', { 'public' : true })
-      .then(function(data) {
-          playlistId = data.body.id;
-        }, function(err) {
-          console.log('Something went wrong!', err);
-        });
-    }
-     // console.log('Retrieved playlists', data.body.items[0].name);
-
-   },function(err) {
-     console.log('Something went wrong!', err);
-   }).then(function(){
-
-   })
-   res.redirect('/');
- });
+    res.redirect('/');
+  });
 
 app.get('/hotTracks', ensureAuthenticated ,function(req, res){
-  // currentUser = req._passport.session
-  // var playlistId = req.session.playlistId
-  // console.log("playlist ID",req.session)
-  var spotifyId = req.query.artistId
-  console.log('in hot fire', spotifyId);
-  spotifyApi.getArtistTopTracks(spotifyId, 'US')
-  .then(function(data) {
-    var responseArr = [];
-    console.log("data in hotFire", data)
-    for(var i = 0; i < data.body.tracks.length; i++){
+  var spotifyId = req.query.artistId;
+  var currentUser = res.req.user.id;
+  getArtistTopTracks(spotifyApi, spotifyId, function(err, tracksArr){
+    if(err){
+      console.log('dafuq? in getArtistTopTracks', err);
+      console.log('dafuq?', err);
+      res.status(400).json({status: ':( didnt add tracks'});
+    } else{
+      if(tracksArr.length === 0){
+        console.log('zero songs');
+        res.status(400).json({status: ':( didnt add tracks'});
+      } else {
+        getPlaylist(spotifyApi, currentUser, function(err, playlistId){
+          if(err){
+            console.log('err - couldnt find playlist ', err);
+            res.status(400).json({status: ':( didnt add tracks'});
+          } 
 
-      console.log('i', i)
+          if(playlistId === undefined){
+            //create playlist
+            createJammCityPlayList(spotifyApi, currentUser, function(err, playlistId){
+              if(err){
+                console.log('err - couldnt create playlist ', err);
+                res.status(400).json({status: ':( didnt add tracks'});
+              } 
+              addToJammCityPlaylist(spotifyApi, currentUser, tracksArr, playlistId, function(err, music){
+                if(err){
+                  console.log('err - couldnt add to playlist ', err);
+                  res.status(400).json({status: ':( didnt add tracks'});
+                }
+                res.status(200).json({status: 'tracks added!'});
+              })
+            })
+          } 
 
-      responseArr.push({
-        artists: data.body.tracks[i].artists[0].name,
-        song: data.body.tracks[i].name,
-        album: data.body.tracks[i].album.name,
-        images: data.body.tracks[i].album.images
-      });
-
-      var spotifyTrack = 'spotify:track:'
-      var track = spotifyTrack + data.body.tracks[i].id
-      trackArray.push(track)
-      if(i === 2){
-        break;
+          addToJammCityPlaylist(spotifyApi, currentUser, tracksArr, playlistId, function(err, music){
+              if(err){
+                console.log('err - couldnt add to playlist ', err);
+                res.status(400).json({status: ':( didnt add tracks'});
+              }
+              res.status(200).json({status: 'tracks added!'});
+          })
+        })
       }
     }
-
-    console.log('responseArr after push', responseArr);
-
-    spotifyApi.addTracksToPlaylist(currentUser, playlistId, trackArray)
-    .then(function(data) {
-      trackArray = []
-      res.status(200).json({status: 'tracks added!', arrSongsAdded: responseArr});
-    }, function(err) {
-      res.status(400).json({status: ':( didnt add tracks'});
-
-      console.log('Something went wrong!', err);
-    });
-
-  }, function(err) {
-      res.status(400).json({status: ':( didnt add tracks'});
-    console.log('Something went wrong!', err);
   })
 })
 
 
-  app.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/login');
-  });
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/login');
+});
 
-  app.get('/isAuthenticated', function(req, res, next) {
-    var isAuth;
+app.get('/isAuthenticated', function(req, res, next) {
+  var isAuth;
 
-    if (req.isAuthenticated()) {
-      isAuth = true;
+  if (req.isAuthenticated()) {
+    isAuth = true;
 
-    } else {
-      isAuth = false;
-    }
-    var isAuthenticated = {
-      authenticated : isAuth
-    };
-    res.status(200).json(isAuthenticated);
+  } else {
+    isAuth = false;
+  }
+  var isAuthenticated = {
+    authenticated : isAuth
+  };
+  res.status(200).json(isAuthenticated);
 
-  });
+});
 
 
   // Simple route middleware to ensure user is authenticated.

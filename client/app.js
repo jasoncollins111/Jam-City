@@ -119,21 +119,11 @@ angular.module('jamApp', [
   $scope.artistDeets = function(artistClicked){
     // console.log($events)
     var newId;
-    var artistId  = artistClicked.artistId
-    // console.log("id", id)
-
-        ArtistInfo.getPics(artistId)
-        .then(function(res){
-          console.log('controller pic data', res.data.response.images[0].url)
-          $scope.artistPic = res.data.response.images[0].url
-        })
-
+    var artistId  = artistClicked.artistId;
 
     $scope.artistClicked = artistClicked
     console.log('in ArtistDeets', artistClicked)
     $state.go('artists.artist')
-
-
   }
   $scope.logout = function(){
     Authentication.logOut()
@@ -141,8 +131,9 @@ angular.module('jamApp', [
       console.log('logged out')
     })
   }
-  $scope.spotify = function(artistId){
+  $scope.spotify = function(artist){
     var newId;
+    var artistId = artist.artistId;
     console.log('app controller spotify', artistId)
     ArtistInfo.getSpotifyIds(artistId)
     .then(function(res){
@@ -154,9 +145,9 @@ angular.module('jamApp', [
           console.log('hot fire added');
           if(!err){
             var songs = response.data.arrSongsAdded;
-            Materialize.toast('We added ' + songs[0].artists + ' to your spotify city jams playlist', 5750);
+            Materialize.toast('We added ' + artist.artistName + ' to your spotify city jams playlist', 5750);
           } else {
-            Materialize.toast('We could not add to your playlist :(...', 5750);
+            Materialize.toast('We could not add'+ artist.artistName + ' add to your playlist :(...', 5750);
           }
         });
       } else {
