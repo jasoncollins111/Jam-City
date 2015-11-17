@@ -1,3 +1,7 @@
+footer {
+  display:block;
+  vertical-align: top;
+ }
 .artist{
   color: black;
 }
@@ -192,8 +196,8 @@ a[ng-click]{
 .titleBox{
   position: relative;
   top: -27px;
-  height: 300px;
-  background-color:#462E3E ;
+  height: 500px;
+  background-color: black ;
 }
 h2{
   padding-top: 15px;
@@ -208,6 +212,32 @@ h2{
 .tagLine{
   color: white;
 }
+.speaker{
+  position: relative;
+  top: -175px;
+}
+#speaker1{
+  /*position: relative;*/
+  top: -75px;
+  /*right: 50%;*/
+}
 
+.row{
+  position: relative;
+  top: 20px;
+}
+.welcome{
+  font-weight: 200;
+  color: #B5ADB6;
+}
+.description{
+  top: -50px;
+  margin: 0px;
+  height: 500px;
+  background-color:#B5ADB6;
+}
+.cardTitle{
+  color:#FF3A4A;
+}
 
 
