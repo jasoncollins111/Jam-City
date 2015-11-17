@@ -138,24 +138,31 @@ angular.module('jamApp', [
     ArtistInfo.getSpotifyIds(artistId)
     .then(function(res){
       console.log('idRes',res)
-      if(res.data.response.artist.foreign_ids){
-        var id = res.data.response.artist.foreign_ids[0].foreign_id
-        newId = id.slice(15)
-        AddToSpotify.hotTracks(newId, function(err, response){
-          console.log('hot fire added');
-          if(!err){
-            var songs = response.data.arrSongsAdded;
-            Materialize.toast('We added ' + artist.artistName + ' to your spotify city jams playlist', 5750);
-          } else {
-            Materialize.toast('We could not add'+ artist.artistName + ' add to your playlist :(...', 5750);
-          }
-        });
-      } else {
-        console.log('artist doesnt exist in spotify');
-        //toast
-        Materialize.toast('We could not add this music to spotify', 5750);
+      try{
 
-        return;
+        if(res.data.response.artist.foreign_ids){
+          var id = res.data.response.artist.foreign_ids[0].foreign_id
+          newId = id.slice(15)
+          AddToSpotify.hotTracks(newId, function(err, response){
+            console.log('hot fire added');
+            if(!err){
+              var songs = response.data.arrSongsAdded;
+              Materialize.toast('We added ' + artist.artistName + ' to your spotify city jams playlist', 5750);
+            } else {
+              Materialize.toast('We could not add'+ artist.artistName + ' add to your playlist :(...', 5750);
+            }
+          });
+        } else {
+          console.log('artist doesnt exist in spotify');
+          //toast
+          Materialize.toast('We could not add this music to spotify', 5750);
+
+          return;
+        }
+      
+      } catch (err) {
+        console.log('artist doesnt exist in spotify');
+        Materialize.toast('We could not add this music to spotify', 5750);
       }
     })
   }

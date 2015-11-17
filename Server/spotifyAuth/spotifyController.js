@@ -79,10 +79,6 @@ module.exports = function (app, express, passport, spotifyApi) {
 //   the user to spotify.com. After authorization, spotify will redirect the user
 //   back to this application at /auth/spotify/callback
 
-app.use(function(req, res, next){
-  console.log('middleware playlist ', req.session.playlist);
-  next();
-})
 
 app.get('/auth/spotify',
   passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private','playlist-modify-public'], showDialog: true}),
