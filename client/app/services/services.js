@@ -11,20 +11,15 @@ angular.module('jamApp.services', [])
   var getCityId = function (city) {
     return $http.jsonp("http://api.songkick.com/api/3.0/search/locations.json?query="+city+"&apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
     .success(function (resp) {
-
       var cityId = resp.resultsPage.results.location[0].metroArea.id
-
-      //getCityEvents(cityId)
-    return resp.data;
+      return resp.data;
     });
-    // })
   }
 
   var getCityEvents = function (cityId) {
     return $http.jsonp("https://api.songkick.com/api/3.0/metro_areas/"+cityId+"/calendar.json?apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
     .success(function(data){
-      console.log('big',data)
-      var events = data.resultsPage.results.event
+      return data.resultsPage.results.event;
     })
   };
 
@@ -119,14 +114,13 @@ angular.module('jamApp.services', [])
     .then(function(response){
       if(response.data.authenticated){
         $state.go(intendedState);
-        console.log('user is authenticated');
         isAuthenticated = true;
       } else {
         $state.go('login');
         isAuthenticated = false;
       }
    }, function(err){
-     console.log(err)
+     $state.go('login');
    })
 
   }
@@ -137,6 +131,7 @@ angular.module('jamApp.services', [])
       console.log(response)
     })
   }
+
   return{
     isAuth: isAuth,
     isAuthenticated: isAuthenticated,
