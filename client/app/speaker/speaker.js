@@ -12,14 +12,20 @@
     var variant2 = 0;
     var toggle = false;
 
-    setInterval(function(){
-       variant2 = Math.random()/1.45
-    }, 150)
+    setTimeout(function(){
+        toggle = !toggle;
+       if(toggle){
+         variant2 = .7;
+       } else{
+         variant2 = .6;
+       }
 
-    setInterval(function(){
+    }, 1000)
+
+    setTimeout(function(){
        toggle = !toggle;
        if(toggle){
-         variant = .5;
+         variant = .8;
        } else{
          variant = .45;
        }

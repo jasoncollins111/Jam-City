@@ -1,3 +1,6 @@
+html{
+  background-color: #B5ADB6;
+}
 footer {
   display:block;
   vertical-align: top;
@@ -195,7 +198,7 @@ a[ng-click]{
 }
 .titleBox{
   position: relative;
-  top: -27px;
+  /*top: -27px;*/
   height: 500px;
   background-color: black ;
 }
@@ -214,11 +217,11 @@ h2{
 }
 .speaker{
   position: relative;
-  top: -175px;
+  top: -130px;
 }
 #speaker1{
   /*position: relative;*/
-  top: -75px;
+  top: -5px;
   /*right: 50%;*/
 }
 
@@ -233,11 +236,60 @@ h2{
 .description{
   top: -50px;
   margin: 0px;
-  height: 500px;
+  /*height: 500px;*/
   background-color:#B5ADB6;
 }
 .cardTitle{
   color:#FF3A4A;
 }
+.footer-copyright{
+  font-size: 14px;
+  color: #B73144;
+}
 
+.icon{
+  padding-top: 50px;
+}
+.team{
+  font-size: 26px;
+  line-height:.1;
+  margin: 0px;
+  color: white;
+}
+.team-member{
+  font-weight: 200;
+  color:#41A7C7;
+}
+.team-description{
 
+  background-color: #514E64;
+  position: relative;
+}
+.bio{
+  margin-left: 30px;
+}
+.meet-team{
+  color:#B73144;
+  font-weight: 200;
+  text-decoration: underline;
+}
+.welcome-tag{
+  padding-top: 3%;
+  color: #41A7C7;
+  width: 55%;
+  position: relative;
+  margin: auto;
+}
+.teamDiv{
+  position: relative;
+  margin-top: 60px;
+  margin-left: 30px;
+}
+.team-member-interests{
+  color: white;
+  display: inline-block;
+}
+.concertCrowd{
+  position: relative;
+  top: -20px;
+}
