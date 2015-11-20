@@ -50,6 +50,7 @@ angular.module('jamApp', [
     displayEvents(events);
   });
 
+
   $scope.getVenue = function(venueName){
     $scope.artistClicked = {};
     $state.go('artists')
@@ -140,6 +141,7 @@ angular.module('jamApp', [
       console.log('echonest or spot ', err);
     })
   };
+
 
 
 });
