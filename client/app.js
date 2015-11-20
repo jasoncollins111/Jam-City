@@ -54,6 +54,9 @@ angular.module('jamApp', [
       $scope.cityId.city = cityId
       return $scope.listCityEvents(cityId, cb)
     })
+    .catch(function(err){
+      console.log('error getting city', err);
+    })
     $scope.obj = {loading : true};
   };
 
@@ -87,6 +90,9 @@ angular.module('jamApp', [
         var events = res.data.resultsPage.results.event
         searchEvents(events)
         cb();
+      })
+      .catch(function(err){
+        console.log('error getting city events', err);
       })
     }
   }
@@ -182,6 +188,7 @@ angular.module('jamApp', [
       });
 
     }).catch(function(err){
+      console.log('error getting city lat and long');
       Materialize.toast('The site did not load properly, please refresh the page', 5750);
     });
   }

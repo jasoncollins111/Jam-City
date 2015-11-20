@@ -26,17 +26,10 @@ angular.module('jamApp.services', [])
 
 
   var getCityEventsLatng = function(lat, lng){
-    console.log('lat ',lat);
-    console.log('lng ',lng);
-
     return $http.jsonp("http://api.songkick.com/api/3.0/search/locations.json?location=geo:"+lat+","+lng+"&apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
-      .success(function(data){
-        return data.resultsPage.results.location[0].metroArea.displayName;
-      })
-      .error(function(error, b){
-        console.log('error ',error);
-        console.log('error code ',b);
-      });
+    .success(function(data){
+      return data.resultsPage.results.location[0].metroArea.displayName;
+    })
   };
 
   return {
@@ -49,41 +42,41 @@ angular.module('jamApp.services', [])
 .factory('ArtistInfo', function ($http){
   function getSpotifyIds(songkickId){
     return $http
-      .jsonp("http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+songkickId+"&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK")
-      .success(function(data) {
-        console.log(data)
-      })
-      // .error(function(data) {console.log(data)})
-  }
-
-  function getPics(id){
-    return $http
-    .jsonp("http://developer.echonest.com/api/v4/artist/images?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+id+"&format=jsonp&results=1&start=0&license=unknown&callback=JSON_CALLBACK")
-    .success(function(data){
-      console.log("services Pic Data", data)
+    .jsonp("http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+songkickId+"&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK")
+    .success(function(data) {
+      console.log(data)
     })
-  }
+      // .error(function(data) {console.log(data)})
+    }
+
+    function getPics(id){
+      return $http
+      .jsonp("http://developer.echonest.com/api/v4/artist/images?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+id+"&format=jsonp&results=1&start=0&license=unknown&callback=JSON_CALLBACK")
+      .success(function(data){
+        console.log("services Pic Data", data)
+      })
+    }
     return {
       getSpotifyIds: getSpotifyIds,
       getPics: getPics
     }
-})
+  })
 .factory('AddToSpotify', function ($http){
-   function hotTracks (artistId, cb) {
-    console.log('artistId factory', artistId)
-     $http.get('/hotTracks', {params :{artistId: artistId}})
-     .then(function(response){
-       console.log(response)
-       cb(null, response);
-     }, function(err){
-       console.log(err)
-       cb(err, null)
-     })
+ function hotTracks (artistId, cb) {
+  console.log('artistId factory', artistId)
+  $http.get('/hotTracks', {params :{artistId: artistId}})
+  .then(function(response){
+   console.log(response)
+   cb(null, response);
+ }, function(err){
+   console.log(err)
+   cb(err, null)
+ })
 
-   }
-   return {
-    hotTracks: hotTracks
-  }
+}
+return {
+  hotTracks: hotTracks
+}
 })
 .factory('VenueSearch', function($http){
   function venueId(venueName){
@@ -95,15 +88,15 @@ angular.module('jamApp.services', [])
   }
   function venueEvents(venueId){
 
-     return $http.jsonp("http://api.songkick.com/api/3.0/venues/"+venueId+"/calendar.json?apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
-    .success(function(data){
-      console.log('venueEvents:',data)
-    })
-  }
-  return{
-    venueId: venueId,
-    venueEvents: venueEvents
-  }
+   return $http.jsonp("http://api.songkick.com/api/3.0/venues/"+venueId+"/calendar.json?apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
+   .success(function(data){
+    console.log('venueEvents:',data)
+  })
+ }
+ return{
+  venueId: venueId,
+  venueEvents: venueEvents
+}
 })
 .factory('Authentication', function($http, $state){
   var isAuthenticated;
@@ -119,7 +112,7 @@ angular.module('jamApp.services', [])
         $state.go('login');
         isAuthenticated = false;
       }
-   }, function(err){
+    }, function(err){
      $state.go('login');
    })
 
