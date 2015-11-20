@@ -104,7 +104,6 @@ angular.module('jamApp.services', [])
     })
   }
   function venueEvents(venueId){
-
    return $http.jsonp('http://api.songkick.com/api/3.0/venues/'+venueId+'/calendar.json?apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK')
    .success(function(data){
     console.log('venueEvents:',data)
