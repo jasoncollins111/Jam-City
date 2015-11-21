@@ -1,32 +1,18 @@
 
-<nav class="nav">
-  <div>
-    <a href="#" class="brand-logo">Logo</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="#"></a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Team</a></li>
-      <li><a align='middle' href='/auth/spotify'>Login</a>
-    </ul>
-  </div>
-</nav>
+<script>
+ $(document).ready(function(){
+      $('.parallax').parallax();
+      // $('html').animate({scrollTop:0}, 1);
+      // $('body').animate({scrollTop:0}, 1);
+    });
+</script>
+<div>
 
-<div class="titleBox">
-  <!-- <p class="tagLine" align="middle">Where live music comes to you</p> -->
-
-  <div class="row">
-
-    <div class="col s6 center-align">
-      <h2 class="welcome" align="middle">Welcome to Jamm-City</h2>
-      <p class="welcome-tag center-align">Some really <strong>AWESOME </strong>Lorem ipsum dolor sit amet, quaeque praesent duo et, omnis mazim indoctum his no. Quodsi aperiri te eum. Verear omnesque sed an.</p>
-    </div>
-    <div id="speakerDiv" class="col s6">
-      <img src="assets/concertLights.jpeg" class="responsive-img concertCrowd" alt="">
-      <!-- <canvas id="speaker1" class="speaker" width="500" height="400"></canvas> -->
-      <!-- // <script type="text/javascript" src="app/speaker/speaker.js"></script> -->
-    </div>
-
-
+  <img src="assets/concerpic.png" class="responsive-img concertCrowd" alt="">
+  <!-- <span><h1 class="center-align valign jamm-city">JAMM-CITY</h1></span> -->
+  <div class="text-on-pic center-align">
+     <h1 class="jamm-city"><b>JAMM-CITY<b></h1>
+     <a class="waves-effect waves-deep-orange accent-1 btn blue-grey darken-3 z-depth-5" align='middle' href='/auth/spotify'>Login</a>
   </div>
 </div>
 
@@ -34,39 +20,65 @@
 
     <div class="col s4">
       <p class="cardTitle" align="middle">Find Shows in your area</p>
-      <p align="middle"f>Lorem ipsum dolor sit amet, quaeque praesent duo et, omnis mazim indoctum his no. Quodsi aperiri te eum. Verear omnesque sed an.</p>
-      <div align="middle"><i class="icon large material-icons" align="middle">location_on</i></div>
+      <p class="directions"align="middle"f>Upon login, fifty events in your area will be loaded.  By clicking on an artist you can see where and when they are playing.</p>
     </div>
     <div class="col s4">
       <p class="cardTitle" align="middle">Discover New Music</p>
-      <p align="middle">Lorem ipsum dolor sit amet, quaeque praesent duo et, omnis mazim indoctum his no. Quodsi aperiri te eum. Verear omnesque sed an.</p>
-      <div align="middle"><i class="icon large material-icons" align="middle">radio</i></div>
+      <p class="directions" align="middle">With Jamm-City, new music is easy to find.  You can check out artists you haven't heard of touring in your city or search your favorite venues.</p>
     </div>
     <div class="col s4">
       <p class="cardTitle" align="middle">Create Playlists</p>
-      <p align="middle">Lorem ipsum dolor sit amet, quaeque praesent duo et, omnis mazim indoctum his no. Quodsi aperiri te eum. Verear omnesque sed an.</p>
+      <p class="directions"align="middle">Hit the add to spotify button and three of the hottest tracks from that artist will be added to a playlist called Jamm-City</p>
+    </div>
+
+</div>
+<div class="row description">
+
+    <div class="col s4">
+      <div align="middle"><i class="icon large material-icons" align="middle">location_on</i></div>
+    </div>
+    <div class="col s4">
+      <div align="middle"><i class="icon large material-icons" align="middle">radio</i></div>
+    </div>
+    <div class="col s4">
       <div align="middle"><i class="icon large material-icons" >queue_music</i></div>
     </div>
 
 </div>
-<div class="row team-description">
-  <div class="col s6 bio">
-    <h3 class="center-align meet-team">Meet the Jamm-City team</h3>
-    <div class="teamDiv">
-      <h1 class="team team-member">Jason Collins - <span><p class="team-member-interests">Code, Music, Ball</p></span></h1>
-      <h1 class="team team-member">Joe Nayigiziki - <span><p class="team-member-interests">Code, Music, Ball</p></span></h1>
-      <h1 class="team team-member">Jackie Wung - <span><p class="team-member-interests">Code, Music, Ball</p></span></h1>
-
-    </div>
-  </div>
-  <div class="col s6 teamPic">
-    <img src="assets/concertHearts.jpeg" alt="" class="responsive-img heartPic" align="middle">
+<div class="parallax-container">
+  <div class="parallax"><img src="assets/concertHearts.jpeg" alt="" class="responsive-img heartPic" align="middle">
   </div>
 </div>
+
+<div class="team-description">
+  <!-- <div class="bio"> -->
+    <h3 class="center-align meet-team">Meet the Jamm-City team</h3>
+  <!-- </div> -->
+</div>
+
+<div class="row bio">
+<br>
+  <div class="col s4">
+    <p class="cardTitle team team-member" align="middle">Jason Collins</p>
+    <p class="team-member-interests center-align" align="middle">Code, Music, Ball</p>
+  </div>
+  <div class="col s4">
+    <p class="cardTitle team team-member" align="middle">Joe Nayigiziki</p>
+    <p class="team-member-interests center-align" align="middle">Code, Music, Ball</p>
+  </div>
+  <div class="col s4">
+    <p class="cardTitle team team-member" align="middle">Jackie Wung</p>
+    <p class="team-member-interests center-align" align="middle">Code, Music, Ball</p>
+  </div>
+
+</div>
+
 <div class="footer-copyright">
-    <p align="left">© 2015 Jamm-City</p>
+    <p align="middle">© 2015 Jamm-City</p>
     <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
   <!-- </div> -->
 </div>
+
+
 
 

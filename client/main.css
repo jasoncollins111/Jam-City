@@ -1,5 +1,5 @@
 html{
-  background-color: #B5ADB6;
+  background-color: #49585B;
 }
 footer {
   display:block;
@@ -200,7 +200,7 @@ a[ng-click]{
   position: relative;
   /*top: -27px;*/
   height: 500px;
-  background-color: black ;
+  background-color: #181c1e;
 }
 h2{
   padding-top: 15px;
@@ -236,10 +236,11 @@ h2{
 .description{
   top: -50px;
   margin: 0px;
-  /*height: 500px;*/
-  background-color:#B5ADB6;
+  font-weight: 100;
+  background-color:#49585B;
 }
 .cardTitle{
+
   color:#FF3A4A;
 }
 .footer-copyright{
@@ -261,17 +262,17 @@ h2{
   color:#41A7C7;
 }
 .team-description{
-
-  background-color: #514E64;
+  height: 96px;
+  background-color: #181c1e;
+  padding-top: 1px;
   position: relative;
 }
-.bio{
-  margin-left: 30px;
-}
+
 .meet-team{
   color:#B73144;
   font-weight: 200;
   text-decoration: underline;
+
 }
 .welcome-tag{
   padding-top: 3%;
@@ -287,9 +288,34 @@ h2{
 }
 .team-member-interests{
   color: white;
-  display: inline-block;
+  font-weight: 100;
+  /*display: inline-block;*/
 }
 .concertCrowd{
-  position: relative;
+  /*position: ;*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.jamm-city{
+  font-size:150px;
+  color: white;
+}
+
+.btn{
+  font-weight: 100;
+}
+
+.text-on-pic{
+  position:absolute;
+  top: 110px;
+  width: 100%;
+}
+.directions{
+  color: white;
+}
+.bio{
   top: -20px;
+  background-color: #181c1e;
 }
