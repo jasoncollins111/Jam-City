@@ -21,8 +21,7 @@ angular.module('jamApp', [
   })
   .state('login', {
     url: '/login',
-    templateUrl: 'login.html',
-    controller: "loginController"
+    templateUrl: 'login.html'
   })
   .state('doBetter', {
     url: '/incompatibleBrowser',
@@ -195,17 +194,12 @@ angular.module('jamApp', [
 
 
 
-
   function errorFunction(){
     console.log("Geocoder failed");
   }
 
 
 
-
-})
-.controller('loginController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch) {
-  console.log('in loginctrl');
 
 });
 

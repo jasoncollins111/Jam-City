@@ -41,17 +41,15 @@ angular.module('jamApp.services', [])
 
 .factory('ArtistInfo', function ($http){
   function getSpotifyIds(songkickId){
-    return $http
-    .jsonp("http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+songkickId+"&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK")
+    return $http.jsonp("http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+songkickId+"&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK")
     .success(function(data) {
       console.log(data)
     })
-      // .error(function(data) {console.log(data)})
     }
 
     function getPics(id){
-      return $http
-      .jsonp("http://developer.echonest.com/api/v4/artist/images?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+id+"&format=jsonp&results=1&start=0&license=unknown&callback=JSON_CALLBACK")
+      
+      return $http.jsonp("http://developer.echonest.com/api/v4/artist/images?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+id+"&format=jsonp&results=1&start=0&license=unknown&callback=JSON_CALLBACK")
       .success(function(data){
         console.log("services Pic Data", data)
       })
@@ -63,7 +61,7 @@ angular.module('jamApp.services', [])
   })
 .factory('AddToSpotify', function ($http){
  function hotTracks (artistId, cb) {
-  console.log('artistId factory', artistId)
+
   $http.get('/hotTracks', {params :{artistId: artistId}})
   .then(function(response){
    console.log(response)
@@ -80,7 +78,7 @@ return {
 })
 .factory('VenueSearch', function($http){
   function venueId(venueName){
-    console.log('getting venue events')
+
     return $http.jsonp("http://api.songkick.com/api/3.0/search/venues.json?query="+venueName+"&apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
     .success(function(data){
       console.log(data)
