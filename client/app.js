@@ -30,7 +30,8 @@ angular.module('jamApp', [
 
 
 })
-.run(function($state, $http, Authentication){
+.run(function($state, $http, Authentication, init){
+  init.cityEvents();
   if (navigator.geolocation) {
     Authentication.isAuth('artists');
   } else {
@@ -38,26 +39,18 @@ angular.module('jamApp', [
   }
 })
 
-.controller('JamController', function ($scope, $location, $state, CityInfo, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout) {
-
+.controller('JamController', function ($scope, $location, $state, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout, init) {
 
   $scope.obj = {loading : true};
   $scope.eventsList = [];
   $scope.cityId = {}
   $scope.artistAdded = false
 
-  $scope.getCity = function(city, cb) {
-    CityInfo.getCityId(city)
-    .then(function(res){
-      var cityId = res.data.resultsPage.results.location[0].metroArea.id;
-      $scope.cityId.city = cityId
-      return $scope.listCityEvents(cityId, cb)
-    })
-    .catch(function(err){
-      console.log('error getting city', err);
-    })
-    $scope.obj = {loading : true};
-  };
+  init.getCity()
+  .then(function(events){
+    console.log('i made it', events);
+    displayEvents(events);
+  });
 
   $scope.getVenue = function(venueName){
     $scope.artistClicked = {};
@@ -73,7 +66,6 @@ angular.module('jamApp', [
       venueId = res.data.resultsPage.results.venue[0].id
       console.log(venueId)
       return VenueSearch.venueEvents(venueId)
-      // console.log($scope.eventsList)
     }).then(function(res){
      console.log('venueEvents call returned',res)
      var events = res.data.resultsPage.results.event
@@ -82,20 +74,8 @@ angular.module('jamApp', [
    })
   }
 
-  $scope.listCityEvents = function(cityId, cb) {
-    if(cityId){
-      CityInfo.getCityEvents(cityId)
-      .then(function(res){
-        var events = res.data.resultsPage.results.event
-        searchEvents(events)
-        cb();
-      })
-      .catch(function(err){
-        console.log('error getting city events', err);
-      })
-    }
-  }
-  function searchEvents(events){
+ 
+  function displayEvents(events){
     $scope.eventsList = [];
     console.log('events ', events);
     for(var i = 0; i < events.length; i++){
@@ -113,15 +93,12 @@ angular.module('jamApp', [
       }
     }
     $scope.obj = {loading : false};
-    console.log($scope.obj);
-
   }
 
   $scope.artistDeets = function(artistClicked){
     // console.log($events)
     var newId;
     var artistId  = artistClicked.artistId;
-
     $scope.artistClicked = artistClicked
     console.log('in ArtistDeets', artistClicked)
     $state.go('artists.artist')
@@ -169,36 +146,6 @@ angular.module('jamApp', [
       }
     })
   }
-
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
-  } 
-
-  function successFunction(position) {
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    $scope.loading = true;
-    CityInfo.getCityEventsLatng(lat, lng)
-    .then(function(data){
-      var city = data.data.resultsPage.results.location[0].metroArea.displayName;
-      $scope.getCity(city, function(){
-        $scope.loading = false;
-        console.log('loading complete');
-      });
-
-    }).catch(function(err){
-      console.log('error getting city lat and long');
-      Materialize.toast('The site did not load properly, please refresh the page', 5750);
-    });
-  }
-
-
-
-  function errorFunction(){
-    console.log("Geocoder failed");
-  }
-
-
 
 
 });

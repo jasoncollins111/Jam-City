@@ -96,7 +96,7 @@ console.log('res ', res);
 //   which, in this example, will redirect the user to the home page.
 app.get('/callback',
   passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {
-    res.redirect('/');
+    res.redirect('/jamCity.html');
   });
 
 app.get('/hotTracks', ensureAuthenticated ,function(req, res){

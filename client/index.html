@@ -1,5 +1,5 @@
 <!-- <!DOCTYPE html> -->
-<html ng-app="jamApp">
+<html>
 <head>
     <meta charset="UTF-8" />
     <title>Jam-City</title>
@@ -7,22 +7,44 @@
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css">
 
-    <!--<script src="bower_components/angular-animate/angular-animate.min.js"></script>-->
-    <!--<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/ngToast/dist/ngToast.min.js"></script>-->
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/ngAutocomplete/src/ngAutocomplete.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="bower_components/materialize/bin/materialize.js"></script>
-    <script type="text/javascript" src="app.js"></script>
-    <script src="app/services/services.js"></script>
 </head>
-<body class="flow-text">
-<div ui-view></div>
+<body>
+ <div class='container valign-wrapper'>
+  <div class="cityImage valign-wrapper" src="">
+    <div  class="row">
+      <div class="col s4 valign-wrapper">
+        <div class="card white darken-1 invisible">
+          <div class="card-content black-text">
+            <span class="card-title">Card Title</span>
+            <p><h3>Welcome to Jam City</h3><br>
+              Jam City allows you to make Spotify playlists from bands playing in your area or any venue in the world
+            </p>
+          </div>
+          <div class="card-action">
+            <a align='middle' href='/auth/spotify'>login</a>
+          </div>
+        </div>
+      </div>
+      <div class="col s4 valign">
+          <div class="card white darken-1 valign">
+            <div class="card-content black-text">
+              <span class="card-title">Card Title</span>
+              <p><h3>Welcome to Jam City</h3><br>
+                <p>
+                  Jam City allows you to make Spotify playlists from artists playing in your area or any venue in the world.
+                </p>
+              </p>
+            </div>
+            <div class="card-action center-align">
+              <a href='/auth/spotify'>login</a>
+            </div>
+          </div>
+      </div>
+    </div>
+      <div class="col s4">
+    </div>
+</div>
+
 
 </body>
 </html>

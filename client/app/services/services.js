@@ -6,38 +6,51 @@ var songkickKey = 'ngIhxhYsLMjkEU8y';
 angular.module('jamApp.services', [])
 
 
-.factory('CityInfo', function ($http) {
-
-  var getCityId = function (city) {
-    return $http.jsonp("http://api.songkick.com/api/3.0/search/locations.json?query="+city+"&apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
-    .success(function (resp) {
-      var cityId = resp.resultsPage.results.location[0].metroArea.id
-      return resp.data;
-    });
-  }
-
+.factory('init', function ($http, $q) {
+  var p;
   var getCityEvents = function (cityId) {
     return $http.jsonp("https://api.songkick.com/api/3.0/metro_areas/"+cityId+"/calendar.json?apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
-    .success(function(data){
-      return data.resultsPage.results.event;
-    })
   };
-
-
 
   var getCityEventsLatng = function(lat, lng){
     return $http.jsonp("http://api.songkick.com/api/3.0/search/locations.json?location=geo:"+lat+","+lng+"&apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
-    .success(function(data){
-      return data.resultsPage.results.location[0].metroArea.displayName;
-    })
   };
 
+  var cityEvents = function(){
+    console.log('getcityevents');
+    p = $q(function(resolve, reject){
+      navigator.geolocation.getCurrentPosition(function(position){
+        console.log('fixing to resolve promise');
+        resolve({
+          lat : position.coords.latitude,
+          lng : position.coords.longitude
+        })
+      }, function(err){
+        console.log('error getting position');
+        reject(err);
+      });
+
+    }).then(function(location){
+      return getCityEventsLatng(location.lat, location.lng);
+    }).then(function(cityInfo){
+      var id = cityInfo.data.resultsPage.results.location[0].metroArea.id;
+      return getCityEvents(id);
+    }).then(function(events){
+      return events.data.resultsPage.results.event;
+    });
+  }
+
+  var getCity = function(){
+    return p;
+  }
   return {
     getCityEvents: getCityEvents,
-    getCityId: getCityId,
-    getCityEventsLatng : getCityEventsLatng
+    getCityEventsLatng : getCityEventsLatng,
+    cityEvents : cityEvents,
+    getCity : getCity
   };
 })
+
 
 .factory('ArtistInfo', function ($http){
   function getSpotifyIds(songkickId){
@@ -100,8 +113,8 @@ return {
   var isAuthenticated;
 
   function isAuth(intendedState){
-
-    $http.get('/isAuthenticated')
+    console.log('isAuth');
+    return $http.get('/isAuthenticated')
     .then(function(response){
       if(response.data.authenticated){
         $state.go(intendedState);
@@ -113,7 +126,6 @@ return {
     }, function(err){
      $state.go('login');
    })
-
   }
   
   function logOut(){
