@@ -1,3 +1,10 @@
+@font-face {
+  font-family: avenir;
+  src: url(assets/avenir-light.woff)
+}
+body{
+  font-family: avenir-light;
+}
 html{
   background-color: #49585B;
 }
@@ -29,7 +36,6 @@ a[ng-click]{
   width: 300px;
 }
 .artistList{
-  /*color:black;*/
   margin-left: 15px;
 }
 
@@ -73,11 +79,6 @@ a[ng-click]{
   border-right-width: 0px;
   border-left-width: 0px;
 }
-/*#loginCard {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}*/
 
 #loginButton {
   position: absolute;
@@ -91,13 +92,6 @@ a[ng-click]{
   top: -32%;
 }
 
-/*button{
-  width: 300px;
-  height: 70;
-  margin-top: 175px;
-  background-color: #48d1cc;
-  opacity: .75;
-}*/
 .navbar-logo{
   position:relative;
   top:14px;
@@ -240,7 +234,6 @@ h2{
   background-color:#49585B;
 }
 .cardTitle{
-
   color:#FF3A4A;
 }
 .footer-copyright{
@@ -258,7 +251,7 @@ h2{
   color: white;
 }
 .team-member{
-  font-weight: 200;
+  font-weight: 100;
   color:#41A7C7;
 }
 .team-description{
@@ -270,8 +263,8 @@ h2{
 
 .meet-team{
   color:#B73144;
-  font-weight: 200;
-  text-decoration: underline;
+  font-weight: 100;
+  /*text-decoration: underline;*/
 
 }
 .welcome-tag{
@@ -299,17 +292,20 @@ h2{
   height: 100%;
 }
 .jamm-city{
-  font-size:150px;
+  letter-spacing: 15px;
+  font-weight: 100;
+  font-size:100px;
   color: white;
 }
 
 .btn{
   font-weight: 100;
+  margin-top: 25px;
 }
 
 .text-on-pic{
   position:absolute;
-  top: 110px;
+  top: 200px;
   width: 100%;
 }
 .directions{
@@ -318,4 +314,14 @@ h2{
 .bio{
   top: -20px;
   background-color: #181c1e;
+}
+.jcFont{
+  height: 15%;
+  /*width:20%;*/
+}
+.butt{
+  color:#FF3A4A;
+  background-color: none;
+  border:1px solid #fff;
+  padding: 5px 10px 5px 10px;
 }
