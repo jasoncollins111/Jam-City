@@ -134,7 +134,5 @@ angular.module('jamApp', [
     })
   };
 
-
-
 });
 
