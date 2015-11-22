@@ -3,7 +3,7 @@
  */
 
  'use strict';
-var express = require('express'),  
+var express = require('express'),
     app = express(),
     port = 8008,
     SpotifyWebApi = require('spotify-web-api-node'),
