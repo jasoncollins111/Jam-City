@@ -1,9 +1,9 @@
 <nav>
-    <div class="nav-wrapper">
-      <form ng-submit="getVenue()" align='middle'>
-        <div class="input-field">
-          <input type="text" align='middle' ng-model="text" class="form-control inputBox" aria-describedby="basic-addon1" options="options" details="details" placeholder="Enter a Venue" />
-          <!-- <span><a class="logout" href="#" ng-click="logout()">LOGOUT</a></span> -->
+    <div class='nav-wrapper'>
+      <form ng-submit='getVenue()' align='middle'>
+        <div class='input-field'>
+          <input type='text' align='middle' ng-model='text' class='form-control inputBox' aria-describedby='basic-addon1' options='options' details='details' placeholder='Enter a Venue' />
+          <!-- <span><a class='logout' href='#' ng-click='logout()'>LOGOUT</a></span> -->
         </div>
       </form>
     </div>
@@ -13,60 +13,60 @@
 
 
 <div ng-if='obj.loading' align='middle' id='loading'>
-  <div class="preloader-wrapper big active">
-      <div class="spinner-layer spinner-blue">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
+  <div class='preloader-wrapper big active'>
+      <div class='spinner-layer spinner-blue'>
+        <div class='circle-clipper left'>
+          <div class='circle'></div>
+        </div><div class='gap-patch'>
+          <div class='circle'></div>
+        </div><div class='circle-clipper right'>
+          <div class='circle'></div>
         </div>
       </div>
 
-      <div class="spinner-layer spinner-red">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
+      <div class='spinner-layer spinner-red'>
+        <div class='circle-clipper left'>
+          <div class='circle'></div>
+        </div><div class='gap-patch'>
+          <div class='circle'></div>
+        </div><div class='circle-clipper right'>
+          <div class='circle'></div>
         </div>
       </div>
 
-      <div class="spinner-layer spinner-yellow">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
+      <div class='spinner-layer spinner-yellow'>
+        <div class='circle-clipper left'>
+          <div class='circle'></div>
+        </div><div class='gap-patch'>
+          <div class='circle'></div>
+        </div><div class='circle-clipper right'>
+          <div class='circle'></div>
         </div>
       </div>
 
-      <div class="spinner-layer spinner-green">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
+      <div class='spinner-layer spinner-green'>
+        <div class='circle-clipper left'>
+          <div class='circle'></div>
+        </div><div class='gap-patch'>
+          <div class='circle'></div>
+        </div><div class='circle-clipper right'>
+          <div class='circle'></div>
         </div>
       </div>
     </div>
 </div>
 
-<div class="col-md-4" id="artists">
+<div class='col-md-4' id='artists'>
 
 
 <div ng-if='!obj.loading'>
 
 
-  <div class="artistList"
-       ng-repeat="artist in eventsList">
-    <div class="info">
-      <div class="name">
-        <a class="artist" href="#" ng-click="artistDeets(artist)">{{ artist.artistName }}</a>
+  <div class='artistList'
+       ng-repeat='artist in eventsList'>
+    <div class='info'>
+      <div class='name'>
+        <a class='artist' href='#' ng-click='artistDeets(artist)'>{{ artist.artistName }}</a>
       </div>
     </div>
   </div>
@@ -75,5 +75,5 @@
 
 </div>
 
-<span class="artistInfo col-md-8" ui-view></span>
+<span class='artistInfo col-md-8' ui-view></span>
 

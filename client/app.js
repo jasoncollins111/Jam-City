@@ -7,12 +7,12 @@ angular.module('jamApp', [
 
 .config(function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise("/artists");
+  $urlRouterProvider.otherwise('/artists');
 
   $stateProvider
   .state('artists', {
-    url: "/artists",
-    templateUrl: "app/artists/artists.html",
+    url: '/artists',
+    templateUrl: 'app/artists/artists.html',
     controller: 'JamController'
   })
   .state('artists.artist', {

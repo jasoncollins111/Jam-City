@@ -9,11 +9,11 @@ angular.module('jamApp.services', [])
 .factory('init', function ($http, $q) {
   var jammCityEventsPromise;
   var getCityEvents = function (cityId) {
-    return $http.jsonp("https://api.songkick.com/api/3.0/metro_areas/"+cityId+"/calendar.json?apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
+    return $http.jsonp('https://api.songkick.com/api/3.0/metro_areas/'+cityId+'/calendar.json?apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK')
   };
 
   var getCityEventsLatng = function(lat, lng){
-    return $http.jsonp("http://api.songkick.com/api/3.0/search/locations.json?location=geo:"+lat+","+lng+"&apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
+    return $http.jsonp('http://api.songkick.com/api/3.0/search/locations.json?location=geo:'+lat+','+lng+'&apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK')
   };
 
   var cityEvents = function(){
@@ -53,7 +53,7 @@ angular.module('jamApp.services', [])
 
 .factory('ArtistInfo', function ($http){
   function getSpotifyIds(songkickId){
-    return $http.jsonp("http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+songkickId+"&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK")
+    return $http.jsonp('http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:'+songkickId+'&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK')
     .then(function(echonestData){
       console.log('echo response' , echonestData);
       var echoArrOfForeignIds;
@@ -73,9 +73,9 @@ angular.module('jamApp.services', [])
   }
 
   function getPics(id){
-    return $http.jsonp("http://developer.echonest.com/api/v4/artist/images?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+id+"&format=jsonp&results=1&start=0&license=unknown&callback=JSON_CALLBACK")
+    return $http.jsonp('http://developer.echonest.com/api/v4/artist/images?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:'+id+'&format=jsonp&results=1&start=0&license=unknown&callback=JSON_CALLBACK')
     .success(function(data){
-      console.log("services Pic Data", data)
+      console.log('services Pic Data', data)
     })
   }
   return {
@@ -98,14 +98,14 @@ angular.module('jamApp.services', [])
 })
 .factory('VenueSearch', function($http){
   function venueId(venueName){
-    return $http.jsonp("http://api.songkick.com/api/3.0/search/venues.json?query="+venueName+"&apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
+    return $http.jsonp('http://api.songkick.com/api/3.0/search/venues.json?query='+venueName+'&apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK')
     .success(function(data){
       console.log(data)
     })
   }
   function venueEvents(venueId){
 
-   return $http.jsonp("http://api.songkick.com/api/3.0/venues/"+venueId+"/calendar.json?apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
+   return $http.jsonp('http://api.songkick.com/api/3.0/venues/'+venueId+'/calendar.json?apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK')
    .success(function(data){
     console.log('venueEvents:',data)
   })
