@@ -2,16 +2,12 @@
   font-family: avenir;
   src: url(assets/avenir-light.woff)
 }
-body{
-  font-family: avenir-light;
-}
+
 html{
+  font-family: avenir-light;
   background-color: #49585B;
 }
-footer {
-  display:block;
-  vertical-align: top;
- }
+
 .artist{
   color: black;
 }
@@ -80,37 +76,6 @@ a[ng-click]{
   border-left-width: 0px;
 }
 
-#loginButton {
-  position: absolute;
-  top: 3%;
-  width: 100%;
-  padding-top: 7%;
-  height: 27%;
-}
-#headerLogin{
-  position: relative;
-  top: -32%;
-}
-
-.navbar-logo{
-  position:relative;
-  top:14px;
-  background-size: 45px 45px;
-  background-repeat: no-repeat;
-  background-position: center center;
-  width:86px;
-  height:55px;
-}
-.navbar-default{
-  border: none;
-}
-.navbar{
-  margin-bottom: 0px;
-}
-.navColor{
-  background-color: #4EAAAE;
-  height: 120px;
-}
 .cities{
   /*margin-top:-21px;*/
   background-color: black;
@@ -120,32 +85,7 @@ a[ng-click]{
   height: 100%;
   opacity: .7;
 }
-.logo{
-  position:relative;
-  left: 239;
-  width: 30%;
-  margin:auto;
-  text-align: center;
-}
 
-.logo-box{
-  width:700px;
-}
-.navLinks{
-  top:15px;
-  padding-left: 10px;
-  vertical-align: center;
-  color:white;
-  font-size: 20px;
-}
-
-
-.header{
-  font-size: 32px;
-  font-weight: lighter;
-  text-decoration: underline;
-  margin-top: 20px;
-}
 .spotify{
   border:#ED3E32;
   background-color: #ED3E32;
@@ -154,20 +94,6 @@ a[ng-click]{
   border:#ED3E32;
   background-color: #ED3E32;
 }
-.cityImage{
-  background: url('../assets/loginPic.jpeg');
-  background-size: cover;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  min-width: 100%;
-  min-height: 100%;
-}
-.invisible{
-  visibility: hidden;
-}
 
 .profile-panel .profile-avatar {
     border-radius: 50%;
@@ -175,57 +101,13 @@ a[ng-click]{
     border: 1px solid #e7e7e2;
     float: left;
 }
-
-.profile-panel .profile-avatar img {
-    border-radius: 50%;
-    border: 1px solid #e7e7e2;
-}
-.logout{
-  color: black;
-}
-.title{
-  position: relative;
-  font-weight: lighter;
-  font-size: 40px;
-  color:black;
-  top: -.5em;
-}
-.titleBox{
-  position: relative;
-  /*top: -27px;*/
-  height: 500px;
-  background-color: #181c1e;
-}
-h2{
-  padding-top: 15px;
-  color: white;
-}
-
-.nav{
-  background-color:#514E64;
-  border-style: solid;
-  border-color:#514E64 #514E64 #41A7C7 #514E64;
-}
 .tagLine{
   color: white;
-}
-.speaker{
-  position: relative;
-  top: -130px;
-}
-#speaker1{
-  /*position: relative;*/
-  top: -5px;
-  /*right: 50%;*/
 }
 
 .row{
   position: relative;
   top: 20px;
-}
-.welcome{
-  font-weight: 200;
-  color: #B5ADB6;
 }
 .description{
   top: -50px;
@@ -264,28 +146,12 @@ h2{
 .meet-team{
   color:#B73144;
   font-weight: 100;
-  /*text-decoration: underline;*/
-
-}
-.welcome-tag{
-  padding-top: 3%;
-  color: #41A7C7;
-  width: 55%;
-  position: relative;
-  margin: auto;
-}
-.teamDiv{
-  position: relative;
-  margin-top: 60px;
-  margin-left: 30px;
 }
 .team-member-interests{
   color: white;
   font-weight: 100;
-  /*display: inline-block;*/
 }
 .concertCrowd{
-  /*position: ;*/
   top: 0;
   left: 0;
   width: 100%;
@@ -297,12 +163,6 @@ h2{
   font-size:100px;
   color: white;
 }
-
-.btn{
-  font-weight: 100;
-  margin-top: 25px;
-}
-
 .text-on-pic{
   position:absolute;
   top: 200px;
@@ -317,9 +177,8 @@ h2{
 }
 .jcFont{
   height: 15%;
-  /*width:20%;*/
 }
-.butt{
+.login{
   color:#FF3A4A;
   background-color: none;
   border:1px solid #fff;
