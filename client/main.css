@@ -3,7 +3,7 @@
   src: url(assets/avenir-light.woff)
 }
 
-html{
+body{
   font-family: avenir-light;
   background-color: #49585B;
 }
@@ -112,6 +112,7 @@ a[ng-click]{
 .description{
   top: -50px;
   margin: 0px;
+  font-size: 21px;
   font-weight: 100;
   background-color:#49585B;
 }
@@ -149,6 +150,7 @@ a[ng-click]{
 }
 .team-member-interests{
   color: white;
+  font-size: 26px;
   font-weight: 100;
 }
 .concertCrowd{
