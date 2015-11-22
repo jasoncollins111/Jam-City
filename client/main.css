@@ -184,3 +184,11 @@ a[ng-click]{
   border:1px solid #fff;
   padding: 5px 10px 5px 10px;
 }
+.linkedIn{
+  height: 8%;
+  width:13%;
+}
+.octocat{
+  height: 10%;
+  width:15%;
+}
