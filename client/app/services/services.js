@@ -7,7 +7,7 @@ angular.module('jamApp.services', [])
 
 
 .factory('init', function ($http, $q) {
-  var p;
+  var jammCityEventsPromise;
   var getCityEvents = function (cityId) {
     return $http.jsonp("https://api.songkick.com/api/3.0/metro_areas/"+cityId+"/calendar.json?apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
   };
@@ -17,8 +17,7 @@ angular.module('jamApp.services', [])
   };
 
   var cityEvents = function(){
-    console.log('getcityevents');
-    p = $q(function(resolve, reject){
+    jammCityEventsPromise = $q(function(resolve, reject){
       navigator.geolocation.getCurrentPosition(function(position){
         console.log('fixing to resolve promise');
         resolve({
@@ -41,7 +40,7 @@ angular.module('jamApp.services', [])
   }
 
   var getCity = function(){
-    return p;
+    return jammCityEventsPromise;
   }
   return {
     getCityEvents: getCityEvents,
@@ -55,43 +54,50 @@ angular.module('jamApp.services', [])
 .factory('ArtistInfo', function ($http){
   function getSpotifyIds(songkickId){
     return $http.jsonp("http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+songkickId+"&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK")
-    .success(function(data) {
-      console.log(data)
+    .then(function(echonestData){
+      console.log('echo response' , echonestData);
+      var echoArrOfForeignIds;
+      if(echonestData.data.response.status.code === 0 && echonestData.data.response.artist.foreign_ids){
+        echoArrOfForeignIds = echonestData.data.response.artist.foreign_ids;
+        return echoArrOfForeignIds.reduce(function(total, val){
+          if(val.catalog === 'spotify'){
+            return val.foreign_id;
+          } else {
+            return total;
+          }
+        }, '');
+      } else {
+        return '';
+      }
     })
-    }
+  }
 
-    function getPics(id){
-      
-      return $http.jsonp("http://developer.echonest.com/api/v4/artist/images?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+id+"&format=jsonp&results=1&start=0&license=unknown&callback=JSON_CALLBACK")
-      .success(function(data){
-        console.log("services Pic Data", data)
-      })
-    }
-    return {
-      getSpotifyIds: getSpotifyIds,
-      getPics: getPics
-    }
-  })
+  function getPics(id){
+    return $http.jsonp("http://developer.echonest.com/api/v4/artist/images?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:"+id+"&format=jsonp&results=1&start=0&license=unknown&callback=JSON_CALLBACK")
+    .success(function(data){
+      console.log("services Pic Data", data)
+    })
+  }
+  return {
+    getSpotifyIds: getSpotifyIds,
+    getPics: getPics
+  }
+})
 .factory('AddToSpotify', function ($http){
- function hotTracks (artistId, cb) {
+  function hotTracks (artistId, cb) {
+    return $http.get('/hotTracks', {params :{artistId: artistId}})
+    .then(function(response){
+      return response.data.status;
+    });
+  }
 
-  $http.get('/hotTracks', {params :{artistId: artistId}})
-  .then(function(response){
-   console.log(response)
-   cb(null, response);
- }, function(err){
-   console.log(err)
-   cb(err, null)
- })
+  return {
+    hotTracks: hotTracks
+  }
 
-}
-return {
-  hotTracks: hotTracks
-}
 })
 .factory('VenueSearch', function($http){
   function venueId(venueName){
-
     return $http.jsonp("http://api.songkick.com/api/3.0/search/venues.json?query="+venueName+"&apikey="+songkickKey+"&jsoncallback=JSON_CALLBACK")
     .success(function(data){
       console.log(data)
