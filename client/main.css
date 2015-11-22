@@ -1,3 +1,17 @@
+@font-face {
+  font-family: avenir;
+  src: url(assets/avenir-light.woff)
+}
+body{
+  font-family: avenir-light;
+}
+html{
+  background-color: #49585B;
+}
+footer {
+  display:block;
+  vertical-align: top;
+ }
 .artist{
   color: black;
 }
@@ -15,13 +29,6 @@ a[ng-click]{
   height: 200px;
 }
 
-.title{
-  position: relative;
-  font-weight: lighter;
-  font-size: 40px;
-  color:black;
-  top: -.5em;
-}
 .cityInput{
   padding-top: 40px;
   margin: auto;
@@ -29,7 +36,6 @@ a[ng-click]{
   width: 300px;
 }
 .artistList{
-  /*color:black;*/
   margin-left: 15px;
 }
 
@@ -73,11 +79,6 @@ a[ng-click]{
   border-right-width: 0px;
   border-left-width: 0px;
 }
-/*#loginCard {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}*/
 
 #loginButton {
   position: absolute;
@@ -91,13 +92,6 @@ a[ng-click]{
   top: -32%;
 }
 
-/*button{
-  width: 300px;
-  height: 70;
-  margin-top: 175px;
-  background-color: #48d1cc;
-  opacity: .75;
-}*/
 .navbar-logo{
   position:relative;
   top:14px;
@@ -144,9 +138,8 @@ a[ng-click]{
   color:white;
   font-size: 20px;
 }
-.nav{
-  border:none;
-}
+
+
 .header{
   font-size: 32px;
   font-weight: lighter;
@@ -190,8 +183,145 @@ a[ng-click]{
 .logout{
   color: black;
 }
+.title{
+  position: relative;
+  font-weight: lighter;
+  font-size: 40px;
+  color:black;
+  top: -.5em;
+}
+.titleBox{
+  position: relative;
+  /*top: -27px;*/
+  height: 500px;
+  background-color: #181c1e;
+}
+h2{
+  padding-top: 15px;
+  color: white;
+}
 
+.nav{
+  background-color:#514E64;
+  border-style: solid;
+  border-color:#514E64 #514E64 #41A7C7 #514E64;
+}
+.tagLine{
+  color: white;
+}
+.speaker{
+  position: relative;
+  top: -130px;
+}
+#speaker1{
+  /*position: relative;*/
+  top: -5px;
+  /*right: 50%;*/
+}
 
+.row{
+  position: relative;
+  top: 20px;
+}
+.welcome{
+  font-weight: 200;
+  color: #B5ADB6;
+}
+.description{
+  top: -50px;
+  margin: 0px;
+  font-weight: 100;
+  background-color:#49585B;
+}
+.cardTitle{
+  color:#FF3A4A;
+}
+.footer-copyright{
+  font-size: 14px;
+  color: #B73144;
+}
 
+.icon{
+  padding-top: 50px;
+}
+.team{
+  font-size: 26px;
+  line-height:.1;
+  margin: 0px;
+  color: white;
+}
+.team-member{
+  font-weight: 100;
+  color:#41A7C7;
+}
+.team-description{
+  height: 96px;
+  background-color: #181c1e;
+  padding-top: 1px;
+  position: relative;
+}
 
+.meet-team{
+  color:#B73144;
+  font-weight: 100;
+  /*text-decoration: underline;*/
 
+}
+.welcome-tag{
+  padding-top: 3%;
+  color: #41A7C7;
+  width: 55%;
+  position: relative;
+  margin: auto;
+}
+.teamDiv{
+  position: relative;
+  margin-top: 60px;
+  margin-left: 30px;
+}
+.team-member-interests{
+  color: white;
+  font-weight: 100;
+  /*display: inline-block;*/
+}
+.concertCrowd{
+  /*position: ;*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.jamm-city{
+  letter-spacing: 15px;
+  font-weight: 100;
+  font-size:100px;
+  color: white;
+}
+
+.btn{
+  font-weight: 100;
+  margin-top: 25px;
+}
+
+.text-on-pic{
+  position:absolute;
+  top: 200px;
+  width: 100%;
+}
+.directions{
+  color: white;
+}
+.bio{
+  top: -20px;
+  background-color: #181c1e;
+}
+.jcFont{
+  height: 15%;
+  /*width:20%;*/
+}
+.butt{
+  color:#FF3A4A;
+  background-color: none;
+  border:1px solid #fff;
+  padding: 5px 10px 5px 10px;
+}

@@ -1,44 +1,84 @@
- <div class='container valign-wrapper'>
-   <!-- <div class="card "> -->
-     <!-- <div class="card-image"> -->
-      <!-- <span class="card-title">jam city</span> -->
-  <div class="cityImage valign-wrapper" src="">
-    <div  class="row">
 
-      <div class="col s4 valign-wrapper">
-        <!-- Promo Content 1 goes here -->
-        <div class="card white darken-1 invisible">
-          <div class="card-content black-text">
-            <span class="card-title">Card Title</span>
-            <p><h3>Welcome to Jam City</h3><br>
-              Jam City allows you to make Spotify playlists from bands playing in your area or any venue in the world
-            </p>
-          </div>
-          <div class="card-action">
-            <a align='middle' href='/auth/spotify'>login</a>
-          </div>
-        </div>
-      </div>
-      <div class="col s4 valign">
-        <!-- <div class="col s12 m6"> -->
-          <div class="card white darken-1 valign">
-            <div class="card-content black-text">
-              <span class="card-title">Card Title</span>
-              <p><h3>Welcome to Jam City</h3><br>
-                <p>
-                  Jam City allows you to make Spotify playlists from artists playing in your area or any venue in the world.
-                </p>
-              </p>
-            </div>
-            <div class="card-action center-align">
-              <a href='/auth/spotify'>login</a>
-            </div>
-          </div>
-      </div>
+<script>
+ $(document).ready(function(){
+      $('.parallax').parallax();
+      // $('html').animate({scrollTop:0}, 1);
+      // $('body').animate({scrollTop:0}, 1);
+    });
+</script>
+<div>
+
+  <img src="assets/concerpic.png" class="responsive-img concertCrowd" alt="">
+  <div class="text-on-pic center-align">
+     <h1 class="jamm-city"><b>JAMM-CITY<b></h1>
+     <p class="tagLine center-align">Explore the pulse of music</p>
+     <a class="butt" align='middle' href='/auth/spotify'>Login</a>
+  </div>
+</div>
+
+<div class="row description">
+
+    <div class="col s4">
+      <p class="cardTitle" align="middle">Find Shows in your area</p>
+      <p class="directions"align="middle"f>Upon login, fifty events in your area will be loaded.  By clicking on an artist you can see where and when they are playing.</p>
     </div>
-      <div class="col s4">
-        <!-- Promo Content 3 goes here -->
-
+    <div class="col s4">
+      <p class="cardTitle" align="middle">Discover New Music</p>
+      <p class="directions" align="middle">Jamm-City makes it fun and exciting to explore new music.  You can check out artists you haven't heard of that are touring in your city or search your favorite venues all over the world.</p>
+    </div>
+    <div class="col s4">
+      <p class="cardTitle" align="middle">Create Playlists</p>
+      <p class="directions"align="middle">Hit the 'add to spotify' button and three of the hottest tracks from that artist will be added to a playlist called Jamm-City. Which you can listen to anywhere that you have spotify.</p>
     </div>
 
 </div>
+<div class="row description">
+
+    <div class="col s4">
+      <div align="middle"><i class="icon large material-icons" align="middle">location_on</i></div>
+    </div>
+    <div class="col s4">
+      <div align="middle"><i class="icon large material-icons" align="middle">radio</i></div>
+    </div>
+    <div class="col s4">
+      <div align="middle"><i class="icon large material-icons" >queue_music</i></div>
+    </div>
+
+</div>
+<div class="parallax-container">
+  <div class="parallax"><img src="assets/concertHearts.jpeg" alt="" class="responsive-img heartPic" align="middle">
+  </div>
+</div>
+
+<div class="team-description">
+  <!-- <div class="bio"> -->
+    <h3 class="center-align meet-team">Meet the Jamm-City team</h3>
+  <!-- </div> -->
+</div>
+
+<div class="row bio">
+<br>
+  <div class="col s4">
+    <p class="cardTitle team team-member" align="middle">Jason Collins - Product Owner</p>
+    <p class="team-member-interests center-align" align="middle">Travelling, meditation, yoga, basketball, human optimization and higher consciousness</p>
+  </div>
+  <div class="col s4">
+    <p class="cardTitle team team-member" align="middle">Joe Nayigiziki - Software Engineer</p>
+    <p class="team-member-interests center-align" align="middle">Code, Music, Ball</p>
+  </div>
+  <div class="col s4">
+    <p class="cardTitle team team-member" align="middle">Jackie Wung - Lead Designer</p>
+    <p class="team-member-interests center-align" align="middle">Snowboarding, eating spicy food, the great outdoors, typography, and user interface design</p>
+  </div>
+
+</div>
+
+<div class="footer-copyright">
+    <p align="middle">© 2015 Jamm-City</p>
+    <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+  <!-- </div> -->
+</div>
+
+
+
+
