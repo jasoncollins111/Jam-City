@@ -1,16 +1,17 @@
 <span class='artistInfo'>
-  <div class='jumbotron'>
+  <!-- <div class='jumbotron'> -->
 
-    <!-- <img class='circle' src= {{artistPic}} alt='profile picture'> -->
+    <img class="responsive-img artist-pic"src={{artistPic}} alt='profile picture'>
 
     <h1>{{artistClicked.artistName}}</h1>
     <p>{{artistClicked.eventDateTime.date}}</p>
     <p>{{artistClicked.venue}}</p>
+    <p>{{hotness}}</p>
     </div>
     <p><a class='btn btn-primary btn-lg spotify' ng-click='spotify(artistClicked)' href='#' role='button'>Add to Spotify</a></p>
 
     </span>
-  </div>
+  <!-- </div> -->
 
 
 

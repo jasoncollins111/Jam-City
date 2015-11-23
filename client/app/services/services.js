@@ -72,15 +72,16 @@ angular.module('jamApp.services', [])
     })
   }
 
-  function getPics(id){
-    return $http.jsonp('http://developer.echonest.com/api/v4/artist/images?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:'+id+'&format=jsonp&results=1&start=0&license=unknown&callback=JSON_CALLBACK')
-    .success(function(data){
-      console.log('services Pic Data', data)
-    })
+  function getInfo(artistId){
+    return $http.get('/getArtist', {params :{artistId: artistId}})
+    .then(function(response){
+      console.log("getArtist", response)
+      return response.data;
+    });
   }
   return {
     getSpotifyIds: getSpotifyIds,
-    getPics: getPics
+    getInfo: getInfo
   }
 })
 .factory('AddToSpotify', function ($http){
@@ -133,7 +134,7 @@ angular.module('jamApp.services', [])
      $state.go('login');
    })
   }
-  
+
   function logOut(){
     $http.get('/logout')
     .then(function(response){

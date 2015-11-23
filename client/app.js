@@ -40,7 +40,6 @@ angular.module('jamApp', [
 })
 
 .controller('JamController', function ($scope, $location, $state, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout, init) {
-
   $scope.obj = {loading : true};
   $scope.eventsList = [];
   $scope.cityId = {}
@@ -73,7 +72,6 @@ angular.module('jamApp', [
    })
   }
 
- 
   function displayEvents(events){
     $scope.eventsList = [];
     console.log('events ', events);
@@ -98,9 +96,19 @@ angular.module('jamApp', [
     // console.log($events)
     var newId;
     var artistId  = artistClicked.artistId;
-    $scope.artistClicked = artistClicked
-    console.log('in ArtistDeets', artistClicked)
-    $state.go('artists.artist')
+    ArtistInfo.getSpotifyIds(artistId)
+    .then(function(artistForeignId){
+      console.log(artistForeignId)
+      newId = artistForeignId.slice(15);
+      return ArtistInfo.getInfo(newId)
+    }).then(function(info){
+      console.log('info', info)
+      $scope.artistPic = info.image;
+      $scope.artistClicked = artistClicked;
+      console.log('in ArtistDeets', artistClicked)
+      $state.go('artists.artist')
+
+    })
   }
 
   $scope.logout = function(){

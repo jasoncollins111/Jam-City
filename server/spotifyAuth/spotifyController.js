@@ -44,7 +44,12 @@ function getArtistTopTracks (spotifyClient, spotifyId){
     return trackArray;
   });
 }
-
+function getArtist(spotifyClient, spotifyId){
+  return spotifyClient.getArtist(spotifyId)
+  .then(function(data) {
+    return data.body;
+  });
+}
 
 
 
@@ -65,6 +70,23 @@ module.exports = function (app, express, passport, spotifyApi) {
     passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {
       res.redirect('/jamCity.html');
     });
+
+  app.get('/getArtist', ensureAuthenticated, function(req, res){
+    spotifyId = req.query.artistId;
+    getArtist(spotifyApi, spotifyId)
+    .then(function(info){
+      console.log(info)
+      if(info.images.length > 0){
+        res.status(200).json({status: 'found your pic bruh', image: info.images[0].url})
+      }
+      else{
+        res.status(400).json({status: 'could not find picture'})
+      }
+    })
+    .catch(function(err){
+      res.status(400).json({status: 'not a spotify artist'})
+    })
+  })
 
   app.get('/hotTracks', ensureAuthenticated ,function(req, res){
     var spotifyId = req.query.artistId;
