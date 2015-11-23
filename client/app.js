@@ -103,7 +103,7 @@ angular.module('jamApp', [
       return ArtistInfo.getInfo(newId)
     }).then(function(info){
       console.log('info', info)
-      $scope.artistPic = info.images[0].url;
+      $scope.artistPic = info.image;
       $scope.artistClicked = artistClicked;
       console.log('in ArtistDeets', artistClicked)
       $state.go('artists.artist')

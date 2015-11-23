@@ -44,16 +44,11 @@ function getArtistTopTracks (spotifyClient, spotifyId){
     return trackArray;
   });
 }
-function getArtist(spotifyClient, spotifyId, cb){
+function getArtist(spotifyClient, spotifyId){
   return spotifyClient.getArtist(spotifyId)
   .then(function(data) {
-    // console.log('Artist information', data.body);
-    cb(null, data.body);
-  }, function(err) {
-    console.error(err);
-    cb(err, null)
+    return data.body;
   });
-
 }
 
 
@@ -75,18 +70,24 @@ module.exports = function (app, express, passport, spotifyApi) {
     passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {
       res.redirect('/jamCity.html');
     });
+
   app.get('/getArtist', ensureAuthenticated, function(req, res){
     spotifyId = req.query.artistId;
-    getArtist(spotifyApi, spotifyId, function(err, info){
-      if(err){
-        console.log('wtf where my data', err)
-        res.status(400).json({status: 'not a spotify artist'})
-      } else{
-        res.status(200).json(info)
+    getArtist(spotifyApi, spotifyId)
+    .then(function(info){
+      console.log(info)
+      if(info.images.length > 0){
+        res.status(200).json({status: 'found your pic bruh', image: info.images[0].url})
+      }
+      else{
+        res.status(400).json({status: 'could not find picture'})
       }
     })
-
+    .catch(function(err){
+      res.status(400).json({status: 'not a spotify artist'})
+    })
   })
+
   app.get('/hotTracks', ensureAuthenticated ,function(req, res){
     var spotifyId = req.query.artistId;
     var currentUser = res.req.user.id;
