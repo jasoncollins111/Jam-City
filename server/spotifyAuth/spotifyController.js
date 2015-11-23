@@ -45,10 +45,6 @@ function getArtistTopTracks (spotifyClient, spotifyId){
   });
 }
 
-
-
-
-
 module.exports = function (app, express, passport, spotifyApi) {
   var clientID = keys.clientID ;
   var clientSecret = keys.clientSecret;
@@ -56,10 +52,7 @@ module.exports = function (app, express, passport, spotifyApi) {
   app.get('/auth/spotify',
     passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private','playlist-modify-public'], showDialog: true}),
     function(req, res){
-  // The request will be redirected to spotify for authentication, so this
-  // function will not be called.
-  console.log('res ', res);
-});
+  });
 
   app.get('/callback',
     passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {
@@ -114,7 +107,6 @@ module.exports = function (app, express, passport, spotifyApi) {
     res.status(200).json(isAuthenticated);
 
   });
-
 
   function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) { return next(); }
