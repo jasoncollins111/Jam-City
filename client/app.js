@@ -55,15 +55,11 @@ angular.module('jamApp', [
     $scope.artistClicked = {};
     $state.go('artists')
     $scope.obj = {loading : true};
-    console.log($scope.obj);
-
     var venueName = $scope.text
     var venueId;
     VenueSearch.venueId(venueName)
     .then(function(res){
-      console.log('venue res', res)
       venueId = res.data.resultsPage.results.venue[0].id
-      console.log(venueId)
       return VenueSearch.venueEvents(venueId)
     }).then(function(res){
      console.log('venueEvents call returned',res)
@@ -76,7 +72,6 @@ angular.module('jamApp', [
  
   function displayEvents(events){
     $scope.eventsList = [];
-    console.log('events ', events);
     for(var i = 0; i < events.length; i++){
       if(events[i].performance.length > 0){
         var artist = events[i].performance[0].artist.displayName;
@@ -88,7 +83,6 @@ angular.module('jamApp', [
             venue: events[i].venue.displayName,
             venueId: events[i].venue.id
           })
-
       }
     }
     $scope.obj = {loading : false};
@@ -99,7 +93,6 @@ angular.module('jamApp', [
     var newId;
     var artistId  = artistClicked.artistId;
     $scope.artistClicked = artistClicked
-    console.log('in ArtistDeets', artistClicked)
     $state.go('artists.artist')
   }
 
@@ -116,7 +109,6 @@ angular.module('jamApp', [
     .then(function(artistForeignId){
       var newId;
       if(artistForeignId === '') throw Error('no foreign Id');
-      console.log('foreign id', artistForeignId);
       newId = artistForeignId.slice(15);
       return AddToSpotify.hotTracks(newId);
     })
@@ -129,7 +121,6 @@ angular.module('jamApp', [
     })
     .catch(function(err){
       Materialize.toast('We could not add '+ artist.artistName + ' to your Jamm-City playlist on Spotify :(...', 5750);
-      console.log('echonest or spot ', err);
     })
   };
 
