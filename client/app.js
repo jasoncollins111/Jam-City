@@ -88,21 +88,28 @@ angular.module('jamApp', [
   }
 
   $scope.artistDeets = function(artistClicked){
-    console.log(artistClicked);
     var newId;
     var artistId  = artistClicked.artistId;
+
     ArtistInfo.getSpotifyIds(artistId)
     .then(function(artistForeignId){
       console.log(artistForeignId)
       newId = artistForeignId.slice(15);
-      return ArtistInfo.getInfo(newId)
+      return ArtistInfo.getInfo(newId);
     }).then(function(info){
-      console.log('info', info)
-      $scope.artistPic = info.image;
-      $scope.artistClicked = artistClicked;
-      console.log('in ArtistDeets', artistClicked)
-      $state.go('artists.artist')
+      if(info.status === 'found your pic bruh'){
+        $scope.artistPic = info.image;
+      } 
 
+      $scope.artistClicked = artistClicked;
+      console.log('in ArtistDeets', artistClicked);
+      $state.go('artists.artist')
+    })
+    .catch(function(err){
+      $scope.artistPic = 'http://cdn.playbuzz.com/cdn/71582f18-68a6-4ff0-942d-fd7090ffafd8/d56b4878-6ccb-4ce5-8101-f76d220a51d7.jpg';
+      $scope.artistClicked = artistClicked;
+      console.log('in ArtistDeets', artistClicked);
+      $state.go('artists.artist')
     })
   }
 

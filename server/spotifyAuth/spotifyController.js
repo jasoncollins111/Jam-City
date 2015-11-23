@@ -71,11 +71,11 @@ module.exports = function (app, express, passport, spotifyApi) {
     spotifyId = req.query.artistId;
     getArtist(spotifyApi, spotifyId)
     .then(function(info){
-      console.log(info)
       if(info.images.length > 0){
         res.status(200).json({status: 'found your pic bruh', image: info.images[0].url})
       }
       else{
+        console.log('error');
         res.status(400).json({status: 'could not find picture'})
       }
     })
