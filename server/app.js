@@ -1,11 +1,12 @@
 /**
  *Main application file
  */
+ //setting the callback uri
 
  'use strict';
 var express = require('express'),
     app = express(),
-    port = 8008,
+    port = 8080,
     SpotifyWebApi = require('spotify-web-api-node'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
@@ -20,7 +21,7 @@ var express = require('express'),
     spotifyApi = new SpotifyWebApi({
       clientId : clientID,
       clientSecret : clientSecret,
-      redirectUri : 'http://localhost:8008/callback'
+      redirectUri : 'http://localhost:8080/callback'
     });
 
     app.use(express.static(__dirname + '/../client'));
@@ -28,22 +29,19 @@ var express = require('express'),
       console.log('user ', user)
       done(null, user);
     });
-
     passport.deserializeUser(function(sessionUser, done) {
       done(null, sessionUser);
     });
-
     passport.use(new SpotifyStrategy({
       clientID: clientID,
       clientSecret: clientSecret,
-      callbackURL: 'http://localhost:8008/callback'
+      callbackURL: 'http://localhost:8080/callback'
     }, function(accessToken, refreshToken, profile, done) {
         process.nextTick(function () {
           spotifyApi.setAccessToken(accessToken);
           return done(null, profile);
         });
     }));
-
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(methodOverride());
@@ -54,8 +52,7 @@ var express = require('express'),
       console.log('req session obj', req.session);
       next();
     })
-  require('./spotifyAuth/spotifyController.js')(app, express, passport, spotifyApi);
-
-  console.log('Jam City on port ', port);
-  app.listen(port);
-  exports = module.exports = app;
+    require('./spotifyAuth/spotifyController.js')(app, express, passport, spotifyApi);
+    console.log('Jam City on port ', port);
+    app.listen(port);
+    exports = module.exports = app;

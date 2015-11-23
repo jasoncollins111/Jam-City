@@ -49,8 +49,6 @@ angular.module('jamApp.services', [])
     getCity : getCity
   };
 })
-
-
 .factory('ArtistInfo', function ($http){
   function getSpotifyIds(songkickId){
     return $http.jsonp('http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:'+songkickId+'&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK')
@@ -105,7 +103,6 @@ angular.module('jamApp.services', [])
     })
   }
   function venueEvents(venueId){
-
    return $http.jsonp('http://api.songkick.com/api/3.0/venues/'+venueId+'/calendar.json?apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK')
    .success(function(data){
     console.log('venueEvents:',data)

@@ -54,15 +54,11 @@ angular.module('jamApp', [
     $scope.artistClicked = {};
     $state.go('artists')
     $scope.obj = {loading : true};
-    console.log($scope.obj);
-
     var venueName = $scope.text
     var venueId;
     VenueSearch.venueId(venueName)
     .then(function(res){
-      console.log('venue res', res)
       venueId = res.data.resultsPage.results.venue[0].id
-      console.log(venueId)
       return VenueSearch.venueEvents(venueId)
     }).then(function(res){
      console.log('venueEvents call returned',res)
@@ -73,8 +69,8 @@ angular.module('jamApp', [
   }
 
   function displayEvents(events){
+    console.log(events);
     $scope.eventsList = [];
-    console.log('events ', events);
     for(var i = 0; i < events.length; i++){
       if(events[i].performance.length > 0){
         var artist = events[i].performance[0].artist.displayName;
@@ -86,28 +82,34 @@ angular.module('jamApp', [
             venue: events[i].venue.displayName,
             venueId: events[i].venue.id
           })
-
       }
     }
     $scope.obj = {loading : false};
   }
 
   $scope.artistDeets = function(artistClicked){
-    // console.log($events)
     var newId;
     var artistId  = artistClicked.artistId;
+
     ArtistInfo.getSpotifyIds(artistId)
     .then(function(artistForeignId){
       console.log(artistForeignId)
       newId = artistForeignId.slice(15);
-      return ArtistInfo.getInfo(newId)
+      return ArtistInfo.getInfo(newId);
     }).then(function(info){
-      console.log('info', info)
-      $scope.artistPic = info.image;
-      $scope.artistClicked = artistClicked;
-      console.log('in ArtistDeets', artistClicked)
-      $state.go('artists.artist')
+      if(info.status === 'found your pic bruh'){
+        $scope.artistPic = info.image;
+      } 
 
+      $scope.artistClicked = artistClicked;
+      console.log('in ArtistDeets', artistClicked);
+      $state.go('artists.artist')
+    })
+    .catch(function(err){
+      $scope.artistPic = 'http://cdn.playbuzz.com/cdn/71582f18-68a6-4ff0-942d-fd7090ffafd8/d56b4878-6ccb-4ce5-8101-f76d220a51d7.jpg';
+      $scope.artistClicked = artistClicked;
+      console.log('in ArtistDeets', artistClicked);
+      $state.go('artists.artist')
     })
   }
 
@@ -124,7 +126,6 @@ angular.module('jamApp', [
     .then(function(artistForeignId){
       var newId;
       if(artistForeignId === '') throw Error('no foreign Id');
-      console.log('foreign id', artistForeignId);
       newId = artistForeignId.slice(15);
       return AddToSpotify.hotTracks(newId);
     })
@@ -137,7 +138,6 @@ angular.module('jamApp', [
     })
     .catch(function(err){
       Materialize.toast('We could not add '+ artist.artistName + ' to your Jamm-City playlist on Spotify :(...', 5750);
-      console.log('echonest or spot ', err);
     })
   };
 

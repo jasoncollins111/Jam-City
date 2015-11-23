@@ -44,14 +44,13 @@ function getArtistTopTracks (spotifyClient, spotifyId){
     return trackArray;
   });
 }
+
 function getArtist(spotifyClient, spotifyId){
   return spotifyClient.getArtist(spotifyId)
   .then(function(data) {
     return data.body;
   });
 }
-
-
 
 
 module.exports = function (app, express, passport, spotifyApi) {
@@ -61,10 +60,7 @@ module.exports = function (app, express, passport, spotifyApi) {
   app.get('/auth/spotify',
     passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private','playlist-modify-public'], showDialog: true}),
     function(req, res){
-  // The request will be redirected to spotify for authentication, so this
-  // function will not be called.
-  console.log('res ', res);
-});
+  });
 
   app.get('/callback',
     passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {
@@ -75,11 +71,11 @@ module.exports = function (app, express, passport, spotifyApi) {
     spotifyId = req.query.artistId;
     getArtist(spotifyApi, spotifyId)
     .then(function(info){
-      console.log(info)
       if(info.images.length > 0){
         res.status(200).json({status: 'found your pic bruh', image: info.images[0].url})
       }
       else{
+        console.log('error');
         res.status(400).json({status: 'could not find picture'})
       }
     })
@@ -136,7 +132,6 @@ module.exports = function (app, express, passport, spotifyApi) {
     res.status(200).json(isAuthenticated);
 
   });
-
 
   function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) { return next(); }

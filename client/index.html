@@ -1,31 +1,23 @@
-
-
 <html>
 <head>
     <meta charset='UTF-8' />
     <title>Jam-City</title>
-
-
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link rel="stylesheet" href="icon.css" >
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/materialize/bin/materialize.js"></script>
     <script type="text/javascript" src="app.js"></script>
-
     <link rel='stylesheet' href='bower_components/materialize/bin/materialize.css'>
     <link rel='stylesheet' href='main.css'>
+    <script>
+     $(document).ready(function(){
+          $('.parallax').parallax();
+        });
+    </script>
 </head>
-<script>
- $(document).ready(function(){
-      $('.parallax').parallax();
-    });
-</script>
 <body>
-
 <div>
-
   <img src="assets/concerpic.png" class="responsive-img concertCrowd" alt="">
   <div class="text-on-pic center-align">
      <h1 class="jamm-city"><b>JAMM-CITY<b></h1>
@@ -33,9 +25,7 @@
      <a class="login" align='middle' href='/auth/spotify'>Login</a>
   </div>
 </div>
-
 <div class="row description">
-
     <div class="col s4">
       <p class="cardTitle" align="middle">Find Shows in your area</p>
       <p class="directions"align="middle"f>Upon login, fifty events in your area will be loaded.  By clicking on an artist you can see where and when they are playing.</p>
@@ -48,10 +38,8 @@
       <p class="cardTitle" align="middle">Create Playlists</p>
       <p class="directions"align="middle">Hit the 'add to spotify' button and three of the hottest tracks from that artist will be added to a playlist called Jamm-City. Which you can listen to anywhere that you have spotify.</p>
     </div>
-
 </div>
 <div class="row description">
-
     <div class="col s4">
       <div align="middle"><i class="icon large material-icons" align="middle">location_on</i></div>
     </div>
@@ -66,13 +54,9 @@
   <div class="parallax"><img src="assets/concertheartsSmall.png" alt="" class="responsive-img heartPic">
   </div>
 </div>
-
 <div class="team-description">
-  <!-- <div class="bio"> -->
     <h3 class="center-align meet-team">Meet the Jamm-City team</h3>
-  <!-- </div> -->
 </div>
-
 <div class="row bio">
 <br>
   <div class="col s4">
@@ -85,7 +69,7 @@
   </div>
   <div class="col s4">
     <p class="cardTitle team team-member" align="middle">Joe Nayigiziki - Software Engineer</p>
-    <p class="team-member-interests center-align" align="middle">Code, listening to music, smoking hookah, looking at girls, philosophy, and talking shit.
+    <p class="team-member-interests center-align" align="middle">Slingin' Code, listening to music and thinking.
     <br>
     <a href="https://www.linkedin.com/in/josephnayigiziki"><img class="linkedIn"src="assets/linked.png" alt=""></a>
     <span><a href="https://github.com/Nayigiziki"><img class="octocat" src="assets/Octocat.png" alt=""></a></span>
@@ -99,16 +83,10 @@
     <span><a href="https://github.com/jackiewung"><img class="octocat" src="assets/Octocat.png" alt=""></a></span>
     </p>
   </div>
-
 </div>
-
 <div class="footer-copyright">
     <p align="middle">© 2015 Jamm-City</p>
-    <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
-  <!-- </div> -->
 </div>
-
-
 </body>
 </html>
 
