@@ -2,12 +2,10 @@
   font-family: avenir;
   src: url(assets/avenir-light.woff)
 }
-
 html{
   font-family: avenir;
   background-color: #49585B;
 }
-
 .artist{
   color: black;
 }
@@ -193,4 +191,8 @@ a[ng-click]{
 .octocat{
   height: 10%;
   width:15%;
+}
+.artist-pic{
+  height: 200px;
+  width: 200px;
 }

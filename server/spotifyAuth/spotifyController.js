@@ -44,7 +44,17 @@ function getArtistTopTracks (spotifyClient, spotifyId){
     return trackArray;
   });
 }
+function getArtist(spotifyClient, spotifyId, cb){
+  return spotifyClient.getArtist(spotifyId)
+  .then(function(data) {
+    // console.log('Artist information', data.body);
+    cb(null, data.body);
+  }, function(err) {
+    console.error(err);
+    cb(err, null)
+  });
 
+}
 
 
 
@@ -65,7 +75,18 @@ module.exports = function (app, express, passport, spotifyApi) {
     passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {
       res.redirect('/jamCity.html');
     });
+  app.get('/getArtist', ensureAuthenticated, function(req, res){
+    spotifyId = req.query.artistId;
+    getArtist(spotifyApi, spotifyId, function(err, info){
+      if(err){
+        console.log('wtf where my data', err)
+        res.status(400).json({status: 'not a spotify artist'})
+      } else{
+        res.status(200).json(info)
+      }
+    })
 
+  })
   app.get('/hotTracks', ensureAuthenticated ,function(req, res){
     var spotifyId = req.query.artistId;
     var currentUser = res.req.user.id;
