@@ -69,6 +69,7 @@ angular.module('jamApp', [
   }
 
   function displayEvents(events){
+    console.log(events);
     $scope.eventsList = [];
     for(var i = 0; i < events.length; i++){
       if(events[i].performance.length > 0){
@@ -87,7 +88,7 @@ angular.module('jamApp', [
   }
 
   $scope.artistDeets = function(artistClicked){
-    // console.log($events)
+    console.log(artistClicked);
     var newId;
     var artistId  = artistClicked.artistId;
     ArtistInfo.getSpotifyIds(artistId)

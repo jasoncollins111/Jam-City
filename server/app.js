@@ -1,6 +1,7 @@
 /**
  *Main application file
  */
+ //setting the callback uri
 
  'use strict';
 var express = require('express'),
@@ -20,7 +21,7 @@ var express = require('express'),
     spotifyApi = new SpotifyWebApi({
       clientId : clientID,
       clientSecret : clientSecret,
-      redirectUri : 'http://localhost:8008/callback'
+      redirectUri : 'http://localhost:8080/callback'
     });
 
     app.use(express.static(__dirname + '/../client'));
