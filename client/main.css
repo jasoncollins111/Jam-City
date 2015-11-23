@@ -3,8 +3,8 @@
   src: url(assets/avenir-light.woff)
 }
 
-body{
-  font-family: avenir-light;
+html{
+  font-family: avenir;
   background-color: #49585B;
 }
 
