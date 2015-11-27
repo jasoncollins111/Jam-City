@@ -71,17 +71,26 @@ angular.module('jamApp', [
   function displayEvents(events){
     console.log(events);
     $scope.eventsList = [];
+    var nameCache = {};
     for(var i = 0; i < events.length; i++){
       if(events[i].performance.length > 0){
+
         var artist = events[i].performance[0].artist.displayName;
-        $scope.eventsList.push({
-          artistName: artist,
-          artistId: events[i].performance[0].artist.id,
-          eventDateTime: {date: events[i].start.date,
-            time: events[i].start.time},
+
+        if(!nameCache[artist]){
+          $scope.eventsList.push({
+            artistName: artist,
+            artistId: events[i].performance[0].artist.id,
+            eventDateTime: {
+              date: events[i].start.date,
+              time: events[i].start.time
+            },
             venue: events[i].venue.displayName,
             venueId: events[i].venue.id
-          })
+            })
+          nameCache[artist] =  true;
+        }
+
       }
     }
     $scope.obj = {loading : false};
@@ -100,16 +109,19 @@ angular.module('jamApp', [
       if(info.status === 'found your pic bruh'){
         $scope.artistPic = info.image;
       } 
-
       $scope.artistClicked = artistClicked;
-      console.log('in ArtistDeets', artistClicked);
-      $state.go('artists.artist')
+      console.log('current state ', $state.current);
+      if ($state.current.name !== 'artists.artist') {
+        $state.go('artists.artist');
+      }
     })
     .catch(function(err){
       $scope.artistPic = 'http://cdn.playbuzz.com/cdn/71582f18-68a6-4ff0-942d-fd7090ffafd8/d56b4878-6ccb-4ce5-8101-f76d220a51d7.jpg';
       $scope.artistClicked = artistClicked;
       console.log('in ArtistDeets', artistClicked);
-      $state.go('artists.artist')
+      if ($state.current.name !== 'artists.artist') {
+        $state.go('artists.artist');
+      }
     })
   }
 
