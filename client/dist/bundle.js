@@ -1,4 +1,4 @@
-/*! Jam-City - v0.0.1 - 2015-11-28 *//*!
+/*! Jam-City - v0.0.1 - 2015-11-29 *//*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
  *
