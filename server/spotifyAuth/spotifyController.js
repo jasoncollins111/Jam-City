@@ -72,6 +72,7 @@ module.exports = function (app, express, passport, spotifyApi) {
     getArtist(spotifyApi, spotifyId)
     .then(function(info){
       if(info.images.length > 0){
+        console.log('info images ', info.images);
         res.status(200).json({status: 'found your pic bruh', image: info.images[0].url})
       }
       else{
@@ -90,8 +91,6 @@ module.exports = function (app, express, passport, spotifyApi) {
     var tasks = [getPlaylist(spotifyApi, currentUser), getArtistTopTracks(spotifyApi, spotifyId)];
     Promise.all(tasks)
     .then(function(fufillmentValues) {
-      console.log("all the promises were fufilled");
-      console.log('all fufillment ', fufillmentValues);
       var playlistId = fufillmentValues[0];
       var tracksArr = fufillmentValues[1];
       if(tracksArr.length === 0){

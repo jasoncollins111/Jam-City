@@ -4,9 +4,7 @@ var consumerKey = 'ce78d10e8183380fb57357cc8a07e29d';
 var echoSharedSecret = 'YhNZOH5TRUWGMogv/2XCZw';
 var songkickKey = 'ngIhxhYsLMjkEU8y';
 angular.module('jamApp.services', [])
-
-
-.factory('init', function ($http, $q) {
+.factory('init',['$http', '$q', function ($http, $q) {
   var jammCityEventsPromise;
   var getCityEvents = function (cityId) {
     return $http.jsonp('https://api.songkick.com/api/3.0/metro_areas/'+cityId+'/calendar.json?apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK')
@@ -42,14 +40,15 @@ angular.module('jamApp.services', [])
   var getCity = function(){
     return jammCityEventsPromise;
   }
+
   return {
     getCityEvents: getCityEvents,
     getCityEventsLatng : getCityEventsLatng,
     cityEvents : cityEvents,
     getCity : getCity
   };
-})
-.factory('ArtistInfo', function ($http){
+}])
+.factory('ArtistInfo', ['$http', function ($http){
   function getSpotifyIds(songkickId){
     return $http.jsonp('http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:'+songkickId+'&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK')
     .then(function(echonestData){
@@ -81,8 +80,8 @@ angular.module('jamApp.services', [])
     getSpotifyIds: getSpotifyIds,
     getInfo: getInfo
   }
-})
-.factory('AddToSpotify', function ($http){
+}])
+.factory('AddToSpotify', ['$http', function ($http){
   function hotTracks (artistId, cb) {
     return $http.get('/hotTracks', {params :{artistId: artistId}})
     .then(function(response){
@@ -94,7 +93,7 @@ angular.module('jamApp.services', [])
     hotTracks: hotTracks
   }
 
-})
+}])
 .factory('VenueSearch', function($http){
   function venueId(venueName){
     return $http.jsonp('http://api.songkick.com/api/3.0/search/venues.json?query='+venueName+'&apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK')
@@ -113,7 +112,7 @@ angular.module('jamApp.services', [])
   venueEvents: venueEvents
 }
 })
-.factory('Authentication', function($http, $state){
+.factory('Authentication', ['$http', '$state', function($http, $state){
   var isAuthenticated;
 
   function isAuth(intendedState){
@@ -138,11 +137,10 @@ angular.module('jamApp.services', [])
       console.log(response)
     })
   }
-
   return{
     isAuth: isAuth,
     isAuthenticated: isAuthenticated,
     logOut: logOut
   }
-})
+}]);
 
