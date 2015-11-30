@@ -1,1 +1,1 @@
-artistsCtrl.js
+
