@@ -1,8 +1,10 @@
 module.exports = function(grunt) {
 
   var cssFiles = [
+  'client/bower_components/materialize/bin/materialize.css',
   'client/css/main.css',
-  'client/bower_components/materialize/bin/materialize.css'
+  'client/artists.css',
+  'client/artist.css'
   ];
 
   var staticJSFiles = [
@@ -17,8 +19,7 @@ module.exports = function(grunt) {
   'client/app/services/services.js',
   'client/app.js',
   ];
-
-  var jsFiles = staticJSFiles.concat(nonStaticJSFiles);
+  var cssJS = cssFiles.concat(nonStaticJSFiles);
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -48,7 +49,7 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: jsFiles,
+      files: cssJS,
       tasks: ['prod']
     }
   });
