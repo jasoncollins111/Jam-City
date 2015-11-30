@@ -6,103 +6,12 @@ html{
   font-family: avenir;
   background-color: #49585B;
 }
-.artist{
-  color: black;
-}
-.artistInfo{
-  width: 350px;
-  position: fixed;
-  left: 33%;
-}
 a[ng-click]{
     cursor: pointer;
-}
-
-#box{
-  background-color: #48d1cc;
-  height: 200px;
-}
-
-.cityInput{
-  padding-top: 40px;
-  margin: auto;
-  right: 50px;
-  width: 300px;
-}
-.artistList{
-  margin-left: 15px;
-}
-
-.artist{
-  font-size: 25px;
-  color: black;
-  font-weight: lighter;
-  transition: font-size 0.3s ease-in;
-}
-.artist:hover{
-  cursor: pointer;
-  color:black;
-  text-decoration: none;
-  font-size: 35px;
-  transition: font-size 0.3s ease-out;
-}
-.artist:focus{
-  text-decoration: none;
-}
-.artistInfo{
-  width: 600px;
-  margin:auto;
-  margin-top: 38px;
-  text-align: center;
-}
-.getCity{
-  height:250px;
-  text-align: center;
-}
-#loading {
-    margin-top: 200px;
-    position: fixed;
-    margin-left: 50%;
-}
-
-#artists {
-  overflow: scroll;
-  position: fixed;
-  height: 100%;
-  width: 33%;
-  border-right-width: 0px;
-  border-left-width: 0px;
-}
-
-.cities{
-  /*margin-top:-21px;*/
-  background-color: black;
-  color: #48d1cc;
-  text-align: center;
-  font-size: 25px;
-  height: 100%;
-  opacity: .7;
-}
-
-.spotify{
-  border:#ED3E32;
-  background-color: #ED3E32;
-}
-.spotify:hover{
-  border:#ED3E32;
-  background-color: #ED3E32;
-}
-
-.profile-panel .profile-avatar {
-    border-radius: 50%;
-    padding: 10px;
-    border: 1px solid #e7e7e2;
-    float: left;
 }
 .tagLine{
   color: white;
 }
-
 .row{
   position: relative;
   top: 20px;
@@ -121,7 +30,6 @@ a[ng-click]{
   font-size: 14px;
   color: #B73144;
 }
-
 .icon{
   padding-top: 50px;
 }
