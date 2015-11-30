@@ -1,0 +1,1 @@
+artistsService.js

@@ -1,0 +1,20 @@
+.artistInfo{
+  width: 350px;
+  position: fixed;
+  left: 33%;
+}
+.artistInfo{
+  width: 600px;
+  margin:auto;
+  margin-top: 38px;
+  text-align: center;
+}
+
+.spotify{
+  border:#ED3E32;
+  background-color: #ED3E32;
+}
+.spotify:hover{
+  border:#ED3E32;
+  background-color: #ED3E32;
+}

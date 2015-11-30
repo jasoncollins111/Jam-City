@@ -1,202 +1,6 @@
-/*! Jam-City - v0.0.1 - 2015-11-29 */@font-face {
-  font-family: avenir;
-  src: url(assets/avenir-light.woff)
-}
-html{
-  font-family: avenir;
-  background-color: #49585B;
-}
-.artist{
-  color: black;
-}
-.artistInfo{
-  width: 350px;
-  position: fixed;
-  left: 33%;
-}
-a[ng-click]{
-    cursor: pointer;
-}
+/*! Jam-City - v0.0.1 - 2015-11-29 */
 
-#box{
-  background-color: #48d1cc;
-  height: 200px;
-}
-
-.cityInput{
-  padding-top: 40px;
-  margin: auto;
-  right: 50px;
-  width: 300px;
-}
-.artistList{
-  margin-left: 15px;
-}
-
-.artist{
-  font-size: 25px;
-  color: black;
-  font-weight: lighter;
-  transition: font-size 0.3s ease-in;
-}
-.artist:hover{
-  cursor: pointer;
-  color:black;
-  text-decoration: none;
-  font-size: 35px;
-  transition: font-size 0.3s ease-out;
-}
-.artist:focus{
-  text-decoration: none;
-}
-.artistInfo{
-  width: 600px;
-  margin:auto;
-  margin-top: 38px;
-  text-align: center;
-}
-.getCity{
-  height:250px;
-  text-align: center;
-}
-#loading {
-    margin-top: 200px;
-    position: fixed;
-    margin-left: 50%;
-}
-
-#artists {
-  overflow: scroll;
-  position: fixed;
-  height: 100%;
-  width: 33%;
-  border-right-width: 0px;
-  border-left-width: 0px;
-}
-
-.cities{
-  /*margin-top:-21px;*/
-  background-color: black;
-  color: #48d1cc;
-  text-align: center;
-  font-size: 25px;
-  height: 100%;
-  opacity: .7;
-}
-
-.spotify{
-  border:#ED3E32;
-  background-color: #ED3E32;
-}
-.spotify:hover{
-  border:#ED3E32;
-  background-color: #ED3E32;
-}
-
-.profile-panel .profile-avatar {
-    border-radius: 50%;
-    padding: 10px;
-    border: 1px solid #e7e7e2;
-    float: left;
-}
-.tagLine{
-  color: white;
-}
-
-.row{
-  position: relative;
-  top: 20px;
-}
-.description{
-  top: -50px;
-  margin: 0px;
-  font-size: 21px;
-  font-weight: 100;
-  background-color:#49585B;
-}
-.cardTitle{
-  color:#FF3A4A;
-}
-.footer-copyright{
-  font-size: 14px;
-  color: #B73144;
-}
-
-.icon{
-  padding-top: 50px;
-}
-.team{
-  font-size: 26px;
-  line-height:.1;
-  margin: 0px;
-  color: white;
-}
-.team-member{
-  font-weight: 100;
-  color:#41A7C7;
-}
-.team-description{
-  height: 96px;
-  background-color: #181c1e;
-  padding-top: 1px;
-  position: relative;
-}
-
-.meet-team{
-  color:#B73144;
-  font-weight: 100;
-}
-.team-member-interests{
-  color: white;
-  font-size: 26px;
-  font-weight: 100;
-}
-.concertCrowd{
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.jamm-city{
-  letter-spacing: 15px;
-  font-weight: 100;
-  font-size:100px;
-  color: white;
-}
-.text-on-pic{
-  position:absolute;
-  top: 200px;
-  width: 100%;
-}
-.directions{
-  color: white;
-}
-.bio{
-  top: -20px;
-  background-color: #181c1e;
-}
-.jcFont{
-  height: 15%;
-}
-.login{
-  color:#FF3A4A;
-  background-color: none;
-  border:1px solid #fff;
-  padding: 5px 10px 5px 10px;
-}
-.linkedIn{
-  height: 8%;
-  width:13%;
-}
-.octocat{
-  height: 10%;
-  width:15%;
-}
-.artist-pic{
-  height: 200px;
-  width: 200px;
-}
-;.materialize-red.lighten-5 {
+.materialize-red.lighten-5 {
   background-color: #fdeaeb !important; }
 
 .materialize-red-text.text-lighten-5 {
@@ -8330,3 +8134,204 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 @media (min-height: 40.125em) {
   .picker--time .picker__box {
     margin-bottom: 5em; } }
+
+
+/*CSS*/
+@font-face {
+  font-family: avenir;
+  src: url(assets/avenir-light.woff)
+}
+html{
+  font-family: avenir;
+  background-color: #49585B;
+}
+.artist{
+  color: black;
+}
+.artistInfo{
+  width: 350px;
+  position: fixed;
+  left: 33%;
+}
+a[ng-click]{
+    cursor: pointer;
+}
+
+#box{
+  background-color: #48d1cc;
+  height: 200px;
+}
+
+.cityInput{
+  padding-top: 40px;
+  margin: auto;
+  right: 50px;
+  width: 300px;
+}
+.artistList{
+  margin-left: 15px;
+}
+
+.artist{
+  font-size: 25px;
+  color: black;
+  font-weight: lighter;
+  transition: font-size 0.3s ease-in;
+}
+.artist:hover{
+  cursor: pointer;
+  color:black;
+  text-decoration: none;
+  font-size: 35px;
+  transition: font-size 0.3s ease-out;
+}
+.artist:focus{
+  text-decoration: none;
+}
+.artistInfo{
+  width: 600px;
+  margin:auto;
+  margin-top: 38px;
+  text-align: center;
+}
+.getCity{
+  height:250px;
+  text-align: center;
+}
+#loading {
+    margin-top: 200px;
+    position: fixed;
+    margin-left: 50%;
+}
+
+#artists {
+  overflow: scroll;
+  position: fixed;
+  height: 100%;
+  width: 33%;
+  border-right-width: 0px;
+  border-left-width: 0px;
+}
+
+.cities{
+  /*margin-top:-21px;*/
+  background-color: black;
+  color: #48d1cc;
+  text-align: center;
+  font-size: 25px;
+  height: 100%;
+  opacity: .7;
+}
+
+.spotify{
+  border:#ED3E32;
+  background-color: #ED3E32;
+}
+.spotify:hover{
+  border:#ED3E32;
+  background-color: #ED3E32;
+}
+
+.profile-panel .profile-avatar {
+    border-radius: 50%;
+    padding: 10px;
+    border: 1px solid #e7e7e2;
+    float: left;
+}
+.tagLine{
+  color: white;
+}
+
+.row{
+  position: relative;
+  top: 20px;
+}
+.description{
+  top: -50px;
+  margin: 0px;
+  font-size: 21px;
+  font-weight: 100;
+  background-color:#49585B;
+}
+.cardTitle{
+  color:#FF3A4A;
+}
+.footer-copyright{
+  font-size: 14px;
+  color: #B73144;
+}
+
+.icon{
+  padding-top: 50px;
+}
+.team{
+  font-size: 26px;
+  line-height:.1;
+  margin: 0px;
+  color: white;
+}
+.team-member{
+  font-weight: 100;
+  color:#41A7C7;
+}
+.team-description{
+  height: 96px;
+  background-color: #181c1e;
+  padding-top: 1px;
+  position: relative;
+}
+
+.meet-team{
+  color:#B73144;
+  font-weight: 100;
+}
+.team-member-interests{
+  color: white;
+  font-size: 26px;
+  font-weight: 100;
+}
+.concertCrowd{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.jamm-city{
+  letter-spacing: 15px;
+  font-weight: 100;
+  font-size:100px;
+  color: white;
+}
+.text-on-pic{
+  position:absolute;
+  top: 200px;
+  width: 100%;
+}
+.directions{
+  color: white;
+}
+.bio{
+  top: -20px;
+  background-color: #181c1e;
+}
+.jcFont{
+  height: 15%;
+}
+.login{
+  color:#FF3A4A;
+  background-color: none;
+  border:1px solid #fff;
+  padding: 5px 10px 5px 10px;
+}
+.linkedIn{
+  height: 8%;
+  width:13%;
+}
+.octocat{
+  height: 10%;
+  width:15%;
+}
+.artist-pic{
+  height: 200px;
+  width: 200px;
+}

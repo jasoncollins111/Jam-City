@@ -1,0 +1,33 @@
+.artistList{
+  margin-left: 15px;
+}
+.artist{
+  font-size: 25px;
+  color: black;
+  font-weight: lighter;
+  transition: font-size 0.3s ease-in;
+}
+.artist:hover{
+  cursor: pointer;
+  color:black;
+  text-decoration: none;
+  font-size: 35px;
+  transition: font-size 0.3s ease-out;
+}
+.artist:focus{
+  text-decoration: none;
+}
+
+#loading {
+    margin-top: 200px;
+    position: fixed;
+    margin-left: 50%;
+}
+#artists {
+  overflow: scroll;
+  position: fixed;
+  height: 100%;
+  width: 33%;
+  border-right-width: 0px;
+  border-left-width: 0px;
+}
