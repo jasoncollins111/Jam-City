@@ -6,6 +6,12 @@ html{
   font-family: avenir;
   letter-spacing: 0.2px;
 }
+button {
+  cursor: pointer;
+}
+button:hover {
+  cursor: pointer;
+}
 a[ng-click]{
   cursor: pointer;
 }
@@ -17,23 +23,39 @@ a[ng-click]{
 }
 .row{
   position: relative;
-  top: 20px;
+  margin: 0 auto;
+  top: 40px;
+}
+.icon-info {
+  padding-top: 8%;
+  color:#fb610d;
+}
+.icon-info:hover {
+  color: #999;
 }
 .description{
   top: -50px;
-  margin: 0px;
+  margin: 0 auto;
   font-size: 21px;
   font-weight: 100;
   background-color:transparent;
 }
+.icon {
+  color: #fff;
+  height: 50%;
+  width: 50%;
+  margin-top: 2%;
+}
+.icon-margin {
+  margin-top: 2.5%;
+}
 .cardTitle{
-  color: #380bf2;
+  color: #10435e;
   font-size: 20px;
   font-weight: 600;
 }
 .footer-copyright{
   font-size: 14px;
-  color: #B73144;
 }
 .icon{
   padding-top: 50px;
@@ -45,24 +67,24 @@ a[ng-click]{
   color: #000;
 }
 .team-member{
-  color:#ff9256;
+  font-size: 20px;
+  color:#fb610d;
   font-weight: 600;
 }
 .team-description{
   height: 96px;
-  background-color: #fff;
+  background-color: #eee;
   padding-top: 1px;
   position: relative;
 }
-
 .meet-team{
-  color:#380bf2;
+  color:#fb610d;
   font-size: 20px;
   font-weight: 600;
 }
 .team-member-interests{
-  color: #380bf2;
-  font-size: 18px;
+  color: #666;
+  font-size: 16px;
   width: 60%;
   padding-top: 6%;
   margin: 0 auto;
@@ -74,40 +96,36 @@ a[ng-click]{
   width: 100%;
   height: 100%;
 }
-
 .jamm-city {
   letter-spacing: 3px;
   font-weight: 600;
   font-size: 50px;
   color: white;
 }
-
 .text-on-pic{
   position:absolute;
   top: 262px;
   width: 100%;
 }
-
 .about-jam {
   background-image: url(/assets/jam-2.png);
   height: 100%;
   width: 100%;
   background-size: cover;
 }
-
 .section-two {
+  text-align: center;
   position: absolute;
-  width: 100%;
-  margin-top: 7%;
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-top: 18%;
 }
-
 .header {
   position: absolute;
   top: 40px;
   left: 155px;
   width: 100%;
 }
-
 .header div{
   text-align: left;
   color: #fff;
@@ -115,17 +133,16 @@ a[ng-click]{
   font-size: 35px;
   letter-spacing: 5px;
 }
-
 .directions{
   color: #fff;
-  font-weight: 600;
   width: 80%;
   margin: 0 auto;
   font-size: 17px;
 }
 .bio{
   top: -20px;
-  background-color: #fff;
+  background-color: #eee;
+  padding-bottom: 2%;
 }
 .jcFont{
   height: 15%;
@@ -134,7 +151,6 @@ a[ng-click]{
   cursor: pointer;
   text-transform: uppercase;
   font-size: 18px;
-
   font-weight: 600;
   color: #330e9a;
   letter-spacing: 1px;
@@ -144,19 +160,9 @@ a[ng-click]{
   border-radius: 25px;
   padding: 7px 30px 7px 30px;
 }
-
 .login:hover {
   background-color: #8e78f0;
   color: #fff;
-}
-
-.linkedIn{
-  height: 8%;
-  width:13%;
-}
-.octocat{
-  height: 5%;
-  width: 5%;
 }
 .artist-pic{
   height: 200px;
