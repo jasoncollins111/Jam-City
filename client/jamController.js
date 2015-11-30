@@ -64,7 +64,7 @@ angular.module('jamApp.controllers', [])
     }).then(function(info){
       if(info.status === 'found your pic bruh'){
         $scope.artistPic = info.image;
-      } 
+      }
       $scope.artistClicked = artistClicked;
       console.log('current state ', $state.current);
       if ($state.current.name !== 'artists.artist') {

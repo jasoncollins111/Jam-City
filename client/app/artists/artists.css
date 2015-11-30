@@ -31,3 +31,8 @@
   border-right-width: 0px;
   border-left-width: 0px;
 }
+.artistInfo{
+  width: 350px;
+  position: fixed;
+  left: 33%;
+}
