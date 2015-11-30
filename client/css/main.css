@@ -6,15 +6,13 @@ html{
   font-family: avenir;
   letter-spacing: 0.2px;
 }
-button {
+a {
   cursor: pointer;
 }
-button:hover {
+a:hover {
   cursor: pointer;
 }
-a[ng-click]{
-  cursor: pointer;
-}
+
 .tagLine{
   margin-bottom: 1%;
   font-size: 25px;
