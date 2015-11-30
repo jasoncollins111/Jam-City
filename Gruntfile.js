@@ -3,8 +3,8 @@ module.exports = function(grunt) {
   var cssFiles = [
   'client/bower_components/materialize/bin/materialize.css',
   'client/css/main.css',
-  'client/artists.css',
-  'client/artist.css'
+  'client/app/artists/artists.css',
+  'client/app/artist/artist.css'
   ];
 
   var staticJSFiles = [
