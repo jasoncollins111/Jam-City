@@ -4,12 +4,15 @@
 }
 html{
   font-family: avenir;
-  background-color: #49585B;
+  letter-spacing: 0.2px;
 }
 a[ng-click]{
-    cursor: pointer;
+  cursor: pointer;
 }
 .tagLine{
+  margin-bottom: 1%;
+  font-size: 25px;
+  font-weight: 100;
   color: white;
 }
 .row{
@@ -21,10 +24,12 @@ a[ng-click]{
   margin: 0px;
   font-size: 21px;
   font-weight: 100;
-  background-color:#49585B;
+  background-color:transparent;
 }
 .cardTitle{
-  color:#FF3A4A;
+  color: #380bf2;
+  font-size: 20px;
+  font-weight: 600;
 }
 .footer-copyright{
   font-size: 14px;
@@ -37,26 +42,30 @@ a[ng-click]{
   font-size: 26px;
   line-height:.1;
   margin: 0px;
-  color: white;
+  color: #000;
 }
 .team-member{
-  font-weight: 100;
-  color:#41A7C7;
+  color:#ff9256;
+  font-weight: 600;
 }
 .team-description{
   height: 96px;
-  background-color: #181c1e;
+  background-color: #fff;
   padding-top: 1px;
   position: relative;
 }
 
 .meet-team{
-  color:#B73144;
-  font-weight: 100;
+  color:#380bf2;
+  font-size: 20px;
+  font-weight: 600;
 }
 .team-member-interests{
-  color: white;
-  font-size: 26px;
+  color: #380bf2;
+  font-size: 18px;
+  width: 60%;
+  padding-top: 6%;
+  margin: 0 auto;
   font-weight: 100;
 }
 .concertCrowd{
@@ -65,40 +74,89 @@ a[ng-click]{
   width: 100%;
   height: 100%;
 }
-.jamm-city{
-  letter-spacing: 15px;
-  font-weight: 100;
-  font-size:100px;
+
+.jamm-city {
+  letter-spacing: 3px;
+  font-weight: 600;
+  font-size: 50px;
   color: white;
 }
+
 .text-on-pic{
   position:absolute;
-  top: 200px;
+  top: 262px;
   width: 100%;
 }
+
+.about-jam {
+  background-image: url(/assets/jam-2.png);
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+}
+
+.section-two {
+  position: absolute;
+  width: 100%;
+  margin-top: 7%;
+}
+
+.header {
+  position: absolute;
+  top: 40px;
+  left: 155px;
+  width: 100%;
+}
+
+.header div{
+  text-align: left;
+  color: #fff;
+  font-weight: 600;
+  font-size: 35px;
+  letter-spacing: 5px;
+}
+
 .directions{
-  color: white;
+  color: #fff;
+  font-weight: 600;
+  width: 80%;
+  margin: 0 auto;
+  font-size: 17px;
 }
 .bio{
   top: -20px;
-  background-color: #181c1e;
+  background-color: #fff;
 }
 .jcFont{
   height: 15%;
 }
-.login{
-  color:#FF3A4A;
-  background-color: none;
-  border:1px solid #fff;
-  padding: 5px 10px 5px 10px;
+.login {
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 18px;
+
+  font-weight: 600;
+  color: #330e9a;
+  letter-spacing: 1px;
+  background-color: #fff;
+  transition: border-color .3s;
+  border: none;
+  border-radius: 25px;
+  padding: 7px 30px 7px 30px;
 }
+
+.login:hover {
+  background-color: #8e78f0;
+  color: #fff;
+}
+
 .linkedIn{
   height: 8%;
   width:13%;
 }
 .octocat{
-  height: 10%;
-  width:15%;
+  height: 5%;
+  width: 5%;
 }
 .artist-pic{
   height: 200px;
