@@ -20,6 +20,7 @@ module.exports = function(grunt) {
   'client/app.js',
   ];
   var cssJS = cssFiles.concat(nonStaticJSFiles);
+  var jsFiles = staticJSFiles.concat(nonStaticJSFiles);
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
