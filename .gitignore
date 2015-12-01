@@ -2,5 +2,7 @@ client/bower_components
 .DS_Store
 Server/keys.js
 node_modules
-client/dist
+client/dist/bundle.css
+client/dist/bundle.js
+client/dist/bundle.min.js
 
