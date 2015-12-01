@@ -19,6 +19,7 @@ module.exports = function(grunt) {
   'client/app/services/services.js',
   'client/app.js',
   ];
+
   var cssJS = cssFiles.concat(nonStaticJSFiles);
   var jsFiles = staticJSFiles.concat(nonStaticJSFiles);
 

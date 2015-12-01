@@ -26,7 +26,7 @@ angular.module('jamApp.controllers', [])
    })
   }
   function displayEvents(events){
-    console.log(events);
+    console.log('events ', events);
     $scope.eventsList = [];
     var nameCache = {};
     for(var i = 0; i < events.length; i++){
@@ -34,9 +34,16 @@ angular.module('jamApp.controllers', [])
 
         var artist = events[i].performance[0].artist.displayName;
 
+        try {
+          var mbid = events[i].performance[0].artist.identifier[0]['mbid'];
+        } catch (e) {
+          var mbid = null;
+        }
+
         if(!nameCache[artist]){
           $scope.eventsList.push({
             artistName: artist,
+            mbid: mbid,
             artistId: events[i].performance[0].artist.id,
             eventDateTime: {
               date: events[i].start.date,
@@ -58,7 +65,7 @@ angular.module('jamApp.controllers', [])
 
     ArtistInfo.getSpotifyIds(artistId)
     .then(function(artistForeignId){
-      console.log(artistForeignId)
+      console.log('id ', artistForeignId)
       newId = artistForeignId.slice(15);
       return ArtistInfo.getInfo(newId);
     }).then(function(info){

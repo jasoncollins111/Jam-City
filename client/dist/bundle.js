@@ -37837,7 +37837,7 @@ function(a){a(document).ready(function(){a.fn.pushpin=function(b){var c={top:0,b
    })
   }
   function displayEvents(events){
-    console.log(events);
+    console.log('events ', events);
     $scope.eventsList = [];
     var nameCache = {};
     for(var i = 0; i < events.length; i++){
@@ -37845,9 +37845,16 @@ function(a){a(document).ready(function(){a.fn.pushpin=function(b){var c={top:0,b
 
         var artist = events[i].performance[0].artist.displayName;
 
+        try {
+          var mbid = events[i].performance[0].artist.identifier[0]['mbid'];
+        } catch (e) {
+          var mbid = null;
+        }
+
         if(!nameCache[artist]){
           $scope.eventsList.push({
             artistName: artist,
+            mbid: mbid,
             artistId: events[i].performance[0].artist.id,
             eventDateTime: {
               date: events[i].start.date,
@@ -37869,7 +37876,7 @@ function(a){a(document).ready(function(){a.fn.pushpin=function(b){var c={top:0,b
 
     ArtistInfo.getSpotifyIds(artistId)
     .then(function(artistForeignId){
-      console.log(artistForeignId)
+      console.log('id ', artistForeignId)
       newId = artistForeignId.slice(15);
       return ArtistInfo.getInfo(newId);
     }).then(function(info){
@@ -38099,3 +38106,34 @@ angular.module('jamApp.services', [])
     $state.go('doBetter');
   }
 }])
+.directive('artistCard', function() {
+  return {
+    templateUrl: 'app/artist/artistCard.html'
+  };
+})
+.directive('ajaxImg',['$http', 'ArtistInfo', function($http, ArtistInfo, $compile) {
+  var defaultImg = 'http://cdn.playbuzz.com/cdn/71582f18-68a6-4ff0-942d-fd7090ffafd8/d56b4878-6ccb-4ce5-8101-f76d220a51d7.jpg';
+  return {
+    scope: {
+            artistId: "=ajaxImg",
+            src : '=ngSrc'
+    },
+    link : function(scope, element, attrs, controllers) {
+     ArtistInfo.getSpotifyIds(scope.artistId)
+        .then(function(artistForeignId){
+          newId = artistForeignId.slice(15);
+          return ArtistInfo.getInfo(newId);
+        }).then(function(info){
+          if(info.status === 'found your pic bruh'){
+            attrs.$set('ngSrc', info.image);
+          } 
+        })
+        .catch(function(err){
+          attrs.$set('ngSrc', defaultImg);
+        })
+    }
+    
+  };
+
+
+}]);
