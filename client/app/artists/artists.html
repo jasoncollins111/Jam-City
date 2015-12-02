@@ -56,7 +56,9 @@
 </div>
 
 <div ng-if='!obj.loading'>
-  <artist-Card ng-repeat='artist in eventsList'></artist-Card>
+  <span ng-repeat='artist in eventsList'>
+    <artist-Card ></artist-Card>
+  </span>
 </div>
 
 

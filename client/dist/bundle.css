@@ -1,4 +1,4 @@
-/*! Jam-City - v0.0.1 - 2015-11-30 */.materialize-red.lighten-5 {
+/*! Jam-City - v0.0.1 - 2015-12-01 */.materialize-red.lighten-5 {
   background-color: #fdeaeb !important; }
 
 .materialize-red-text.text-lighten-5 {
@@ -8296,7 +8296,6 @@ a:hover {
 }
 .login:hover {
   background-color: #DA4147;
-  /*opacity: .8;*/
   color: #fff;
 }
 .artist-pic{
@@ -8361,3 +8360,23 @@ a:hover {
   border:#ED3E32;
   background-color: #ED3E32;
 }
+.card-image{
+  overflow: hidden;
+  height: 225px;
+  width: 100%;
+}
+.image{
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+.card-content{
+  color:#10435e;
+}
+.card{
+  display: inline-block;
+  margin: 15px;
+  width: 400px;
+  /*height: 450px;*/
+}
+
