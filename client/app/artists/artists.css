@@ -36,4 +36,6 @@
   position: fixed;
   left: 33%;
 }
-
+.nav-wrapper{
+  background-color: grey;
+}

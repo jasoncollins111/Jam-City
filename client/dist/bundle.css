@@ -8340,7 +8340,9 @@ a:hover {
   position: fixed;
   left: 33%;
 }
-
+.nav-wrapper{
+  background-color: grey;
+}
 ;.artistInfo{
   width: 350px;
   position: fixed;
