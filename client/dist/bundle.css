@@ -8352,7 +8352,6 @@ a:hover {
   margin-top: 38px;
   text-align: center;
 }
-
 .spotify{
   border:#ED3E32;
   background-color: #ED3E32;
@@ -8378,6 +8377,11 @@ a:hover {
   display: inline-block;
   margin: 15px;
   width: 400px;
-  /*height: 450px;*/
+  color:#039be5 !important;
 }
-
+.add-to-spot{
+  color:#039be5 !important;
+}
+.add-to-spot:hover{
+  color:#DA4147 !important;
+}
