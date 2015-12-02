@@ -18,3 +18,23 @@
   border:#ED3E32;
   background-color: #ED3E32;
 }
+.card-image{
+  overflow: hidden;
+  height: 225px;
+  width: 100%;
+}
+.image{
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+.card-content{
+  color:#10435e;
+}
+.card{
+  display: inline-block;
+  margin: 15px;
+  width: 400px;
+  /*height: 450px;*/
+}
+
