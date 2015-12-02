@@ -35,16 +35,9 @@ angular.module('jamApp.controllers', [])
 
         var artist = events[i].performance[0].artist.displayName;
 
-        try {
-          var mbid = events[i].performance[0].artist.identifier[0]['mbid'];
-        } catch (e) {
-          var mbid = null;
-        }
-
         if(!nameCache[artist]){
           $scope.eventsList.push({
             artistName: artist,
-            mbid: mbid,
             artistId: events[i].performance[0].artist.id,
             eventDateTime: {
               date: events[i].start.date,
