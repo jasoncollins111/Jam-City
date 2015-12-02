@@ -24,8 +24,8 @@ angular.module('jamApp', [
     templateUrl: 'incompatibleBrowser.html'
   })
 })
-.run(['$state', '$http', 'Authentication', 'init', function($state, $http, Authentication, init){
-  init.cityEvents();
+.run(['$state', '$http', 'Authentication', 'City', function($state, $http, Authentication, City){
+  City.getCityId();
   if (navigator.geolocation) {
     Authentication.isAuth('artists');
   } else {

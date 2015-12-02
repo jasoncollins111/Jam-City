@@ -1,14 +1,22 @@
 angular.module('jamApp.controllers', [])
-.controller('JamController',['$scope', '$location', '$state', 'AddToSpotify', 'ArtistInfo', 'VenueSearch', 'Authentication', '$timeout', 'init', function ($scope, $location, $state, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout, init) {
+.controller('JamController',['$scope', '$location', '$state', 'AddToSpotify', 'ArtistInfo', 'VenueSearch', 'Authentication', '$timeout', 'City', function ($scope, $location, $state, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout, City) {
   $scope.obj = {loading : true};
   $scope.eventsList = [];
   $scope.artistAdded = false
-  init.getCity()
+  City.getCity()
+    .then(function(id){
+      return City.getCityEvents(id);
+    }) 
+    .then(function(events){
+      console.log('in events', events);
+      return events.data.resultsPage.results.event;
+    })
   .then(function(events){
     console.log('city', events[0].location.city)
     $scope.city = events[0].location.city
     displayEvents(events);
   });
+
   $scope.getVenue = function(venueName){
     $scope.artistClicked = {};
     $state.go('artists')
@@ -28,7 +36,7 @@ angular.module('jamApp.controllers', [])
   }
   function displayEvents(events){
     console.log('events ', events);
-    $scope.eventsList = [];
+    $scope.eventsList = $scope.eventsList ? $scope.eventsList : [];
     var nameCache = {};
     for(var i = 0; i < events.length; i++){
       if(events[i].performance.length > 0){
