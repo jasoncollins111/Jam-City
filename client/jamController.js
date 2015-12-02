@@ -2,10 +2,11 @@ angular.module('jamApp.controllers', [])
 .controller('JamController',['$scope', '$location', '$state', 'AddToSpotify', 'ArtistInfo', 'VenueSearch', 'Authentication', '$timeout', 'init', function ($scope, $location, $state, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout, init) {
   $scope.obj = {loading : true};
   $scope.eventsList = [];
-  $scope.cityId = {}
   $scope.artistAdded = false
   init.getCity()
   .then(function(events){
+    console.log('city', events[0].location.city)
+    $scope.city = events[0].location.city
     displayEvents(events);
   });
   $scope.getVenue = function(venueName){
