@@ -20,8 +20,9 @@
 
 #loading {
     margin-top: 200px;
-    position: fixed;
-    margin-left: 50%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 #artists {
   overflow: scroll;
@@ -38,4 +39,8 @@
 }
 .nav-wrapper{
   background-color: grey;
+}
+.loadingEvents, .playing-info{
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
