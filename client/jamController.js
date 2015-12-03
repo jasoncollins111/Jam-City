@@ -64,7 +64,7 @@ angular.module('jamApp.controllers', [])
     console.log('events ', events);
     $scope.eventsList = $scope.eventsList ? $scope.eventsList : [];
     var nameCache = {};
-    // var lengthBeforeAddingEvents = $scope.eventsList.length;
+
    
     for(var i = 0; i < events.length; i++){
       if(events[i].performance.length > 0){
@@ -89,7 +89,7 @@ angular.module('jamApp.controllers', [])
       }
     }
     $scope.obj = {loading : false};
-    // if(lengthBeforeAddingEvents > 0) $anchorScroll.yOffset = 100; 
+
   }
   $scope.artistDeets = function(artistClicked){
     var newId;

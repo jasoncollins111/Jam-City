@@ -20,8 +20,9 @@
 
 #loading {
     margin-top: 200px;
-    position: fixed;
-    margin-left: 50%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 #artists {
   overflow: scroll;
