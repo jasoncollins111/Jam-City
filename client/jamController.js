@@ -1,11 +1,11 @@
 angular.module('jamApp.controllers', [])
-.controller('JamController',['$scope', '$location', '$state', 'AddToSpotify', 'ArtistInfo', 'VenueSearch', 'Authentication', '$timeout', 'City', '$window', function ($scope, $location, $state, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout, City, $window) {
+.controller('JamController',['$scope', '$location', '$state', 'AddToSpotify', 'ArtistInfo', 'VenueSearch', 'Authentication', '$timeout', 'City', '$window', '$anchorScroll',function ($scope, $location, $state, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout, City, $window, $anchorScroll) {
   $scope.obj = {loading : true};
   $scope.eventsList = [];
   $scope.artistAdded = false
   
   var getCityEventsIdThenUpdateEventsList = function(){
-    City.getCity()
+      return City.getCity()
       .then(function(id){
         return City.getCityEvents(id);
       }) 
@@ -17,6 +17,7 @@ angular.module('jamApp.controllers', [])
       console.log('city', events[0].location.city)
       $scope.city = $scope.city ? $scope.city: events[0].location.city; 
       displayEvents(events);
+      return true;
     });
   }
 
@@ -51,7 +52,12 @@ angular.module('jamApp.controllers', [])
 
     if (windowBottom >= docHeight) {
         console.log('getting some events!');
-        $timeout(getCityEventsIdThenUpdateEventsList, 2500);
+        $timeout(function(){
+          getCityEventsIdThenUpdateEventsList()
+          .then(function(){
+            $anchorScroll.yOffset = 100;
+          });
+        }, 2500);
     }
   });
 
@@ -59,17 +65,20 @@ angular.module('jamApp.controllers', [])
     console.log('events ', events);
     $scope.eventsList = $scope.eventsList ? $scope.eventsList : [];
     var nameCache = {};
+    // var lengthBeforeAddingEvents = $scope.eventsList.length;
+   
     for(var i = 0; i < events.length; i++){
       if(events[i].performance.length > 0){
 
         var artist = events[i].performance[0].artist.displayName;
+        var time = events[i].start.datetime !== null ? moment(events[i].start.datetime).calendar() : moment(events[i].start.date).calendar().split(' ')[0];
 
         if(!nameCache[artist]){
           $scope.eventsList.push({
             artistName: artist,
             artistId: events[i].performance[0].artist.id,
             eventDateTime: {
-              date: events[i].start.date,
+              date: time,
               time: events[i].start.time
             },
             venue: events[i].venue.displayName,
@@ -81,6 +90,7 @@ angular.module('jamApp.controllers', [])
       }
     }
     $scope.obj = {loading : false};
+    // if(lengthBeforeAddingEvents > 0) $anchorScroll.yOffset = 100; 
   }
   $scope.artistDeets = function(artistClicked){
     var newId;

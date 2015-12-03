@@ -11,7 +11,8 @@ module.exports = function(grunt) {
   'client/bower_components/jquery/dist/jquery.js',
   'client/bower_components/angular/angular.js',
   'client/bower_components/angular-ui-router/release/angular-ui-router.min.js',
-  'client/bower_components/materialize/bin/materialize.js'
+  'client/bower_components/materialize/bin/materialize.js',
+  'client/bower_components/momentjs/moment.js'
   ];
 
   var nonStaticJSFiles = [
