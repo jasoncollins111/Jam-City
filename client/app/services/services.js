@@ -33,8 +33,12 @@ angular.module('jamApp.services', [])
     }).then(function(location){
       return getCityEventsLatng(location.lat, location.lng);
     }).then(function(cityInfo){
-      var id = cityInfo.data.resultsPage.results.location[0].metroArea.id;
-      return id;
+      console.log('city Info', cityInfo);
+      var cityObj = {
+        id : cityInfo.data.resultsPage.results.location[0].metroArea.id,
+        displayName : cityInfo.data.resultsPage.results.location[0].metroArea.displayName
+      }
+      return cityObj;
     });
   }
 

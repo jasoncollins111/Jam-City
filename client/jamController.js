@@ -6,16 +6,15 @@ angular.module('jamApp.controllers', [])
   
   var getCityEventsIdThenUpdateEventsList = function(){
       return City.getCity()
-      .then(function(id){
-        return City.getCityEvents(id);
+      .then(function(city){
+        $scope.city = $scope.city ? $scope.city : city.displayName; 
+        return City.getCityEvents(city.id);
       }) 
       .then(function(events){
         console.log('in events', events);
         return events.data.resultsPage.results.event;
       })
-    .then(function(events){
-      console.log('city', events[0].location.city)
-      $scope.city = $scope.city ? $scope.city: events[0].location.city; 
+    .then(function(events){      
       displayEvents(events);
       return true;
     });

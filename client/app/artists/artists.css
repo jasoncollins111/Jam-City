@@ -39,3 +39,7 @@
 .nav-wrapper{
   background-color: grey;
 }
+.loadingEvents, .playing-info{
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
