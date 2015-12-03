@@ -4,18 +4,21 @@ var consumerKey = 'ce78d10e8183380fb57357cc8a07e29d';
 var echoSharedSecret = 'YhNZOH5TRUWGMogv/2XCZw';
 var songkickKey = 'ngIhxhYsLMjkEU8y';
 angular.module('jamApp.services', [])
-.factory('init',['$http', '$q', function ($http, $q) {
-  var jammCityEventsPromise;
+.factory('City',['$http', '$q', function ($http, $q) {
+  var jammCityIdPromise;
+  var page = 1;
   var getCityEvents = function (cityId) {
-    return $http.jsonp('https://api.songkick.com/api/3.0/metro_areas/'+cityId+'/calendar.json?apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK')
+    return $http.jsonp('https://api.songkick.com/api/3.0/metro_areas/'+cityId+'/calendar.json?apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK&per_page=12&page='+ page++)
   };
 
   var getCityEventsLatng = function(lat, lng){
     return $http.jsonp('http://api.songkick.com/api/3.0/search/locations.json?location=geo:'+lat+','+lng+'&apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK')
   };
 
-  var cityEvents = function(){
-    jammCityEventsPromise = $q(function(resolve, reject){
+
+  var getCityId = function(){
+    jammCityIdPromise = $q(function(resolve, reject){
+      
       navigator.geolocation.getCurrentPosition(function(position){
         console.log('fixing to resolve promise');
         resolve({
@@ -31,22 +34,22 @@ angular.module('jamApp.services', [])
       return getCityEventsLatng(location.lat, location.lng);
     }).then(function(cityInfo){
       var id = cityInfo.data.resultsPage.results.location[0].metroArea.id;
-      return getCityEvents(id);
-    }).then(function(events){
-      return events.data.resultsPage.results.event;
+      return id;
     });
   }
 
+
   var getCity = function(){
-    return jammCityEventsPromise;
+    return jammCityIdPromise;
   }
 
   return {
     getCityEvents: getCityEvents,
     getCityEventsLatng : getCityEventsLatng,
-    cityEvents : cityEvents,
+    getCityId : getCityId,
     getCity : getCity
   };
+
 }])
 .factory('ArtistInfo', ['$http', function ($http){
   function getSpotifyIds(songkickId){

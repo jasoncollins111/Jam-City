@@ -1,14 +1,29 @@
 angular.module('jamApp.controllers', [])
-.controller('JamController',['$scope', '$location', '$state', 'AddToSpotify', 'ArtistInfo', 'VenueSearch', 'Authentication', '$timeout', 'init', function ($scope, $location, $state, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout, init) {
+.controller('JamController',['$scope', '$location', '$state', 'AddToSpotify', 'ArtistInfo', 'VenueSearch', 'Authentication', '$timeout', 'City', '$window', '$anchorScroll',function ($scope, $location, $state, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout, City, $window, $anchorScroll) {
   $scope.obj = {loading : true};
   $scope.eventsList = [];
   $scope.artistAdded = false
-  init.getCity()
-  .then(function(events){
-    console.log('city', events[0].location.city)
-    $scope.city = events[0].location.city
-    displayEvents(events);
-  });
+  
+  var getCityEventsIdThenUpdateEventsList = function(){
+      return City.getCity()
+      .then(function(id){
+        return City.getCityEvents(id);
+      }) 
+      .then(function(events){
+        console.log('in events', events);
+        return events.data.resultsPage.results.event;
+      })
+    .then(function(events){
+      console.log('city', events[0].location.city)
+      $scope.city = $scope.city ? $scope.city: events[0].location.city; 
+      displayEvents(events);
+      return true;
+    });
+  }
+
+  getCityEventsIdThenUpdateEventsList();
+
+
   $scope.getVenue = function(venueName){
     $scope.artistClicked = {};
     $state.go('artists')
@@ -26,28 +41,44 @@ angular.module('jamApp.controllers', [])
      searchEvents(events)
    })
   }
+
+  angular.element($window).bind("scroll", function(e) {
+    console.log('handling scroll event');
+    var windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+    var body = document.body;
+    var html = document.documentElement;
+    var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+    windowBottom = windowHeight + window.pageYOffset;
+
+    if (windowBottom >= docHeight) {
+        console.log('getting some events!');
+        $timeout(function(){
+          getCityEventsIdThenUpdateEventsList()
+          .then(function(){
+            $anchorScroll.yOffset = 100;
+          });
+        }, 2500);
+    }
+  });
+
   function displayEvents(events){
     console.log('events ', events);
-    $scope.eventsList = [];
+    $scope.eventsList = $scope.eventsList ? $scope.eventsList : [];
     var nameCache = {};
+    // var lengthBeforeAddingEvents = $scope.eventsList.length;
+   
     for(var i = 0; i < events.length; i++){
       if(events[i].performance.length > 0){
 
         var artist = events[i].performance[0].artist.displayName;
-
-        try {
-          var mbid = events[i].performance[0].artist.identifier[0]['mbid'];
-        } catch (e) {
-          var mbid = null;
-        }
+        var time = events[i].start.datetime !== null ? moment(events[i].start.datetime).calendar() : moment(events[i].start.date).calendar().split(' ')[0];
 
         if(!nameCache[artist]){
           $scope.eventsList.push({
             artistName: artist,
-            mbid: mbid,
             artistId: events[i].performance[0].artist.id,
             eventDateTime: {
-              date: events[i].start.date,
+              date: time,
               time: events[i].start.time
             },
             venue: events[i].venue.displayName,
@@ -59,6 +90,7 @@ angular.module('jamApp.controllers', [])
       }
     }
     $scope.obj = {loading : false};
+    // if(lengthBeforeAddingEvents > 0) $anchorScroll.yOffset = 100; 
   }
   $scope.artistDeets = function(artistClicked){
     var newId;

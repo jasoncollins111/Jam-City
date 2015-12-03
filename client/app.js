@@ -24,8 +24,8 @@ angular.module('jamApp', [
     templateUrl: 'incompatibleBrowser.html'
   })
 })
-.run(['$state', '$http', 'Authentication', 'init', function($state, $http, Authentication, init){
-  init.cityEvents();
+.run(['$state', '$http', 'Authentication', 'City', function($state, $http, Authentication, City){
+  City.getCityId();
   if (navigator.geolocation) {
     Authentication.isAuth('artists');
   } else {
@@ -35,6 +35,11 @@ angular.module('jamApp', [
 .directive('artistCard', function() {
   return {
     templateUrl: 'app/artist/artistCard.html'
+  };
+})
+.directive('preloader', function() {
+  return {
+    templateUrl: 'app/preloader/preloader.html'
   };
 })
 .directive('ajaxImg',['$http', 'ArtistInfo', function($http, ArtistInfo, $compile) {
