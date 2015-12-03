@@ -1,51 +1,5 @@
 
-
-
-
-<div ng-if='obj.loading' align='middle' id='loading'>
-  <div class='preloader-wrapper big active'>
-      <div class='spinner-layer spinner-blue'>
-        <div class='circle-clipper left'>
-          <div class='circle'></div>
-        </div><div class='gap-patch'>
-          <div class='circle'></div>
-        </div><div class='circle-clipper right'>
-          <div class='circle'></div>
-        </div>
-      </div>
-
-      <div class='spinner-layer spinner-red'>
-        <div class='circle-clipper left'>
-          <div class='circle'></div>
-        </div><div class='gap-patch'>
-          <div class='circle'></div>
-        </div><div class='circle-clipper right'>
-          <div class='circle'></div>
-        </div>
-      </div>
-
-      <div class='spinner-layer spinner-yellow'>
-        <div class='circle-clipper left'>
-          <div class='circle'></div>
-        </div><div class='gap-patch'>
-          <div class='circle'></div>
-        </div><div class='circle-clipper right'>
-          <div class='circle'></div>
-        </div>
-      </div>
-
-      <div class='spinner-layer spinner-green'>
-        <div class='circle-clipper left'>
-          <div class='circle'></div>
-        </div><div class='gap-patch'>
-          <div class='circle'></div>
-        </div><div class='circle-clipper right'>
-          <div class='circle'></div>
-        </div>
-      </div>
-    </div>
-</div>
-
+<preloader ng-if='obj.loading'></preloader>
 <div class='center-align'ng-if='!obj.loading'>
   <p class='playing-info center-align'>Artists playing near <b>{{city}}</b></p>
   <artist-Card ng-repeat='artist in eventsList'></artist-Card>

@@ -8,7 +8,7 @@ angular.module('jamApp.services', [])
   var jammCityIdPromise;
   var page = 1;
   var getCityEvents = function (cityId) {
-    return $http.jsonp('https://api.songkick.com/api/3.0/metro_areas/'+cityId+'/calendar.json?apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK&per_page=10&page='+ page++)
+    return $http.jsonp('https://api.songkick.com/api/3.0/metro_areas/'+cityId+'/calendar.json?apikey='+songkickKey+'&jsoncallback=JSON_CALLBACK&per_page=12&page='+ page++)
   };
 
   var getCityEventsLatng = function(lat, lng){

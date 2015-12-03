@@ -1,21 +1,27 @@
 angular.module('jamApp.controllers', [])
-.controller('JamController',['$scope', '$location', '$state', 'AddToSpotify', 'ArtistInfo', 'VenueSearch', 'Authentication', '$timeout', 'City', function ($scope, $location, $state, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout, City) {
+.controller('JamController',['$scope', '$location', '$state', 'AddToSpotify', 'ArtistInfo', 'VenueSearch', 'Authentication', '$timeout', 'City', '$window', function ($scope, $location, $state, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout, City, $window) {
   $scope.obj = {loading : true};
   $scope.eventsList = [];
   $scope.artistAdded = false
-  City.getCity()
-    .then(function(id){
-      return City.getCityEvents(id);
-    }) 
+  
+  var getCityEventsIdThenUpdateEventsList = function(){
+    City.getCity()
+      .then(function(id){
+        return City.getCityEvents(id);
+      }) 
+      .then(function(events){
+        console.log('in events', events);
+        return events.data.resultsPage.results.event;
+      })
     .then(function(events){
-      console.log('in events', events);
-      return events.data.resultsPage.results.event;
-    })
-  .then(function(events){
-    console.log('city', events[0].location.city)
-    $scope.city = events[0].location.city
-    displayEvents(events);
-  });
+      console.log('city', events[0].location.city)
+      $scope.city = $scope.city ? $scope.city: events[0].location.city; 
+      displayEvents(events);
+    });
+  }
+
+  getCityEventsIdThenUpdateEventsList();
+
 
   $scope.getVenue = function(venueName){
     $scope.artistClicked = {};
@@ -34,6 +40,21 @@ angular.module('jamApp.controllers', [])
      searchEvents(events)
    })
   }
+
+  angular.element($window).bind("scroll", function(e) {
+    console.log('handling scroll event');
+    var windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+    var body = document.body;
+    var html = document.documentElement;
+    var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+    windowBottom = windowHeight + window.pageYOffset;
+
+    if (windowBottom >= docHeight) {
+        console.log('getting some events!');
+        $timeout(getCityEventsIdThenUpdateEventsList, 2500);
+    }
+  });
+
   function displayEvents(events){
     console.log('events ', events);
     $scope.eventsList = $scope.eventsList ? $scope.eventsList : [];

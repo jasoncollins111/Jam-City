@@ -37,6 +37,11 @@ angular.module('jamApp', [
     templateUrl: 'app/artist/artistCard.html'
   };
 })
+.directive('preloader', function() {
+  return {
+    templateUrl: 'app/preloader/preloader.html'
+  };
+})
 .directive('ajaxImg',['$http', 'ArtistInfo', function($http, ArtistInfo, $compile) {
   var defaultImg = 'http://cdn.playbuzz.com/cdn/71582f18-68a6-4ff0-942d-fd7090ffafd8/d56b4878-6ccb-4ce5-8101-f76d220a51d7.jpg';
   return {
