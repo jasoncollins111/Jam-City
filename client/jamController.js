@@ -3,18 +3,18 @@ angular.module('jamApp.controllers', [])
   $scope.obj = {loading : true};
   $scope.eventsList = [];
   $scope.artistAdded = false
-  
+
   var getCityEventsIdThenUpdateEventsList = function(){
       return City.getCity()
       .then(function(city){
-        $scope.city = $scope.city ? $scope.city : city.displayName; 
+        $scope.city = $scope.city ? $scope.city : city.displayName;
         return City.getCityEvents(city.id);
-      }) 
+      })
       .then(function(events){
         console.log('in events', events);
         return events.data.resultsPage.results.event;
       })
-    .then(function(events){      
+    .then(function(events){
       displayEvents(events);
       return true;
     });
@@ -56,7 +56,7 @@ angular.module('jamApp.controllers', [])
           .then(function(){
             $anchorScroll.yOffset = 100;
           });
-        }, 2500);
+        }, 1500);
     }
   });
 
@@ -65,7 +65,7 @@ angular.module('jamApp.controllers', [])
     $scope.eventsList = $scope.eventsList ? $scope.eventsList : [];
     var nameCache = {};
 
-   
+
     for(var i = 0; i < events.length; i++){
       if(events[i].performance.length > 0){
 
