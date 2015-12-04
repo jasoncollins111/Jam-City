@@ -12,13 +12,15 @@ module.exports = function(grunt) {
   'client/bower_components/angular/angular.js',
   'client/bower_components/angular-ui-router/release/angular-ui-router.min.js',
   'client/bower_components/materialize/bin/materialize.js',
-  'client/bower_components/momentjs/moment.js'
+  'client/bower_components/moment/moment.js'
   ];
 
   var nonStaticJSFiles = [
   'client/jamController.js',
   'client/app/services/services.js',
-  'client/app.js',
+  'client/app/artist/artistService.js',
+  'client/app/artists/artistsService.js',
+  'client/app.js'
   ];
 
   var cssJS = cssFiles.concat(nonStaticJSFiles);

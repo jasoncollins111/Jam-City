@@ -3,7 +3,7 @@
  */
  //setting the callback uri
 
- 'use strict';
+'use strict';
 var express = require('express'),
     app = express(),
     port = 8080,
