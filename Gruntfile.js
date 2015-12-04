@@ -18,6 +18,7 @@ module.exports = function(grunt) {
   var nonStaticJSFiles = [
   'client/jamController.js',
   'client/app/services/services.js',
+  'client/app/artist/artistService.js',
   'client/app/artists/artistsService.js',
   'client/app.js'
   ];
