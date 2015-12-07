@@ -1,0 +1,167 @@
+@font-face {
+  font-family: avenir;
+  src: url(assets/font/avenir-light.woff)
+}
+html{
+  font-family: avenir;
+  letter-spacing: 0.2px;
+}
+a {
+  cursor: pointer;
+}
+a:hover {
+  cursor: pointer;
+}
+
+.tagLine{
+  margin-bottom: 1%;
+  font-size: 25px;
+  font-weight: 100;
+  color: white;
+}
+.row{
+  margin: 0 auto;
+}
+.icon-info {
+  padding-top: 8%;
+  color:#fb610d;
+}
+.icon-spinner {
+  color:black;
+}
+.icon-info:hover {
+  color: #999;
+}
+.description{
+  margin: 0 auto;
+  font-size: 21px;
+  font-weight: 100;
+}
+.icon {
+  color: #fff;
+  height: 50%;
+  width: 50%;
+  margin-top: 2%;
+}
+.icon-margin {
+  margin-top: 2.5%;
+}
+.cardTitle{
+  color: #10435e;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 50px;
+}
+.footer-copyright{
+  font-size: 14px;
+}
+.icon{
+  padding-top: 50px;
+}
+.team{
+  font-size: 26px;
+  line-height:.1;
+  margin: 0px;
+  color: #000;
+}
+.team-member{
+  font-size: 20px;
+  color:#fb610d;
+  font-weight: 600;
+}
+.team-description{
+  height: 96px;
+  background-color: #eee;
+  padding-top: 1px;
+  position: relative;
+}
+.meet-team{
+  color:#666;
+  font-size: 25px;
+  font-weight: 600;
+}
+.team-member-interests{
+  color: #666;
+  font-size: 16px;
+  width: 60%;
+  padding-top: 6%;
+  margin: 0 auto;
+  font-weight: 100;
+}
+.concert-crowd{
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-size: cover;
+}
+.jamm-city {
+  letter-spacing: 3px;
+  font-weight: 600;
+  font-size: 50px;
+  color: white;
+}
+.text-on-pic{
+  position:absolute;
+  top: 262px;
+  width: 100%;
+}
+.about-jam {
+  background-color: #eee;
+  padding-bottom: 50px;
+}
+.section-two {
+  position: relative;
+  text-align: center;
+}
+.header {
+  position: absolute;
+  top: 40px;
+  left: 155px;
+  width: 50%;
+}
+.header div{
+  text-align: left;
+  color: #fff;
+  font-weight: 600;
+  font-size: 35px;
+  letter-spacing: 5px;
+}
+.directions{
+  color: black;
+  width: 80%;
+  margin: 0 auto;
+  font-size: 17px;
+}
+.bio{
+  top: -20px;
+  background-color: #eee;
+  padding-bottom: 2%;
+}
+.jcFont{
+  height: 15%;
+}
+.login {
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 600;
+  color: #330e9a;
+  letter-spacing: 1px;
+  background-color: #fff;
+  transition: border-color .3s;
+  border: none;
+  border-radius: 25px;
+  padding: 7px 30px 7px 30px;
+}
+.login:hover {
+  background-color: #DA4147;
+  color: #fff;
+}
+.artist-pic{
+  height: 200px;
+  width: 200px;
+}
+.parallax-container{
+  clear: both;
+}
+

@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
   var cssFiles = [
   'client/bower_components/materialize/bin/materialize.css',
-  'client/css/main.css',
+  'client/app/main/main.css',
   'client/app/artists/artists.css',
   'client/app/artist/artist.css'
   ];
@@ -16,13 +16,15 @@ module.exports = function(grunt) {
   ];
 
   var nonStaticJSFiles = [
-  'client/jamController.js',
+  'client/app/main/jamController.js',
   'client/app/artist/artistCtrl.js',
   'client/app/artists/artistsCtrl.js',
-  'client/app/services/services.js',
+  'client/app/main/services.js',
   'client/app/artist/artistService.js',
   'client/app/artists/artistsService.js',
-  'client/app.js'
+  'client/app.js',
+  'client/app/artists/artistsDirective.js',
+  'client/app/artist/artistDirective.js'
   ];
 
   var cssJS = cssFiles.concat(nonStaticJSFiles);
