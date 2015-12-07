@@ -1,5 +1,5 @@
 
-<preloader ng-if='obj.loading'></preloader>
+<preloader ng-if='obj.loading' class="preloader-spinner"></preloader>
 <div class='center-align'ng-if='!obj.loading'>
   <p class='playing-info center-align'>Artists playing near <b>{{city}}</b></p>
   <artist-Card ng-repeat='artist in eventsList'></artist-Card>

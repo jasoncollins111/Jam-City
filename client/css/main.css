@@ -20,23 +20,22 @@ a:hover {
   color: white;
 }
 .row{
-  position: relative;
   margin: 0 auto;
-  top: 40px;
 }
 .icon-info {
   padding-top: 8%;
   color:#fb610d;
 }
+.icon-spinner {
+  color:black;
+}
 .icon-info:hover {
   color: #999;
 }
 .description{
-  top: -60px;
   margin: 0 auto;
   font-size: 21px;
   font-weight: 100;
-  background-color:transparent;
 }
 .icon {
   color: #fff;
@@ -51,6 +50,7 @@ a:hover {
   color: #10435e;
   font-size: 20px;
   font-weight: 600;
+  margin-top: 50px;
 }
 .footer-copyright{
   font-size: 14px;
@@ -92,7 +92,6 @@ a:hover {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   background-size: cover;
 }
 .jamm-city {
@@ -107,18 +106,12 @@ a:hover {
   width: 100%;
 }
 .about-jam {
-  /*background-image: url(/assets/jammtestcover.png);*/
   background-color: #eee;
-  height: 80%;
-  width: 100%;
-  background-size: cover;
+  padding-bottom: 50px;
 }
 .section-two {
+  position: relative;
   text-align: center;
-  position: absolute;
-  margin-left: 8%;
-  margin-right: 8%;
-  margin-top: 11%;
 }
 .header {
   position: absolute;
@@ -167,5 +160,8 @@ a:hover {
 .artist-pic{
   height: 200px;
   width: 200px;
+}
+.parallax-container{
+  clear: both;
 }
 

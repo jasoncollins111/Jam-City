@@ -20,9 +20,11 @@
 
 #loading {
     margin-top: 200px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
     width: 100%;
+    height: 30px;
 }
 #artists {
   overflow: scroll;
@@ -40,7 +42,14 @@
 .nav-wrapper{
   background-color: grey;
 }
-.loadingEvents, .playing-info{
+.loadingEvents .playing-info{
   margin-top: 12px;
   margin-bottom: 12px;
+}
+/*.reveal .fa {
+  font-family: 'FontAwesome';
+  font-style: normal;
+}*/
+.spinner{
+  color: blue;
 }
