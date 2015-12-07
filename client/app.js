@@ -9,7 +9,7 @@ angular.module('jamApp', [
   .state('artists', {
     url: '/artists',
     templateUrl: 'app/artists/artists.html',
-    controller: 'JamController'
+    controller: 'JamEventListCtrl'
   })
   .state('artists.artist', {
     url: '/artist',
@@ -57,13 +57,13 @@ angular.module('jamApp', [
         }).then(function(info){
           if(info.status === 'found your pic bruh'){
             attrs.$set('ngSrc', info.image);
-          } 
+          }
         })
         .catch(function(err){
           attrs.$set('ngSrc', defaultImg);
         })
     }
-    
+
   };
 
 
