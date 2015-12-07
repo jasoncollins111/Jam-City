@@ -1,6 +1,6 @@
 
 angular.module('jamApp.controllers')
-.controller('JamArtistCtrl',['$scope', '$location', '$state', 'AddToSpotify', 'ArtistInfo', 'VenueSearch', 'Authentication', '$timeout', 'City', '$window', '$anchorScroll',function ($scope, $location, $state, AddToSpotify, ArtistInfo, VenueSearch, Authentication, $timeout, City, $window, $anchorScroll) {
+.controller('JamArtistCtrl',['$scope', 'AddToSpotify', 'ArtistInfo', function ($scope, AddToSpotify, ArtistInfo) {
   $scope.obj = {loading : true};
   $scope.eventsList = [];
   $scope.artistAdded = false
