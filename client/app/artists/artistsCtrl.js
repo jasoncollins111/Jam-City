@@ -9,6 +9,8 @@ angular.module('jamApp.controllers')
             $scope.artistAdded = false
             var lastCallTimeStamp = null;
             $scope.hideSongs = false;
+            $scope.playingSongTitle = '';
+
 
 
 
@@ -28,6 +30,7 @@ angular.module('jamApp.controllers')
 
             $scope.playSong = function(song) {
                 $scope.stream_url = $sce.trustAsResourceUrl(song.stream_url + '?client_id=0272b27b7da270dd421f928fca6c9da0');
+                $scope.playingSongTitle = song.title;
             }
 
             var getCityEventsIdThenUpdateEventsList = function() {

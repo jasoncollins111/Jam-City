@@ -1,9 +1,10 @@
+<div class='playlist' ng-class="{'hideSongs': hideSongs}">
+  <div ng-repeat='song in songs' ng-click='playSong(song)'>{{song.title}}</div> 
+</div>
 <div id='audioPlayer' >
-  <div ng-repeat='song in songs' ng-class="{'hideSongs': hideSongs}">
-    <span ng-click='playSong(song)'>{{song.title}}</span> 
-  </div>
-  <div ng-click='toggleClasses()'>
+  <div ng-click='toggleClasses()' id='audioPlayerHeader'>
     <span>Jamm-City</span>
+    <span id='songTitle'>{{playingSongTitle}}</span>
     <audio src='{{stream_url}}' preload="auto" autoplay controls ></audio>
   </div>
 </div>
