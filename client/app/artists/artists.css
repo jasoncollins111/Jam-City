@@ -18,6 +18,58 @@
   text-decoration: none;
 }
 
+#audioPlayer {  
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  background: #039be5;
+  color: white;
+  width: 100%;
+  padding: 12px;
+}
+
+.playlist {
+  cursor: pointer;
+  position: fixed;
+  right: 0px;
+  z-index: 10;
+  padding: 0px;
+  margin-bottom: 14px;
+  padding: 0px 12px;
+  bottom: 40%;
+  text-align: right;
+  background: #039be5;
+  color: white;
+  max-height: 500px;
+  overflow: hidden;
+  max-width: 100%;
+  -webkit-transition: max-width 0.25s ease-in; 
+  -moz-transition: max-width 0.25s ease-in; 
+  -ms-transition: max-width 0.25s ease-in; 
+  -o-transition: max-width 0.25s ease-in; 
+  transition: max-width 0.25s ease-in;  
+}
+
+
+#audioPlayerHeader {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.hideSongs{
+  color: transparent;
+  -webkit-transition: max-width 0.15s ease-out; 
+  -moz-transition: max-width 0.15s ease-out; 
+  -ms-transition: max-width 0.15s ease-out; 
+  -o-transition: max-width 0.15s ease-out; 
+  transition: max-width 0.15s ease-out;
+  max-width: 0px;
+}
+
 #loading {
     margin-top: 200px;
     margin-bottom: 50px;
@@ -26,6 +78,40 @@
     width: 100%;
     height: 30px;
 }
+
+.playlist > div:hover {
+  text-decoration: underline;
+  font-weight: 800;
+  overflow: visible;
+}
+
+.playlist > div {
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  left: 0px;
+  transition: font-weight .1s;
+}
+
+#songTitle {
+  max-width: 50%;
+}
+
+
+div.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  font-size: 36px;
+}
+
+.playingInfo {
+  padding-top: 12px;
+}
+
 #artists {
   overflow: scroll;
   position: fixed;
@@ -42,14 +128,20 @@
 .nav-wrapper{
   background-color: grey;
 }
-.loadingEvents .playing-info{
+.loadingEvents .aaying-info{
   margin-top: 12px;
   margin-bottom: 12px;
+  padding-top: 12px;
 }
-/*.reveal .fa {
-  font-family: 'FontAwesome';
-  font-style: normal;
-}*/
+
+div.card-image {
+  height: auto;
+}
+
+div.card  {
+  width: 50%;
+}
+
 .spinner{
   color: blue;
 }
