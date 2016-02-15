@@ -1,14 +1,24 @@
 
     <div class="card grey lighten-2" ng-controller="JamArtistCtrl">
       <div class="card-content">
+
+        <div class='card-header'>
+          <div>
+          <p class="card-title card-info">{{artist.artistName}}</p>
+          </div>
+          <div>
+            <p class="card-info">{{artist.eventDateTime.date}}</p>
+            <p class="card-info">{{artist.venue}}</p>
+          </div>
+          <div>
+            <a href="#" ng-click='spotify(artist)' class='add-to-spot'>Add to Spotify</a>
+          </div>
+          <div>
+            <a href="#" ng-click='soundCloud(artist)' class='add-to-spot'>Soundcloud</a>
+          </div>
+        </div>
         <div class="card-image">
             <img ajax-img='artist.artistId' class="responsive-img image" ng-src='null'>
         </div>
-        <p class="card-title card-info">{{artist.artistName}}</p>
-        <p class="card-info">{{artist.eventDateTime.date}}</p>
-        <p class="card-info">{{artist.venue}}</p>
-      </div>
-      <div class="card-action">
-        <a href="#" ng-click='spotify(artist)' class='add-to-spot'>Add to Spotify</a>
       </div>
     </div>

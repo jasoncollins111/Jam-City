@@ -18,6 +18,24 @@
   text-decoration: none;
 }
 
+#audioPlayer {
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  right: 0px;
+  text-align: right;
+  background: #039be5;
+  color: white;
+  padding: 12px;
+  -webkit-transition: height 1s, color 1s;
+  transition: height 1s, color 1s;
+}
+
+.hideSongs{
+  color: transparent;
+  height: 0px;
+}
+
 #loading {
     margin-top: 200px;
     margin-bottom: 50px;
@@ -25,6 +43,18 @@
     justify-content: center;
     width: 100%;
     height: 30px;
+}
+
+div.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  font-size: 36px;
+}
+
+.playingInfo {
+  padding-top: 12px;
 }
 #artists {
   overflow: scroll;
@@ -42,14 +72,20 @@
 .nav-wrapper{
   background-color: grey;
 }
-.loadingEvents .playing-info{
+.loadingEvents .aaying-info{
   margin-top: 12px;
   margin-bottom: 12px;
+  padding-top: 12px;
 }
-/*.reveal .fa {
-  font-family: 'FontAwesome';
-  font-style: normal;
-}*/
+
+div.card-image {
+  height: auto;
+}
+
+div.card  {
+  width: 50%;
+}
+
 .spinner{
   color: blue;
 }
