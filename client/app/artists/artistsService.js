@@ -16,7 +16,6 @@ angular.module('jamApp.services')
                 return $http.jsonp('http://api.songkick.com/api/3.0/search/locations.json?location=geo:' + lat + ',' + lng + '&apikey=' + songkickKey + '&jsoncallback=JSON_CALLBACK')
             };
 
-
             var getCityId = function() {
                 jammCityIdPromise = $q(function(resolve, reject) {
 

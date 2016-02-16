@@ -38,6 +38,7 @@
   z-index: 10;
   padding: 0px;
   margin-bottom: 14px;
+  margin-left: 14px;
   padding: 0px 12px;
   bottom: 40%;
   text-align: right;
@@ -74,17 +75,18 @@
 }
 
 #loading {
-    margin-top: 200px;
-    margin-bottom: 50px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 30px;
+  margin-top: 200px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 30px;
 }
 
 .playlist > div:hover {
-  text-decoration: underline;
-  font-weight: 800;
+  /*text-decoration: underline;*/
+  /*font-weight: 800;*/
+  color: #DA4147;
   overflow: visible;
 }
 
@@ -94,6 +96,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-align: left;
+  margin-left: 15px;
   left: 0px;
   transition: font-weight .1s;
 }

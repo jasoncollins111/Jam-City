@@ -12,8 +12,6 @@ angular.module('jamApp.controllers')
             $scope.playingSongTitle = '';
 
 
-
-
             $scope.$on('soundcloudSongs', function(event, songs) {
                 makePlaylist(songs);
             });
@@ -21,11 +19,11 @@ angular.module('jamApp.controllers')
             var makePlaylist = function(songs) {
                 $scope.songs = songs;
                 console.log($scope.songs);
-                $scope.$apply();
+                $scope.$digest();
             }
 
             $scope.toggleClasses = function() {
-                $scope.hideSongs = !$scope.hideSongs;
+              $scope.hideSongs = !$scope.hideSongs;
             }
 
             $scope.playSong = function(song) {
@@ -127,7 +125,6 @@ angular.module('jamApp.controllers')
                             })
                             nameCache[artist] = true;
                         }
-
                     }
                 }
                 $scope.obj = {

@@ -39,10 +39,19 @@
   color:#039be5 !important;
 }
 .add-to-spot{
+
   color:#039be5 !important;
 }
 .add-to-spot:hover{
   color:#DA4147 !important;
+}
+.spot{
+  position: relative;
+  left: -16% !important;
+}
+.soundcloud{
+  position: relative;
+  right: -20% !important;
 }
 .card-info{
   font-size: 23px;

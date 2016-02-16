@@ -40,22 +40,21 @@ angular.module('jamApp.services')
         }
     }
 ])
-    .factory('AddToSpotify', ['$http',
-        function($http) {
-            function hotTracks(artistId, cb) {
-                return $http.get('/hotTracks', {
-                        params: {
-                            artistId: artistId
-                        }
-                    })
-                    .then(function(response) {
-                        return response.data.status;
-                    });
-            }
-
-            return {
-                hotTracks: hotTracks
-            }
-
+.factory('AddToSpotify', ['$http',
+  function($http) {
+    function hotTracks(artistId, cb) {
+      return $http.get('/hotTracks', {
+        params: {
+          artistId: artistId
         }
-    ])
+      })
+      .then(function(response) {
+        return response.data.status;
+      });
+    }
+    return {
+        hotTracks: hotTracks
+    }
+
+  }
+])

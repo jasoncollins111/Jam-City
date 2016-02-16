@@ -1,5 +1,8 @@
-<div class='playlist' ng-class="{'hideSongs': hideSongs}">
-  <div ng-repeat='song in songs' ng-click='playSong(song)'>{{song.title}}</div> 
+<div class='playlist' ng-click='toggleClasses()' ng-class="{'hideSongs': hideSongs}">
+
+  <div ng-repeat='song in songs' ng-click='playSong(song)'>{{song.title}}
+    <a href="" class="collection-item">{{song.title}}</a>
+  </div>
 </div>
 <div id='audioPlayer' >
   <div ng-click='toggleClasses()' id='audioPlayerHeader'>
