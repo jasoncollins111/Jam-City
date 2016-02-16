@@ -29,9 +29,11 @@
 }
 .card-content{
   color:#10435e;
+  padding: 1px !important;
 }
 .card{
   display: inline-block;
+  padding: 1px !important;
   margin: 15px;
   width: 400px;
   color:#039be5 !important;
@@ -43,5 +45,5 @@
   color:#DA4147 !important;
 }
 .card-info{
-  font-size: 17px;
+  font-size: 23px;
 }

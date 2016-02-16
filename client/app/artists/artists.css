@@ -18,11 +18,14 @@
   text-decoration: none;
 }
 
-#audioPlayer {  
+#audioPlayer {
   position: fixed;
   bottom: 0;
   z-index: 10;
-  background: #039be5;
+  /*background: #039be5;*/
+  background: #43cea2; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #43cea2 , #185a9d); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #43cea2 , #185a9d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: white;
   width: 100%;
   padding: 12px;
@@ -43,11 +46,11 @@
   max-height: 500px;
   overflow: hidden;
   max-width: 100%;
-  -webkit-transition: max-width 0.25s ease-in; 
-  -moz-transition: max-width 0.25s ease-in; 
-  -ms-transition: max-width 0.25s ease-in; 
-  -o-transition: max-width 0.25s ease-in; 
-  transition: max-width 0.25s ease-in;  
+  -webkit-transition: max-width 0.25s ease-in;
+  -moz-transition: max-width 0.25s ease-in;
+  -ms-transition: max-width 0.25s ease-in;
+  -o-transition: max-width 0.25s ease-in;
+  transition: max-width 0.25s ease-in;
 }
 
 
@@ -62,10 +65,10 @@
 
 .hideSongs{
   color: transparent;
-  -webkit-transition: max-width 0.15s ease-out; 
-  -moz-transition: max-width 0.15s ease-out; 
-  -ms-transition: max-width 0.15s ease-out; 
-  -o-transition: max-width 0.15s ease-out; 
+  -webkit-transition: max-width 0.15s ease-out;
+  -moz-transition: max-width 0.15s ease-out;
+  -ms-transition: max-width 0.15s ease-out;
+  -o-transition: max-width 0.15s ease-out;
   transition: max-width 0.15s ease-out;
   max-width: 0px;
 }
