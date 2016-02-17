@@ -8,10 +8,10 @@
   <div ng-click='toggleClasses()' id='audioPlayerHeader'>
     <span>Jamm-City</span>
     <span ng-show='playingArtist' id='songTitle'>
-      <i class="fa fa-user">:</i>
-      {{playingArtist}}<br>
-      <i class="fa fa-music"></i>
-      {{playingSongTitle}}
+      Now Playing - {{playingSongTitle}} by {{playingArtist}}
+      <!-- <i class="fa fa-user"></i> -->
+
+      <!-- <i class="fa fa-music"></i> -->
     </span>
     <audio src='{{stream_url}}' preload="auto" autoplay controls ></audio>
   </div>
