@@ -1,13 +1,18 @@
-<div class='playlist' ng-click='toggleClasses()' ng-class="{'hideSongs': hideSongs}">
+<!-- <div class='playlist' ng-click='toggleClasses()' ng-class="{'hideSongs': hideSongs}">
 
   <div ng-repeat='song in songs' ng-click='playSong(song)'>{{song.title}}
     <a href="" class="collection-item">{{song.title}}</a>
   </div>
-</div>
+</div> -->
 <div id='audioPlayer' >
   <div ng-click='toggleClasses()' id='audioPlayerHeader'>
     <span>Jamm-City</span>
-    <span id='songTitle'>{{playingSongTitle}}</span>
+    <span ng-show='playingArtist' id='songTitle'>
+      <i class="fa fa-user">:</i>
+      {{playingArtist}}<br>
+      <i class="fa fa-music"></i>
+      {{playingSongTitle}}
+    </span>
     <audio src='{{stream_url}}' preload="auto" autoplay controls ></audio>
   </div>
 </div>
