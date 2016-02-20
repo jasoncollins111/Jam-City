@@ -3,7 +3,8 @@ angular.module('jamApp.services')
 .factory('ArtistInfo', ['$http',
     function($http) {
         function getSpotifyIds(songkickId) {
-            return $http.jsonp('http://developer.echonest.com/api/v4/artist/profile?api_key=APRGVYHQGMQ5FKTYM&id=songkick:artist:' + songkickId + '&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK')
+            console.log('skID',songkickId)
+            return $http.jsonp('http://developer.echonest.com/api/v4/artist/profile?api_key=5UIASXPAXN5VPD0PN&id=songkick:artist:' + songkickId + '&bucket=id:spotify&format=jsonp&callback=JSON_CALLBACK')
                 .then(function(echonestData) {
                     console.log('echo response', echonestData);
                     var echoArrOfForeignIds;
