@@ -1,3 +1,4 @@
+//Events List Controller
 angular.module('jamApp.controllers')
 .controller('JamEventListCtrl', ['$scope', '$state', 'ArtistInfo', 'VenueSearch', '$timeout', 'City', '$window', '$anchorScroll', '$sce', 'Authentication',
 

@@ -60,6 +60,9 @@ module.exports = function(app, express, passport, spotifyApi, userInfo) {
     var clientID = keys.clientID;
     var clientSecret = keys.clientSecret;
 
+
+
+
     app.get('/auth/spotify',
         passport.authenticate('spotify', {
             scope: ['user-read-email', 'user-read-private', 'playlist-modify-public'],
@@ -137,9 +140,10 @@ module.exports = function(app, express, passport, spotifyApi, userInfo) {
     app.get('/isAuthenticated', function(req, res, next) {
         var isAuth;
         userInfo.session = req.session;
+        console.log('is authenticated', req.session);
+
         if (req.isAuthenticated()) {
             isAuth = true;
-
         } else {
             isAuth = false;
             res.redirect('/')

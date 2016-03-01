@@ -25,7 +25,7 @@ var express = require('express'),
       redirectUri : 'http://localhost:8080/callback'
     });
 
-    app.use(express.static(__dirname + '/../client'));
+
     passport.serializeUser(function(user, done) {
       console.log('user ', user)
       userInfo.displayName = user.displayName;
@@ -46,6 +46,26 @@ var express = require('express'),
           return done(null, profile);
         });
     }));
+
+    app.use(function(req, res, next){
+        console.log(req.isAuthenticated());
+        if (req.url === '/' && req.isAuthenticated()) {
+            // var isAuth = true;
+            console.log('authenticated in app use');
+            res.redirect('/jamCity.html');
+        } else {
+            console.log('no authenticated in app use');
+
+            next();
+            // var isAuth = false;
+        }
+        // var isAuthenticated = {
+        //     authenticated: isAuth
+        // };
+        // res.status(200).json({isAuthenticated, userInfo});
+    });
+    
+    app.use(express.static(__dirname + '/../client'));
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(methodOverride());
