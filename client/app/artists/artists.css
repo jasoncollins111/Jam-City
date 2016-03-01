@@ -50,7 +50,7 @@
   position:fixed;
   top:8vh;
   bottom: 0;
-  left: 85%;
+  left: 85% !important;
   border-left: 2px solid #B73144;
   width: 15%;
   background-color: #0F1010;
