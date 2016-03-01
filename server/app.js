@@ -22,7 +22,7 @@ var express = require('express'),
     spotifyApi = new SpotifyWebApi({
       clientId : clientID,
       clientSecret : clientSecret,
-      redirectUri : 'http://localhost:8080/callback'
+      redirectUri : 'http://jamm-city.com/callback'
     });
 
 
@@ -39,7 +39,7 @@ var express = require('express'),
     passport.use(new SpotifyStrategy({
       clientID: clientID,
       clientSecret: clientSecret,
-      callbackURL: 'http://localhost:8080/callback'
+      callbackURL: 'http://jamm-city.com/callback'
     }, function(accessToken, refreshToken, profile, done) {
         process.nextTick(function () {
           spotifyApi.setAccessToken(accessToken);
