@@ -2,14 +2,15 @@
 angular.module('jamApp.services', [])
 .factory('Authentication', ['$http', '$state', function($http, $state){
   var isAuthenticated;
-
+  var user;
   function isAuth(intendedState){
-    console.log('isAuth');
     return $http.get('/isAuthenticated')
     .then(function(response){
-      if(response.data.authenticated){
+      if(response.data.isAuthenticated.authenticated){
+        console.log('authentication', response)
         $state.go(intendedState);
         isAuthenticated = true;
+        user = response.data.userInfo;
       } else {
         $state.go('login');
         isAuthenticated = false;
@@ -18,7 +19,9 @@ angular.module('jamApp.services', [])
      $state.go('login');
    })
   }
-
+  function getUser(){
+    return user 
+  }
   function logOut(){
     $http.get('/logout')
     .then(function(response){
@@ -28,6 +31,7 @@ angular.module('jamApp.services', [])
   return{
     isAuth: isAuth,
     isAuthenticated: isAuthenticated,
-    logOut: logOut
+    logOut: logOut,
+    getUser: getUser
   }
 }]);

@@ -33,7 +33,6 @@ angular.module('jamApp.controllers')
     };
 
     $scope.soundCloud = function(event, artist) {
-      console.log('click event', event)
       event.preventDefault();
       var artistId = artist.artistId;
       SC.get('/tracks', {
