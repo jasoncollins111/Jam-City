@@ -17,6 +17,8 @@ var express = require('express'),
     keys = require('./keys.js'),
     clientID = keys.clientID,
     clientSecret = keys.clientSecret,
+    userInfo = {},
+
     spotifyApi = new SpotifyWebApi({
       clientId : clientID,
       clientSecret : clientSecret,
@@ -26,6 +28,9 @@ var express = require('express'),
     app.use(express.static(__dirname + '/../client'));
     passport.serializeUser(function(user, done) {
       console.log('user ', user)
+      userInfo.displayName = user.displayName;
+      userInfo.profilePic = user.photos[0];
+      userInfo.url = user.profileUrl;
       done(null, user);
     });
     passport.deserializeUser(function(sessionUser, done) {
@@ -48,10 +53,10 @@ var express = require('express'),
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(function(req, res, next){
-      console.log('req session obj', req.session);
+      // console.log('req session obj', req.session);
       next();
-    })
-    require('./spotifyAuth/spotifyController.js')(app, express, passport, spotifyApi);
+    });
+    require('./spotifyAuth/spotifyController.js')(app, express, passport, spotifyApi, userInfo);
     console.log('Jam City on port ', port);
     app.listen(port);
     exports = module.exports = app;

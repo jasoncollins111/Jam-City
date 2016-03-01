@@ -5,6 +5,8 @@
 html{
   font-family: avenir;
   letter-spacing: 0.2px;
+  background-color: black;
+  opacity: .9;
 }
 a {
   cursor: pointer;
@@ -53,6 +55,9 @@ a:hover {
   margin-top: 50px;
 }
 .footer-copyright{
+  color: #4CB8C4; /* fallback for old browsers */
+  color: -webkit-linear-gradient(to left, #4CB8C4 , #3CD3AD); /* Chrome 10-25, Safari 5.1-6 */
+  color: linear-gradient(to left, #4CB8C4 , #3CD3AD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   font-size: 14px;
 }
 .icon{
@@ -164,4 +169,3 @@ a:hover {
 .parallax-container{
   clear: both;
 }
-

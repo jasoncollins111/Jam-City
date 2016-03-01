@@ -39,20 +39,38 @@
   color:#039be5 !important;
 }
 .add-to-spot{
-
-  color:#039be5 !important;
+  font-size: 3em;
+  color:#FAEBD7 !important;
 }
 .add-to-spot:hover{
   color:#DA4147 !important;
 }
 .spot{
   position: relative;
-  left: -17% !important;
+  left: -15% !important;
 }
 .soundcloud{
   position: relative;
-  right: -19% !important;
+  right: -23% !important;
 }
 .card-info{
-  font-size: 23px;
+  color: #FAEBD7 !important;
+  font-size: 1.2vw;
+  padding: 0px !important;
+  margin: 7px !important;
+  border-top: 0px !important;
+}
+.artist-name{
+  margin-left: 6px;
+  font-size: 2vw;
+}
+.date-venue{
+  margin-right: 6px !important;
+}
+.card-color{
+  background: #007196;
+  
+}
+.card-info{
+  align-items: center;
 }

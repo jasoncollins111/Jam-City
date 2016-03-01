@@ -36,7 +36,6 @@ function getArtistTopTracks(spotifyClient, spotifyId) {
         .then(function(data) {
             var trackArray = [];
             var tracks = data.body.tracks;
-            console.log(tracks);
             for (var i = 0; i < tracks.length; i++) {
                 var trackUrl = 'spotify:track:' + data.body.tracks[i].id;
                 trackArray.push(trackUrl);
@@ -57,7 +56,7 @@ function getArtist(spotifyClient, spotifyId) {
 }
 
 
-module.exports = function(app, express, passport, spotifyApi) {
+module.exports = function(app, express, passport, spotifyApi, userInfo) {
     var clientID = keys.clientID;
     var clientSecret = keys.clientSecret;
 
@@ -80,7 +79,6 @@ module.exports = function(app, express, passport, spotifyApi) {
         getArtist(spotifyApi, spotifyId)
             .then(function(info) {
                 if (info.images.length > 0) {
-                    console.log('info images ', info.images);
                     res.status(200).json({
                         status: 'found your pic bruh',
                         image: info.images[0].url
@@ -138,17 +136,18 @@ module.exports = function(app, express, passport, spotifyApi) {
 
     app.get('/isAuthenticated', function(req, res, next) {
         var isAuth;
-
+        userInfo.session = req.session;
         if (req.isAuthenticated()) {
             isAuth = true;
 
         } else {
             isAuth = false;
+            res.redirect('/')
         }
         var isAuthenticated = {
             authenticated: isAuth
         };
-        res.status(200).json(isAuthenticated);
+        res.status(200).json({isAuthenticated, userInfo});
 
     });
 

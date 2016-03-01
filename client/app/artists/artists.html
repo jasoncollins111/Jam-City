@@ -1,24 +1,34 @@
-<!-- <div class='playlist' ng-click='toggleClasses()' ng-class="{'hideSongs': hideSongs}">
 
-  <div ng-repeat='song in songs' ng-click='playSong(song)'>{{song.title}}
-    <a href="" class="collection-item">{{song.title}}</a>
-  </div>
-</div> -->
+
+<div id='infoHeader' >
+    <span>
+      <div class="profile">
+        <a target="_blank" href="{{user.url}}" title="Go to Spotify"><img src="{{user.profilePic}}" alt="" class="circle responsive-img profile-pic "><p class="profile-link">{{user.displayName}}</p></a>
+      </div>
+     <p class="event-headline">{{header}}</p>
+     
+    </span>
+</div>
 <div id='audioPlayer' >
   <div ng-click='toggleClasses()' id='audioPlayerHeader'>
-    <span>Jamm-City</span>
+    <span><img class="audio-footer-logo" src='../../assets/jamm-city-white.png'></span>
     <span ng-show='playingArtist' id='songTitle'>
       Now Playing - {{playingSongTitle}} by {{playingArtist}}
-      <!-- <i class="fa fa-user"></i> -->
-
-      <!-- <i class="fa fa-music"></i> -->
     </span>
     <audio src='{{stream_url}}' preload="auto" autoplay controls ></audio>
   </div>
 </div>
-<preloader ng-if='obj.loading' class="preloader-spinner"></preloader>
-<div class='center-align' ng-if='!obj.loading' >
-  <p class='playing-info center-align'>Artists playing near <b>{{city}}</b></p>
-  <artist-Card ng-repeat='artist in eventsList'></artist-Card>
-</div>
-<div align='middle' class='loadingEvents'>Loading events!</div>
+  <div class="row pageContent">
+    <preloader ng-if='obj.loading' class="preloader-spinner center-align col s12 m9 l10"></preloader>
+    <div class='center-align col s12 m9 l10' ng-if='!obj.loading' >
+      <artist-Card ng-repeat='artist in eventsList'></artist-Card>
+    </div>
+    <div class="sidebar col s0 m3 l2">
+      <form ng-submit='getVenue()' align='middle'>
+        <div class='input-field'>
+          <input type='text' align='middle' ng-model='text' class='form-control inputBox' aria-describedby='basic-addon1' options='options' details='details' placeholder='Venue Search' />
+        </div>
+      </form>
+    </div>
+    <div align='middle' class='loadingEvents center-align col s12 m9 l10'>Loading events!</div>
+  </div>

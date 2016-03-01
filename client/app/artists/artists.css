@@ -18,17 +18,53 @@
   text-decoration: none;
 }
 
+#infoHeader{
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  background: #43cea2; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #1C1F27 , #007196); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #1C1F27 , #007196); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #FAEBD7;
+  width: 100%;
+  padding: 6px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: center;
+}
 #audioPlayer {
   position: fixed;
   bottom: 0;
   z-index: 10;
   /*background: #039be5;*/
   background: #43cea2; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #43cea2 , #185a9d); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #43cea2 , #185a9d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: white;
+  background: -webkit-linear-gradient(to left, #1C1F27 , #007196); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #1C1F27 , #007196); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #FAEBD7;
   width: 100%;
   padding: 12px;
+  height: 8vh;
+
+}
+.sidebar{
+  position:fixed;
+  top:8vh;
+  bottom: 0;
+  left: 85%;
+  border-left: 2px solid #B73144;
+  width: 15%;
+  background-color: #0F1010;
+  color:#FAEBD7;
+}
+.loadingEvents{
+  color: #B73144; /* fallback for old browsers */
+  margin-top: 12px;
+  margin-bottom: 1vh !important;
+  padding-top: 12px;
+}
+
+.pageContent {
+  margin: 10vh auto;
 }
 
 .playlist {
@@ -136,11 +172,7 @@ div.card-header {
 .nav-wrapper{
   background-color: grey;
 }
-.loadingEvents .aaying-info{
-  margin-top: 12px;
-  margin-bottom: 12px;
-  padding-top: 12px;
-}
+
 
 div.card-image {
   height: auto;
@@ -149,7 +181,41 @@ div.card-image {
 div.card  {
   width: 50%;
 }
-
 .spinner{
   color: blue;
+}
+
+.audio-footer-logo{
+  margin-left: 10px;
+  width: 15vw;
+}
+.input-box{
+  text-align: -webkit-center;
+}
+.profile{
+  text-align: left;
+  margin-left: 1%;
+  float:left;
+  z-index: 10;
+}
+.profile-pic{
+  max-width: 12% !important;
+}
+.event-headline{
+  margin: 0px;
+  font-size: 1.7vw !important;
+  position: relative;
+  right: 18.5%;
+  z-index: -1;
+
+}
+.profile-link{
+  position: relative;
+  top: -11px;
+  font-size: 11px;
+  color: white;
+  font-weight: 100;
+  margin: 0;
+  display: inline-flex;
+  margin-left: .5vw;
 }

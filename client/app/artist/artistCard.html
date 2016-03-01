@@ -1,28 +1,23 @@
 
-    <div class="card grey lighten-2" ng-controller="JamArtistCtrl">
+    <div class="card card-color" ng-controller="JamArtistCtrl">
       <div class="card-content">
 
-        <div class='card-header'>
+        <div class='card-header card-info'>
           <div>
-          <p class="card-info">{{artist.artistName}}</p>
+          <h3 class="card-info artist-name">{{artist.artistName}}</h3>
           </div>
           <div>
-
-             <p class="card-info">{{artist.eventDateTime.date}}</p>
-
+            <p class="card-info date-venue">{{artist.eventDateTime.date}}</p>
+            <p class="card-info date-venue">@ {{artist.venue}}</p>
           </div>
-          <div>
-            <p class="card-info">{{artist.venue}}</p>
-          </div>
-
         </div>
         <div class="card-image">
             <img ajax-img='artist.artistId' class="responsive-img image" ng-src='null'>
         </div>
-        <div class="card-action">
+        <div class="card-action card-info">
             <span>
-              <a href="" ng-click='spotify(artist)' class='add-to-spot spot'>Add to Jamm-City <i class="fa fa-spotify"></i></a>
-              <a href="" ng-click='soundCloud($event, artist)' class='add-to-spot soundcloud'>Stream <i class="fa fa-soundcloud"></i></a>
+              <a href="" ng-click='spotify(artist)' class='add-to-spot spot' title="Click to add {{artist.artistName}} to your Jamm-City Spotify playlist"><i class="fa fa-spotify"></i></a>
+              <a href="" ng-click='soundCloud($event, artist)' class='add-to-spot soundcloud'title="Click to stream {{artist.artistName}}"><i class="fa fa-soundcloud"></i></a>
             </span>
         </div>
       </div>
