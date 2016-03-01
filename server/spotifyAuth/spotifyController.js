@@ -151,7 +151,7 @@ module.exports = function(app, express, passport, spotifyApi, userInfo) {
         var isAuthenticated = {
             authenticated: isAuth
         };
-        res.status(200).json({isAuthenticated, userInfo});
+        res.status(200).json({isAuthenticated:isAuthenticated, userInfo:userInfo});
 
     });
 
