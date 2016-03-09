@@ -1,5 +1,5 @@
 
-    <div class="card card-color" ng-controller="JamArtistCtrl">
+    <div class="card card-color pic" ng-hide="nopic" ng-controller="JamArtistCtrl">
       <div class="card-content">
 
         <div class='card-header card-info'>
@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="card-image">
-            <img ajax-img='artist.artistId' class="responsive-img image" ng-src='null'>
+            <img class="responsive-img image" src={{artist.artistpic}}>
         </div>
         <div class="card-action card-info">
             <span>

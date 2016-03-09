@@ -1,5 +1,6 @@
 
 
+
 <div id='infoHeader' >
     <span>
       <div class="profile">
@@ -24,11 +25,12 @@
       <artist-Card ng-repeat='artist in eventsList'></artist-Card>
     </div>
     <div class="sidebar col s0 m3 l2">
-      <form ng-submit='getVenue()' align='middle'>
+      <form ng-submit='goVenue()' align='middle'>
         <div class='input-field'>
           <input type='text' align='middle' ng-model='text' class='form-control inputBox' aria-describedby='basic-addon1' options='options' details='details' placeholder='Venue Search' />
         </div>
       </form>
     </div>
-    <div align='middle' class='loadingEvents center-align col s12 m9 l10'>Loading events!</div>
+    <div align='middle' ng-hide="venueSearch" class='loadingEvents center-align col s12 m9 l10'>Loading events!</div>
+    <a ng-click='goBack()' align='middle' ng-show="venueSearch"  class='loadingEvents center-align col s12 m9 l10'>Back to City Search</a>
   </div>

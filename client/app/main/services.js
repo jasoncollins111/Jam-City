@@ -7,16 +7,15 @@ angular.module('jamApp.services', [])
     return $http.get('/isAuthenticated')
     .then(function(response){
       if(response.data.isAuthenticated.authenticated){
-        console.log('authentication', response)
-        $state.go(intendedState);
         isAuthenticated = true;
         user = response.data.userInfo;
+        $state.go('jams');
       } else {
-        $state.go('login');
+        $state.go('/');
         isAuthenticated = false;
       }
     }, function(err){
-     $state.go('login');
+     $state.go('/');
    })
   }
   function getUser(){

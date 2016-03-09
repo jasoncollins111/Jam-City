@@ -13,13 +13,7 @@ angular.module('jamApp.controllers')
 
     $scope.spotify = function(artist) {
       var artistId = artist.artistId;
-      ArtistInfo.getSpotifyIds(artistId)
-      .then(function(artistForeignId) {
-        var newId;
-        if (artistForeignId === '') throw Error('no foreign Id');
-        newId = artistForeignId.slice(15);
-        return AddToSpotify.hotTracks(newId);
-      })
+      AddToSpotify.hotTracks(artistId)
       .then(function(addToSpotifyJammCityPlaylistStatus) {
         if (addToSpotifyJammCityPlaylistStatus === 'tracks added!') {
           Materialize.toast('Popular music from ' + artist.artistName + ' was added to your Jamm-City playlist on Spotify', 5750);

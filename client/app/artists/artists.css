@@ -1,6 +1,7 @@
 .artistList{
   margin-left: 15px;
 }
+
 .artist{
   font-size: 25px;
   color: black;
@@ -17,7 +18,9 @@
 .artist:focus{
   text-decoration: none;
 }
-
+.no-picture{
+  display:none;
+}
 #infoHeader{
   position: fixed;
   top: 0;

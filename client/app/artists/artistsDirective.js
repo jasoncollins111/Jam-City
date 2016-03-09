@@ -10,16 +10,14 @@ angular.module('jamApp')
         src: '=ngSrc'
       },
       link: function(scope, element, attrs, controllers) {
-        ArtistInfo.getSpotifyIds(scope.artistId)
-        .then(function(artistForeignId) {
-          newId = artistForeignId.slice(15);
-          return ArtistInfo.getInfo(newId);
-        }).then(function(info) {
+        ArtistInfo.getInfo(scope.artistId)
+        .then(function(info) {
           if (info.status === 'found your pic bruh') {
             attrs.$set('ngSrc', info.image);
           }
         })
         .catch(function(err) {
+          scope.nopic = true;
           attrs.$set('ngSrc', images[parseInt(Math.random()*4)]);
         })
       }

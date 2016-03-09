@@ -3,27 +3,29 @@ angular.module('jamApp', [
   'jamApp.controllers',
   'ui.router'
   ])
-.config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/artists');
+.config(function($stateProvider, $locationProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/jams');
   $stateProvider
-  .state('artists', {
-    url: '/artists',
+  .state('jams', {
+    url: '/jams',
     templateUrl: 'app/artists/artists.html',
     controller: 'JamEventListCtrl'
   })
-  .state('artists.artist', {
-    url: '/artist',
-    templateUrl: 'app/artist/artist.html'
+  .state('jams.venue', {
+    url: '/:venue',
+    templateUrl: 'app/artists/artists.html',
+    controller: 'JamEventListCtrl'
   })
   .state('doBetter', {
     url: '/incompatibleBrowser',
     templateUrl: 'app/static/incompatibleBrowser.html'
   })
+  $locationProvider.html5Mode(true);
 })
 .run(['$state', '$http', 'Authentication', 'City', function($state, $http, Authentication, City){
-  City.getCityId();
+  City.getCityId()
   if (navigator.geolocation) {
-    Authentication.isAuth('artists');
+    Authentication.isAuth();
   } else {
     $state.go('doBetter');
   }

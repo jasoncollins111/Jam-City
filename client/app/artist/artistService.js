@@ -29,7 +29,6 @@ angular.module('jamApp.services')
         }
       })
       .then(function(response) {
-        console.log("getArtist", response)
         return response.data;
       });
     }

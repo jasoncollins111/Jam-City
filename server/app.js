@@ -22,12 +22,11 @@ var express = require('express'),
     spotifyApi = new SpotifyWebApi({
       clientId : clientID,
       clientSecret : clientSecret,
-      redirectUri : 'http://jamm-city.com/callback'
+      redirectUri : 'http://localhost:8080/callback'
     });
 
 
     passport.serializeUser(function(user, done) {
-      console.log('user ', user)
       userInfo.displayName = user.displayName;
       userInfo.profilePic = user.photos[0];
       userInfo.url = user.profileUrl;
@@ -39,7 +38,7 @@ var express = require('express'),
     passport.use(new SpotifyStrategy({
       clientID: clientID,
       clientSecret: clientSecret,
-      callbackURL: 'http://jamm-city.com/callback'
+      callbackURL: 'http://localhost:8080/callback'
     }, function(accessToken, refreshToken, profile, done) {
         process.nextTick(function () {
           spotifyApi.setAccessToken(accessToken);
@@ -48,13 +47,13 @@ var express = require('express'),
     }));
 
     app.use(function(req, res, next){
-        console.log(req.isAuthenticated());
+        // console.log(req.isAuthenticated());
         if (req.url === '/' && req.isAuthenticated()) {
             // var isAuth = true;
             console.log('authenticated in app use');
             res.redirect('/jamCity.html');
         } else {
-            console.log('no authenticated in app use');
+            // console.log('no authenticated in app use');
 
             next();
             // var isAuth = false;
