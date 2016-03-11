@@ -13,7 +13,7 @@ function getPlaylist(spotifyClient, currentUser) {
                 }
             });
             return playlistId || createJammCityPlayList(spotifyClient, currentUser);
-        })
+        });
 
 }
 
@@ -23,7 +23,7 @@ function createJammCityPlayList(spotifyClient, currentUser) {
         })
         .then(function(data) {
             playlistId = data.body.id;
-            return playlistId
+            return playlistId;
         });
 }
 
@@ -84,21 +84,22 @@ module.exports = function(app, express, passport, spotifyApi, userInfo) {
                 if (info.images.length > 0) {
                     res.status(200).json({
                         status: 'found your pic bruh',
-                        image: info.images[0].url
-                    })
+                        image: info.images[0].url,
+                        genres: info.genres
+                    });
                 } else {
                     console.log('error');
                     res.status(400).json({
                         status: 'could not find picture'
-                    })
+                    });
                 }
             })
             .catch(function(err) {
                 res.status(400).json({
                     status: 'not a spotify artist'
-                })
-            })
-    })
+                });
+            });
+    });
 
     app.get('/hotTracks', ensureAuthenticated, function(req, res) {
         var spotifyId = req.query.artistId;
@@ -114,7 +115,7 @@ module.exports = function(app, express, passport, spotifyApi, userInfo) {
                         status: ':( didnt add tracks'
                     });
                 } else {
-                    return addToJammCityPlaylist(spotifyApi, currentUser, tracksArr, playlistId)
+                    return addToJammCityPlaylist(spotifyApi, currentUser, tracksArr, playlistId);
                 }
             })
             .then(function(data) {
@@ -128,8 +129,8 @@ module.exports = function(app, express, passport, spotifyApi, userInfo) {
                 res.status(400).json({
                     status: ':( didnt add tracks'
                 });
-            })
-    })
+            });
+    });
 
 
     app.get('/logout', function(req, res) {
@@ -146,12 +147,15 @@ module.exports = function(app, express, passport, spotifyApi, userInfo) {
             isAuth = true;
         } else {
             isAuth = false;
-            res.redirect('/')
+            res.redirect('/');
         }
         var isAuthenticated = {
             authenticated: isAuth
         };
-        res.status(200).json({isAuthenticated:isAuthenticated, userInfo:userInfo});
+        res.status(200).json({
+            isAuthenticated: isAuthenticated,
+            userInfo: userInfo
+        });
 
     });
 
@@ -161,4 +165,4 @@ module.exports = function(app, express, passport, spotifyApi, userInfo) {
         }
         res.redirect('/login');
     }
-}
+};

@@ -9,6 +9,20 @@
           <div>
             <p class="card-info date-venue">{{artist.eventDateTime.date}}</p>
             <p class="card-info date-venue">@ {{artist.venue}}</p>
+            <p class="card-info date-venue" ng-show="artist.genres.length > 0">
+                <span ng-show="{{artist.genres.length === 1}}">Genre: {{artist.genres[0]}} </span>
+                <span ng-show="{{artist.genres.length > 1}}">Genres: 
+                  <span ng-repeat="(index, genre) in artist.genres">
+                    <span ng-show="{{index === 0}}">
+                      {{genre}}
+                    </span>
+                    <span ng-show="{{index > 0}}">
+                      , {{genre}}
+                    </span>
+                  </span>
+                </span>
+            </p>
+
           </div>
         </div>
         <div class="card-image">
