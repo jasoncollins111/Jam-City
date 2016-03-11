@@ -5,7 +5,8 @@
   "version": "0.0.1",
   "main": "app.js",
   "scripts": {
-    "start": "grunt prod; nodemon server/app.js"
+    "start": "grunt prod; nodemon server/app.js",
+    "watch": "grunt watch"
   },
   "dependencies": {
     "bluebird": "^3.0.5",
