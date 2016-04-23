@@ -46,18 +46,7 @@ var express = require('express'),
         });
     }));
 
-    app.use(function(req, res, next){
-        // console.log(req.isAuthenticated());
-        if (req.url === '/' && req.isAuthenticated()) {
-            // var isAuth = true;
-            console.log('authenticated in app use');
-            res.redirect('/jamCity.html');
-        } else {
 
-            next();
-        }
-
-    });
     
     app.use(express.static(__dirname + '/../client'));
     app.use(cookieParser());
@@ -71,6 +60,7 @@ var express = require('express'),
       next();
     });
     require('./spotifyAuth/spotifyController.js')(app, express, passport, spotifyApi, userInfo);
+
     console.log('Jam City on port ', port);
     app.listen(port);
     exports = module.exports = app;
