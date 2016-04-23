@@ -53,15 +53,10 @@ var express = require('express'),
             console.log('authenticated in app use');
             res.redirect('/jamCity.html');
         } else {
-            // console.log('no authenticated in app use');
 
             next();
-            // var isAuth = false;
         }
-        // var isAuthenticated = {
-        //     authenticated: isAuth
-        // };
-        // res.status(200).json({isAuthenticated, userInfo});
+
     });
     
     app.use(express.static(__dirname + '/../client'));

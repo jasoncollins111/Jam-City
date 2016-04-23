@@ -121,7 +121,7 @@ a:hover {
 .header {
   position: absolute;
   top: 40px;
-  left: 155px;
+  left: 15px;
   width: 50%;
 }
 .header div{
@@ -168,4 +168,18 @@ a:hover {
 }
 .parallax-container{
   clear: both;
+}
+@media (max-width: 600px){
+  .team-member{
+    font-size: 14px;
+  }
+  .header div{
+    font-size: 20px;
+  }
+  .jamm-city{
+    display: none;
+  }
+  .tagLine{
+    display: none;
+  }
 }
