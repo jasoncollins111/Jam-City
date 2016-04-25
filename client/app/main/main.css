@@ -70,7 +70,7 @@ a:hover {
   color: #000;
 }
 .team-member{
-  font-size: 20px;
+  font-size: 3vw;
   color:#fb610d;
   font-weight: 600;
 }
@@ -102,7 +102,7 @@ a:hover {
 .jamm-city {
   letter-spacing: 3px;
   font-weight: 600;
-  font-size: 50px;
+  font-size: 5vw;
   color: white;
 }
 .text-on-pic{
@@ -170,16 +170,45 @@ a:hover {
   clear: both;
 }
 @media (max-width: 600px){
-  .team-member{
-    font-size: 14px;
+  .jamm-city{
+    display: none;
   }
   .header div{
     font-size: 20px;
   }
-  .jamm-city{
-    display: none;
+  .login{
+    position: absolute;
+    top: -17vh;
+    left: 33%;
   }
   .tagLine{
     display: none;
   }
+}
+@media (max-width: 300px){
+  .concert-crowd{
+    display: none;
+  }
+  .header div{
+    font-size: 4vw;
+    color: #4CB8C4;
+  }
+  .login{
+    background-color: #4CB8C4;
+    left: 25%;
+  }
+  .about-jam{
+    display: none;
+
+  }
+  .parallax-container{
+    display:none;
+  }
+  .bio{
+    display:none;
+  }
+  .footer-copyright{
+    display:none;
+  }
+  
 }
